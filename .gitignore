@@ -1,23 +1,20 @@
-*.gem
-*.swp
-*~
+# Dependencies
+/node_modules
+
+# Production
+/build
+
+# Generated files
+.docusaurus
+.cache-loader
+
+# Misc
 .DS_Store
-.analysis
-.bundle/
-.byebug_history
-.jekyll-metadata
-.ruby-gemset
-.ruby-version
-.sass-cache
-/test/source/file_name.txt
-/vendor
-Gemfile.lock
-_site/
-bin/
-bbin/
-coverage
-gh-pages/
-pkg/
-site/_site/
-test/dest
-tmp/*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
