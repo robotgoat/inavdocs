@@ -27,18 +27,16 @@ function HomepageHeader() {
         </Heading> */}
         <ThemedImage
           alt="INAV"
-          className="h-fit w-fit xl:mr-12"
+          className=""
           sources={{
             light: useBaseUrl("img/inav_home_light.svg"),
             dark: useBaseUrl("img/inav_home_dark.svg"),
           }}
         />
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <p className="xs:text-sm sm:text-lg xl:text-xl">
-          INAV is a cutting edge flight controller software whose focus is to{" "}
-          <br></br> bring semi-autonomous flight capabilities to a variety of RC
-          vehicles <br></br>
-          such as: fixed wings, rotary wings, VTOLs, boats, and rovers.
+        <p className="text--center col col--4 col--offset-4">
+          INAV is a cutting edge flight controller software whose focus is to bring semi-autonomous flight capabilities to a variety of RC
+          vehicles such as: fixed wings, rotary wings, VTOLs, boats, and rovers.
         </p>
         <div className={styles.buttons}>
           <Link
@@ -62,6 +60,9 @@ export default function Home(): ReactNode {
     >
       <HomepageHeader />
       <main>
+        <div className="text--center margin-top--lg margin-left--lg">
+        <Heading as="h1">At a Glance</Heading>
+        </div>
         <HomepageFeatures />
       </main>
     </Layout>

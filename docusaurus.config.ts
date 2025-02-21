@@ -74,7 +74,8 @@ const config: Config = {
     },
     announcementBar: {
       id: 'the_news',
-      content: 'INAV 8.0.0 is out now!',
+      content: '<a href="https://github.com/iNavFlight/inav/releases">INAV 8.0.0 is out now! </a>',
+      backgroundColor: '#ff9999',
       isCloseable: true,
     },
     navbar: {

@@ -11,35 +11,42 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Hardware',
+    Svg: require('@site/static/img/feature/cpu.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        INAV works on many flight controllers from many different manufacturers with further support of additional peripherals such as pitot tubes, rangefinder/optical flow sensors, and 
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Open Source Software',
+    Svg: require('@site/static/img/feature/code.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        INAV is free and open source software that is actively developed by many contributers from around the world. Large version releases occur annually and smaller, maintenance releases throughout the year.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Community',
+    Svg: require('@site/static/img/feature/users.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        With a large, enthusiastic, and active community of 16.4k members in the official Facebook and 8900 in Discord, getting up and going with your INAV build will be a breeze. 
       </>
     ),
   },
+  // {
+  //   title: 'Powered by React',
+  //   Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+  //   description: (
+  //     <>
+  //       Extend or customize your website layout by reusing React. Docusaurus can
+  //       be extended while reusing the same header and footer.
+  //     </>
+  //   ),
+  // },
 ];
 
 function Feature({title, Svg, description}: FeatureItem) {
@@ -50,7 +57,7 @@ function Feature({title, Svg, description}: FeatureItem) {
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+        <p className="text--left">{description}</p>
       </div>
     </div>
   );
