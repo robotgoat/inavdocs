@@ -27,24 +27,37 @@ function HomepageHeader() {
         </Heading> */}
         <ThemedImage
           alt="INAV"
-          className=""
           sources={{
             light: useBaseUrl("img/inav_home_light.svg"),
             dark: useBaseUrl("img/inav_home_dark.svg"),
           }}
         />
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <p className="text--center col col--4 col--offset-4">
-          INAV is a cutting edge flight controller software whose focus is to bring semi-autonomous flight capabilities to a variety of RC
-          vehicles such as: fixed wings, rotary wings, VTOLs, boats, and rovers.
-        </p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Get Started!
-          </Link>
+        <div className="container">
+          <div className="row margin-bottom--md">
+            <div className="col col--6 col--offset-3 card padding--md"
+            style={{opacity: 0.8,}}>
+              <div className="text--justify">
+                INAV is a cutting-edge flight controller software whose focus is
+                to bring easy to setup and use, semi-autonomous flight
+                capabilities to a variety of RC vehicles such as: fixed wings,
+                rotary wings, VTOLs, boats, and rovers.
+              </div>
+            </div>
+          </div>
+          <div className="row margin-top--md">
+            <div className="col">
+            <div className={styles.buttons}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/welcome"
+            >
+              Get Started! 🛨
+            </Link>
+          </div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </header>
@@ -61,7 +74,7 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <main>
         <div className="text--center margin-top--lg margin-left--lg">
-        <Heading as="h1">At a Glance</Heading>
+          <Heading as="h1">At a Glance</Heading>
         </div>
         <HomepageFeatures />
       </main>

@@ -52,8 +52,8 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
@@ -74,7 +74,7 @@ const config: Config = {
     },
     announcementBar: {
       id: 'the_news',
-      content: '<a href="https://github.com/iNavFlight/inav/releases">INAV 8.0.0 is out now! </a>',
+      content: '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 8.0.0 is out now! 🎉</a>',
       backgroundColor: '#ff9999',
       isCloseable: true,
     },
@@ -92,7 +92,20 @@ const config: Config = {
           position: "left",
           label: "Documentation",
         },
-        { to: "/blog", label: "Blog", position: "left" },
+        {
+          to: "/download",
+          label: "Download",
+          position: "left"
+        },
+        { to: "/blog",
+          label: "Blog", 
+          position: "left" 
+        },
+        {
+          to: "/about",
+          label: "About",
+          position: "left"
+        },
         {
           href: "https://github.com/iNavFlight/inav",
           label: "GitHub",
@@ -138,7 +151,7 @@ const config: Config = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              href: "https://github.com/iNavFlight/inav",
             },
           ],
         },

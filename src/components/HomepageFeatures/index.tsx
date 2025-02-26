@@ -15,7 +15,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/feature/cpu.svg').default,
     description: (
       <>
-        INAV works on many flight controllers from many different manufacturers with further support of additional peripherals such as pitot tubes, rangefinder/optical flow sensors, and 
+        INAV works on many flight controllers from many different manufacturers with further support of additional peripherals such as pitot tubes, rangefinder/optical flow sensors, and more.
       </>
     ),
   },
