@@ -38,6 +38,14 @@ const config: Config = {
       "classic",
       {
         docs: {
+          includeCurrentVersion: true,
+          lastVersion: 'current',
+          versions : {
+            current: {
+              label: "8.0.0",
+              banner: 'none'
+            }
+          },
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -105,6 +113,11 @@ const config: Config = {
           to: "/about",
           label: "About",
           position: "left"
+        },
+        {
+          type: "docsVersionDropdown",
+          position: "right",
+          dropdownActiveClassDisabled: true
         },
         {
           href: "https://github.com/iNavFlight/inav",

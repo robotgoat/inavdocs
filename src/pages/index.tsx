@@ -14,7 +14,7 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header
-      className={clsx("hero hero--primary", styles.heroBanner)}
+      className={clsx("hero shadow--lw", styles.heroBanner)}
       style={{
         backgroundImage: `url("img/g2.svg")`,
         backgroundRepeat: "no-repeat",
