@@ -32,7 +32,11 @@ const config: Config = {
   },
 
   plugins: [require.resolve("docusaurus-lunr-search")],
-
+  themes: ['@docusaurus/theme-mermaid'],
+  markdown: {
+    mermaid: true,
+  },
+  
   presets: [
     [
       "classic",
@@ -125,6 +129,13 @@ const config: Config = {
           position: "right",
         },
       ],
+    },
+    docs: {
+      versionPersistence: 'localStorage',
+      sidebar : {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
     },
     footer: {
       // style: "dark",

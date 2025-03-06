@@ -1,0 +1,4 @@
+---
+title: Receiver
+slug: receiver
+---
