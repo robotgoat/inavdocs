@@ -16,9 +16,13 @@ The new documentation aims to consolidate everything INAV in a central and easy 
 
 ## How to Use
 
+:::info
+For absolute first timers getting setup, please visit the **Installation** section to get your environment prepared with Inav Configurator. 
+:::
+
 The documentation is organized into two main sections: **Quickstart** and **Modules**. 
 
 - **Quickstart** aims to get you from zero to flying with a barebones configuration for an airplane or quadcopter. 
 It will not delve into advanced features such as waypoint missions and return to home options. 
 
-- **Modules** will explain in greater detail all the options available with INAV and how to go about configuring your aircraft to use them if applicable. 
+- **Modules** will explain in greater detail all the options available with INAV and how to go about configuring your aircraft with INAV Configurator to use them if applicable. 
