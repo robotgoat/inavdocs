@@ -1,10 +1,8 @@
 ---
 title: INAV Overview
 slug: overview
-sidebar_position: 2
+sidebar_position: 3
 ---
-
-## Announcements
 
 ## History
 
@@ -69,7 +67,7 @@ The currently supported MCU are listed in the table below:
 ### IMU (Inertial Measurement Unit)
 
 The IMU is what tells the quad or plane how it's behaving in space. 
-It is typically comprised of a gyroscope and accelerometer.
+It's typically comprised of a gyroscope and accelerometer.
 
 ### Barometer
 
