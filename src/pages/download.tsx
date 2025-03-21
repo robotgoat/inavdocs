@@ -13,12 +13,12 @@ export default function Downloads() {
         </div>
         <div className="row text--center">
           <div className="col col--4 col--offset-2">
-            <div className="button button--primary button--lg">
+            <a className="button button--primary button--lg" href="https://github.com/iNavFlight/inav-configurator/releases/tag/8.0.0">
               Configurator
-            </div>
+            </a>
           </div>
           <div className="col col--4">
-            <div className="button button--primary button--lg">INAV Lua</div>
+            <a className="button button--primary button--lg" href="https://github.com/iNavFlight/OpenTX-Telemetry-Widget/releases">INAV Lua</a>
           </div>
         </div>
       </div>

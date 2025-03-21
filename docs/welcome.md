@@ -26,3 +26,7 @@ The documentation is organized into two main sections: **Quickstart** and **Modu
 It will not delve into advanced features such as waypoint missions and return to home options. 
 
 - **Modules** will explain in greater detail all the options available with INAV and how to go about configuring your aircraft with INAV Configurator to use them if applicable. 
+
+The [INAV Configurator](/docs/configurator.md) section explains the main features and tabs of INAV Configurator. 
+Detailed information on how to use each tab is explained in the relevant Modules section.
+For example, all information on failsafes in the configurator are found in the Failsafes modules page.
