@@ -1,0 +1,4 @@
+---
+title: Buzzer
+slug: buzzer
+---

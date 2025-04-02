@@ -46,7 +46,7 @@ const config: Config = {
           lastVersion: 'current',
           versions : {
             current: {
-              label: "8.0.0",
+              label: "8.0.1",
               banner: 'none'
             }
           },
@@ -86,7 +86,7 @@ const config: Config = {
     },
     announcementBar: {
       id: 'the_news',
-      content: '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 8.0.0 is out now! 🎉</a>',
+      content: '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 8.0.1 is out now! 🎉</a>',
       backgroundColor: '#ff9999',
       isCloseable: true,
     },
@@ -163,6 +163,10 @@ const config: Config = {
             {
               label: "Facebook",
               href: "https://www.facebook.com/groups/INAVOfficial",
+            },
+            {
+              label: "Telegram",
+              href: "https://t.me/INAVFlight",
             },
           ],
         },

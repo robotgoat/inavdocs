@@ -4,9 +4,9 @@ slug: releasenotes
 sidebar_position: 2
 ---
 
-# INAV 8.0.0 - Gallant Goshawk
+# INAV 8.0.1 - Gallant Goshawk
 
-![INAV 8.0.0 Gallant Goshawk](/img/inav_banner.png)
+![INAV 8.0.1 Gallant Goshawk](/img/inav_banner.png)
 
 Please carefully read the release notes for the best possible experience and safety.
 
