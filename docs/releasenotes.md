@@ -1,7 +1,7 @@
 ---
 title: Release Notes
 slug: releasenotes
-sidebar_position: 2
+sidebar_position: 8
 ---
 
 # INAV 8.0.1 - Gallant Goshawk

@@ -17,7 +17,7 @@ The new documentation aims to consolidate everything INAV in a central and easy 
 ## How to Use
 
 :::info
-For absolute first timers getting setup, please visit the **Installation** section to get your environment prepared with Inav Configurator. 
+For absolute first timer users who want to get setup, please visit the **Installation** section first to get your environment prepared with Inav Configurator. 
 :::
 
 The documentation is organized into three main sections:

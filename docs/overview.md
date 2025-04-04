@@ -1,7 +1,7 @@
 ---
 title: INAV Overview
 slug: overview
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 ## History

@@ -1,7 +1,7 @@
 ---
 title: INAV Configurator
 slug: inavconfigurator
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 ## Tabs Explained
@@ -31,7 +31,7 @@ Detailed explainations are found in the linked section in the **Modules** sectio
 | :---: | :-------- | :--------------: |
 | Status | Displays a 3D model of hte vehicle that reacts to changes in the FC's orientation. The columns on the left show sensor, battery, and GNSS/GPS information | |
 | Calibration | Where accelerometer, compass, and optical flow/rangefinder sensors are calibrated. This is mandatory for setup. | |
-| Mixer | | |
+| Mixer | Set mixer rules to determine how servos and motors react to user and FC inputs. | |
 | Outputs | | |
 | Ports | | |
 | Configuration | | |
@@ -45,12 +45,12 @@ Detailed explainations are found in the linked section in the **Modules** sectio
 | GPS | | |
 | Alignment Tool | | |
 | Mission Control | | |
-| OSD | | |
-| LED Strip | | |
-| Sensors | | |
+| OSD | Set how flight data is overlayed the video stream | |
+| LED Strip | Configure user addressable LED strips such as the WS2811 and WS2812 | |
+| Sensors | View real time data captured from connected sensors | |
 | Tethered Logging | | |
-| Blackbox | | |
-| CLI | | |
+| Blackbox | Set what FC parameters to record | |
+| CLI | Command line interface for modifying INAV's parameters | |
 | Search | | |
 
 ## Different map providers

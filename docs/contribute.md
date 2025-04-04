@@ -1,7 +1,7 @@
 ---
 title: Contribute
 slug: contribute
-sidebar_position: 8
+sidebar_position: 7
 ---
 
 Contributions are welcome and encouraged. You can contribute in many ways:
