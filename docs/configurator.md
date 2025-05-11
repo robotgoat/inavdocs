@@ -16,8 +16,8 @@ The tabs for each view are outlined in the tables below with brief explainations
 ### Home View
 
 | Tab | Description |
-| :---: | :--------: |
-| Welcome | Is the home page greeting you to INAV |
+| :---: | :-------- |
+| Welcome | The home page that greets you to INAV |
 | Documentation & Support | Links to the official docs website |
 | Mission Control | Allows for the creation of waypoint missions |
 | Firmware Flasher | Flash firmware onto a flight controller |

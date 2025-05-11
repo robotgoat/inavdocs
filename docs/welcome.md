@@ -26,10 +26,10 @@ The documentation is organized into three main sections:
 This section aims to get you from zero to flying with a barebones configuration for an airplane or quadcopter. 
 It will not delve into advanced features such as waypoint missions and return to home options. 
 
-### **Modules** 
+### [**Modules**](/docs/category/modules) 
 This section will explain in greater detail all the options available with INAV and how to go about configuring your aircraft with INAV Configurator to use them if applicable. 
 
-### [INAV Configurator](/docs/configurator.md) 
+### [**INAV Configurator**](/docs/configurator.md) 
 This explains the main features and tabs of INAV Configurator. 
 Detailed information on how to use each tab is explained in the relevant Modules section.
 For example, all information on failsafes in the configurator are found in the Failsafes modules page.
