@@ -30,47 +30,63 @@ This is all stored without any approximation or loss of precision, so even quite
 GPS data is logged whenever new GPS data is available. 
 Although the CSV decoder will decode this data, the video renderer does not yet show any of the GPS information (this will be added later).
 
-## Supported configurations
+## Supported Configurations
 
-The maximum data rate that can be recorded to the flight log is fairly restricted, so anything that increases the load can cause the flight log to drop frames and contain errors.
+The maximum data rate that can be recorded to the flight log is fairly restricted, so if there is anything that increases the load, it may cause the flight log to drop frames and contain errors.
 
-The Blackbox is typically used on tricopters and quadcopters. Although it will work on hexacopters and octocopters, because these craft have more motors to record, they must transmit more data to the flight log. This can increase the number of dropped frames. Although the browser-based log viewer supports hexacopters and octocopters, the command-line `blackbox_render` tool currently only supports tri- and quadcopters.
+The Blackbox is typically used on tricopters and quadcopters.
+Though it will also work on hexacopters and octocopters, there will be a higher likelihood of dropped frames because these craft have more motors to record and thus transmit more data to the flight log. 
+The browser-based log viewer supports hexacopters and octocopters, but the command-line `blackbox_render` tool currently only supports tri and quadcopters.
 
-INAV's `looptime` setting decides how frequently an update is saved to the flight log. The default looptime on INAV is 2000us. If you're using a looptime smaller than about 2400, you may experience some dropped frames due to the high required data rate. In that case you will need to reduce the sampling rate in the Blackbox settings, or increase your logger's baudrate to 250000. See the later section on configuring the Blackbox feature for details.
+INAV's `looptime` setting decides how frequently an update is saved to the flight log. 
+The default looptime on INAV is **2000us**. 
+If a looptime smaller than about 2400 is used, there might be some dropped frames due to the high required data rate. 
+In that case, either the sampling rate will need to be lowered in the Blackbox settings, or the logger's baudrate needs to be increased to 250000. 
+See the later section on configuring the Blackbox feature for details.
 
-## Setting up logging
+## Set Up Logging
 
-First, you must enable the Blackbox feature. In the INAV Configurator enter the Configuration tab, tick the "BLACKBOX" feature at the bottom of the page, and click "Save and reboot"
+First, ensure the Blackbox feature is enabled in INAV Configurator. 
+In the INAV Configurator, enter the Configuration tab, tick the "BLACKBOX" feature at the bottom of the page, and click "Save and reboot"
 
-Now you must decide which device to store your flight logs on. You can either transmit the log data over a serial port to an external logging device like the OpenLog serial data logger to be recorded to a microSDHC card, or if you have a compatible flight controller you can store the logs on the onboard dataflash storage instead.
+Next, decide which device to store the flight logs. 
+The log data can be transmitted over a serial port to an external logging device, such as the OpenLog serial data logger to a microSDHC card.
+If the flight controller has the supporting hardware, the logs can be written to the onboard dataflash storage.
 
-### OpenLog serial data logger
+:::warning
+The information about OpenLog is potentially outdated and not applicable to newer flight controllers that have SD card logging features.
+:::
+### OpenLog Serial Data Logger
 
-The OpenLog is a small logging device which attaches to your flight controller using a serial port and logs your flights to a MicroSD card.
+OpenLog is a small logging device that is connected to the flight controller using a serial port and logs flight data to a microSD card.
 
-The OpenLog ships from SparkFun with standard "OpenLog 3" firmware installed. Although this original OpenLog firmware will work with the Blackbox, in order to reduce the number of dropped frames it should be reflashed with the higher performance OpenLog Blackbox firmware. The special Blackbox variant of the OpenLog firmware also ensures that the OpenLog is using INAV compatible settings, and defaults to 115200 baud.
+The OpenLog ships from SparkFun with standard "OpenLog 3" firmware installed. 
+Although this original OpenLog firmware will work with the Blackbox, to reduce the number of dropped frames it should be reflashed with the higher performance OpenLog Blackbox firmware. The special Blackbox variant of the OpenLog firmware also ensures that the OpenLog is using INAV compatible settings, and defaults to 115200 baud.
 
 You can find the Blackbox version of the OpenLog firmware [here](https://github.com/iNavFlight/openlog-blackbox-firmware), along with instructions for installing it onto your OpenLog.
 
 [OpenLog serial data logger]: https://www.sparkfun.com/products/9530
 [OpenLog Blackbox firmware]: https://github.com/iNavFlight/openlog-blackbox-firmware
 
-#### microSDHC
+### MicroSDHC Card
 
-Your choice of microSDHC card is very important to the performance of the system. The OpenLog relies on being able to make many small writes to the card with minimal delay, which not every card is good at. A faster SD-card speed rating is not a guarantee of better performance.
+The choice of microSDHC card is very important to the performance of the system. 
+The OpenLog relies on being able to make many small writes to the card with minimal delay, which not every card is good at. 
+A faster SD-card speed rating is not a guarantee of better performance.
 
-##### microSDHC cards known to have poor performance
+#### MicroSDHC cards known to have poor performance
 
  - Generic 4GB Class 4 microSDHC card - the rate of missing frames is about 1%, and is concentrated around the most interesting parts of the log!
  - Sandisk Ultra 32GB (unlike the smaller 16GB version, this version has poor write latency)
 
-##### microSDHC cards known to have good performance
+#### MicroSDHC cards known to have good performance
 
  - Transcend 16GB Class 10 UHS-I microSDHC (typical error rate < 0.1%)
  - Sandisk Extreme 16GB Class 10 UHS-I microSDHC (typical error rate < 0.1%)
  - Sandisk Ultra 16GB (it performs only half as well as the Extreme in theory, but still very good)
 
-You should format any card you use with the SD Association's special formatting tool , as it will give the OpenLog the best chance of writing at high speed. You must format it with either FAT, or with FAT32 (recommended).
+The microSD card should be formatted to either FAT or FAT32.
+Any modern imaging utility can perform this function.
 
 <!-- [SD Association's special formatting tool]: https://www.sdcard.org/downloads/formatter_4/ -->
 
@@ -95,7 +111,10 @@ The key criteria to choose a serial port are:
 
 #### OpenLog configuration
 
-Power up the OpenLog with a microSD card inside, wait 10 seconds or so, then power it down and plug the microSD card into your computer. You should find a "CONFIG.TXT" file on the card, open it up in a text editor. You should see the baud rate that the OpenLog has been configured for (usually 115200 or 9600 from the factory). Set the baud rate to match the rate you entered for the Blackbox in the Configurator's Port tab (typically 115200 or 250000).
+Power up the OpenLog with a microSD card inside, wait 10 seconds or so, then power it down and plug the microSD card into your computer. 
+You should find a "CONFIG.TXT" file on the card, open it up in a text editor. 
+You should see the baud rate that the OpenLog has been configured for (usually 115200 or 9600 from the factory). 
+Set the baud rate to match the rate you entered for the Blackbox in the Configurator's Port tab (typically 115200 or 250000).
 
 Save the file and put the card back into your OpenLog, it will use those settings from now on.
 
@@ -136,11 +155,14 @@ On the Configurator's CLI tab, you must enter `set blackbox_device=SPIFLASH` to 
 
 ## Configuring the Blackbox
 
-The Blackbox currently provides two settings (`blackbox_rate_num` and `blackbox_rate_denom`) that allow you to control the rate at which data is logged. These two together form a fraction (`blackbox_rate_num / blackbox_rate_denom`) which decides what portion of the flight controller's control loop iterations should be logged. The default is 1/1 which logs every iteration.
+The Blackbox currently provides two settings `blackbox_rate_num` and `blackbox_rate_denom` that controls the rate at which data is logged. 
+These two variables form the fraction (`blackbox_rate_num / blackbox_rate_denom`), which decides what portion of the flight controller's control loop iterations should be logged. 
+The default is 1/1, which logs every iteration.
 
-If you're using a slower MicroSD card, you may need to reduce your logging rate to reduce the number of corrupted logged frames that `blackbox_decode` complains about. A rate of 1/2 is likely to work for most craft.
+If using a slower MicroSD card, the logging rate will have to be lowered to reduce the number of corrupted logged frames that `blackbox_decode` complains about. 
+A rate of 1/2 is likely to work for most aircraft.
 
-You can change the logging rate settings by entering the CLI tab in the INAV Configurator and using the `set` command, like so:
+The logging rate settings can be changed by entering the CLI tab in the INAV Configurator and using the `set` command, like so:
 
 ```
 set blackbox_rate_num = 1
