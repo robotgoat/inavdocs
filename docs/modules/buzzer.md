@@ -1,6 +1,7 @@
 ---
 title: Buzzer
 slug: buzzer
+description: Utilize the features of a discrete buzzer
 ---
 
 INAV supports a buzzer, which is used for the following purposes:
@@ -59,9 +60,9 @@ Sequences:
 
 You can use [this tool](https://www.mrd-rc.com/tutorials-tools-and-testing/useful-tools/helpful-inav-buzzer-code-checker/) to hear current buzzer sequences or enter custom sequences.
 
-## Controlling buzzer usage
+## Controlling Buzzer Usage
 
-The usage of the buzzer can be controlled by the CLI `beeper` command.
+The usage of the buzzer can be controlled through the CLI using the `beeper` command.
 
 ### List current usage
 

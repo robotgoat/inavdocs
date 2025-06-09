@@ -22,7 +22,7 @@ For absolute first timer users who want to get setup, please visit the **Install
 
 The documentation is organized into three main sections:
 
-### **Quickstart** 
+### [**Quickstart**](/docs/category/quickstart/) 
 This section aims to get you from zero to flying with a barebones configuration for an airplane or quadcopter. 
 It will not delve into advanced features such as waypoint missions and return to home options. 
 

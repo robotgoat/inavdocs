@@ -1,6 +1,7 @@
 ---
 title: ADS-B
 slug: adsb
+description: Automatic Dependent Surveillance Broadcast setup in INAV
 ---
 
 [Automatic Dependent Surveillance Broadcast](https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast)

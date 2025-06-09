@@ -50,7 +50,7 @@ Detailed explainations are found in the linked section in the **Modules** sectio
 | Sensors | View real time data captured from connected sensors | |
 | Tethered Logging | | |
 | Blackbox | Set what FC parameters to record | |
-| CLI | Command line interface for modifying INAV's parameters | |
+| CLI | Command line interface for modifying INAV's parameters | [CLI](modules/cli.md) |
 | Search | | |
 
 ## Different map providers

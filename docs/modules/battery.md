@@ -1,6 +1,7 @@
 ---
 title: Battery
 slug: battery
+description: Information about monitoring battery statistics
 ---
 
 ## Battery Monitoring
