@@ -6,6 +6,8 @@ description: Supported characters used in hte OSD
 
 # Characters Map
 
+Found in [Custom OSD Elements](/docs/modules/osd#custom-osd-elements)
+
 | Preview                                                            | Firmware Variable          | Configurator Variable        | Description                           | Decimal ID | HEX ID       |
 |--------------------------------------------------------------------|----------------------------|------------------------------|---------------------------------------|------------|--------------|
 | ![None](/img/appendix/osd/digital/default/24x36/000.png)              | SYM_NONE                   |                              | Completely transparent icon           | 000        | 0x00         |

@@ -13,11 +13,10 @@ Canvas OSDs draw shapes on the image whereas character based OSDs use font chara
 
 
 General OSD information is in this document. Other documents cover specific OSD-related topics:
-* [Custom OSD Elements](https://github.com/iNavFlight/inav/wiki/Custom-OSD-Elements)
-* [OSD Hud and ESP32 radars](https://github.com/iNavFlight/inav/wiki/OSD-Hud-and-ESP32-radars)
-* [OSD Joystick](https://github.com/iNavFlight/inav/blob/master/docs/OSD%20Joystick.md)
-* [DJI compatible OSD.md](https://github.com/iNavFlight/inav/blob/master/docs/DJI%20compatible%20OSD.md)
-* [Pixel OSD FAQ](https://github.com/iNavFlight/inav/wiki/Pixel-OSD-FAQs)
+* [Custom OSD Elements](osd#custom-osd-elements)
+* [OSD Hud and ESP32 radars](osd#hud-and-esp32-radar)
+* [OSD Joystick](osd#osd-joystick)
+* [DJI compatible OSD.md](osd#dji-compatible-msp-displayport-osd-dji-o3-canvas-mode)
 
 
 ## OSD Types and Features
@@ -68,10 +67,10 @@ This is an example of the arming screen with the pilot logo enabled. This is usi
 This is an example of setting the `osd_inav_to_pilot_logo_spacing` to 0. This will allow a larger, single logo.
 ![Power on screen example with 0 spacing between logos](https://user-images.githubusercontent.com/17590174/271817352-6206402c-9da4-4682-9d83-790cc2396b00.png)
 
-# Post Flight Statistics
+## Post Flight Statistics
 The post flight statistcs are set in the firmware. Statistics are only hidden if the supporting hardware is not present. Due to size contraints. The post flight statistics are spread over 2 pages on analogue systems.
 
-## Statistics Shown
+### Statistics Shown
 | Statistic                     | Requirement           | Page  | |
 |-------------------------------|-----------------------|-------|-|
 | Flight Time                   |                       | 1     | The total time from arm to disarm. |
@@ -101,7 +100,7 @@ The post flight statistcs are set in the firmware. Statistics are only hidden if
 | Disarm method                 |                       | 1 & 2 |  |
 | Settings save status          |                       | 1 & 2 | Shows a message if the settings are being saved or have been saved on disarm. |
 
-## Configuration
+### Configuration
 There are a couple of settings that allow you to adjust parts of the post flights statistics.
 
 - `osd_stats_page_auto_swap_time` allows you to specify how long each stats page is displayed [seconds]. Reverts to manual control when Roll stick used to change pages. Disabled when set to 0.

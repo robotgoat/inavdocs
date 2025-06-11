@@ -252,5 +252,7 @@ For targets that have a flash data chip, typically used for blackbox logs, the f
 
 ## CLI Variable Reference
 
-**TODO**
-<!-- See [Settings.md](Settings.md). -->
+**TODO:** The properly formatted CLI Variables page is in progress.
+
+
+For now, the CLI variables can be accessed from the firmware dev repo [here](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md).

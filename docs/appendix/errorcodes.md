@@ -4,7 +4,10 @@ slug: errorcodes
 description: Error codes and their explainations
 ---
 
-INAV may fail to perform some action as expected, typically arming or engaging waypoints. This articles documents the reasons for some of these events.
+Found in: [CLI Commands Reference](/docs/modules/cli#cli-command-reference)
+
+INAV may fail to perform some action as expected, typically arming or engaging waypoints. 
+This table documents the reasons for these errors.
 
 ## Arming Errors
 

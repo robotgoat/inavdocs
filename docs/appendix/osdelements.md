@@ -4,6 +4,8 @@ slug: osdelements
 description: The available elements for OSDs
 ---
 
+Found in [OSD Elements](/docs/modules/osd#osd-elements)
+
 INAV provides a number of elements that can be displayed on the OSD. 
 This table lists all elements and the version from which they were added.
 

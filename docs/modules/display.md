@@ -1,6 +1,7 @@
 ---
 title: Display
 slug: display
+description: INAV supports presenting information on a display
 ---
 
 INAV supports displays to provide information to you about your aircraft and INAV state.
