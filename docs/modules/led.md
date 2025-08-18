@@ -6,14 +6,13 @@ description: All things LEDs
 
 ## LED Strip
 
-INAV supports the use of addressable LED strips.  Addressable LED strips allow each LED in the strip to
-be programmed with a unique and independant color.  This is far more advanced than the normal RGB strips which
-require that all the LEDs in the strip show the same color.
+INAV supports the use of addressable LED strips.  
+Addressable LED strips allow each LED in the strip to be programmed with a unique and independant color.  
+This is far more advanced than the normal RGB strips, which do not allow for individual control of each LED in the strip.
 
-Addressable LED strips can be used to show information from the flight controller system, the current implementation
-supports the following:
+Addressable LED strips can be used to show information from the flight controller system, the current implementation supports the following:
 
-* Up to 128 LEDs. _If using more than 20 LEDs, you should look to use a separate power supply._
+* Up to 128 LEDs. *If using more than 20 LEDs, you should look to use a separate power supply.*
 * Indicators showing pitch/roll stick positions.
 * Heading/Orientation lights.
 * Flight mode specific color schemes.
@@ -25,14 +24,16 @@ supports the following:
 
 Support for more than 128 LEDs is possible, it just requires additional development.
 
-## Supported hardware
+### Supported Hardware
 
-Only strips of 128 WS2811/WS2812 LEDs are supported currently.  If the strip is longer than 128 LEDs it does not matter,
-but only the first 128 are used.
+Only strips of 128 WS2811/WS2812 LEDs are currently supported.
+If the strip is longer than 128 LEDs, only the first 128 are used.
 
 WS2812 LEDs require an 800khz signal and precise timings and thus requires the use of a dedicated hardware timer.
 
-Note: Not all WS2812 ICs use the same timings, some batches use different timings.
+::: info
+Not all WS2812 ICs use the same timings, some batches use different timings.
+:::
 
 It could be possible to be able to specify the timings required via CLI if users request it.
 
@@ -44,40 +45,53 @@ It could be possible to be able to specify the timings required via CLI if users
 * [Adafruit NeoPixel Stick](https://www.adafruit.com/products/1426) (works well)
   * Measured current consumption in all white mode ~ 350 mA.
 
-## Connections
+### Connections
 
 WS2812 LED strips generally require a single data line, 5V and GND.
 
-WS2812 LEDs on full brightness can consume quite a bit of current.  **It is recommended to verify the current draw of you LEDs and ensure your supply can cope with the load. Remember, your flight controller will likely be using the same BEC to operate.** Check the specs of the LED chips. Some are more power hungry than others. Remember that if using the flight controller's 5v supply. This is also powering other components on your flight controller. Make sure there is enough overhead so that they don't brownout.
+:::warning
+WS2812 LEDs on full brightness can consume quite a bit of current.
+It is recommended to verify the current draw of you LEDs and ensure your supply can cope with the load. Remember, your flight controller will likely be using the same BEC to operate.
+:::
 
-On a multirotor that uses multiple BEC ESC's you can try use a different BEC to the one the FC uses. e.g. ESC1/BEC1 -> FC, ESC2/BEC2 -> LED strip. It's also possible to power one half of the strip from one BEC and the other half from another BEC. Just ensure that the GROUND is the same for all BEC outputs and LEDs.
+Check the specs of the LED chips. 
+Some are more power hungry than others. 
+Remember that if using the flight controller's 5v supply, this also powers other components on your flight controller. 
+Please make sure there is enough overhead to reduce potential for a brownout.
 
-If using a large number of LEDs. It would be more efficient to use 12v LEDs and power them with a separate regulated supply. Especially if using long strips. You would use the data line (LED pad) from the flight controller. Make sure there is continuity between the ground on the LEDS and the ground on the flight controller.
+On a multirotors that use individual ESCs with built in BECs, it's possible to use the ESC/BEC instead of the BEC from the FC e.g. ESC1/BEC1 -> FC, ESC2/BEC2 -> LED strip. 
+It's also possible to power one half of the strip from one BEC and the other half from another BEC. 
+Just ensure that the GROUND is the same for all BEC outputs and LEDs.
+
+If using a large number of LEDs, it will be more efficient to use 12v LEDs and power them with a separate regulated supply. 
+The data line (LED pad) from the flight controller will stil be used for control.
+Please ensure there is continuity between the ground on the LEDS and the ground on the flight controller.
 
 | Target                | Pin  | LED Strip | Signal |
 | --------------------- | ---- | --------- | -------|
 | F3Discovery | PB8  | Data In   | PB8    |
 | Sparky                | PWM5 | Data In   | PA6    |
 
-If you have LEDs that are intermittent, flicker or show the wrong colors then drop the VIN to less than 4.7v, e.g. by using an inline
-diode on the VIN to the LED strip. The problem occurs because of the difference in voltage between the data signal and the power
-signal.  The WS2811 LED's require the data signal (Din) to be between 0.3 * Vin (Max) and 0.7 * VIN (Min) to register valid logic
-low/high signals.  The LED pin on the CPU will always be between 0v to ~3.3v, so the Vin should be 4.7v (3.3v / 0.7 = 4.71v).
+If you have LEDs that are intermittent, flicker, or show the wrong colors, then drop the VIN to less than 4.7v, e.g. by using an inline diode on the VIN to the LED strip. 
+The problem occurs because of the difference in voltage between the data signal and the power
+signal.  
+The WS2811 LED's require the data signal (Din) to be between 0.3 * Vin (Max) and 0.7 * VIN (Min) to register valid logic low/high signals.  The LED pin on the CPU will always be between 0v to ~3.3v, so the Vin should be 4.7v (3.3v / 0.7 = 4.71v).
 Some LEDs are more tolerant of this than others.
 
 The datasheet can be found here: http://www.adafruit.com/datasheets/WS2812.pdf
 
-## Configuration
+## LED Setup
 
-The led strip feature can be configured via the GUI.
+![Configurator LED Page](/img/modules/config_led.jpg)
 
-GUI:
-Enable the Led Strip feature via the GUI under setup.
+The LED strip feature can be configured via Configurator in the LED Strip tab in Configurator.
 
-Configure the leds from the Led Strip tab in the INAV GUI.
+1. Enable the Led Strip feature via the GUI under setup.
+
+1. Configure the leds from the Led Strip tab in the INAV GUI.
 First setup how the led's are laid out so that you can visualize it later as you configure and so the flight controller knows how many led's there are available.
 
-There is a step by step guide on how to use the GUI to configure the Led Strip feature using the GUI http://blog.oscarliang.net/setup-rgb-led-cleanflight/ which was published early 2015 by Oscar Liang which may or may not be up-to-date by the time you read this.
+1. There is a step by step guide on how to use the GUI to configure the Led Strip feature using the GUI http://blog.oscarliang.net/setup-rgb-led-cleanflight/ which was published early 2015 by Oscar Liang which may or may not be up-to-date by the time you read this.
 
 CLI:
 Enable the `LED_STRIP` feature via the cli:
@@ -210,7 +224,9 @@ This mode binds the LED color to remaining battery capacity.
 | Deep pink  |     0%   |
 
 When Warning or Critial voltage is reached, LEDs will blink slowly or fast.
-Note: this mode requires a current sensor. If you don't have the actual device you can set up a virtual current sensor (see [Battery](battery.md)).
+:::info
+This mode requires a current sensor. If you don't have the actual device you can set up a virtual current sensor (see [Battery](battery.md)).
+:::
 
 #### Blink
 
@@ -605,10 +621,9 @@ This configuration is specifically designed for the [Alien Spider AQ50D PRO 250m
 
 ## Troubleshooting
 
-On initial power up the LEDs on the strip will be set to WHITE.  This means you can attach a current meter to verify
-the current draw if your measurement equipment is fast enough.  Most 5050 LEDs will draw 0.3 Watts a piece.
+On initial power up the LEDs on the strip will be set to WHITE.  
+This means you can attach a current meter to verify the current draw if your measurement equipment is fast enough.  
+Most 5050 LEDs will draw 0.3 Watts a piece.
 This also means that you can make sure that each R,G and B LED in each LED module on the strip is also functioning.
-
 After a short delay the LEDs will show the unarmed color sequence and or low-battery warning sequence.
-
 Also check that the feature `LED_STRIP` was correctly enabled and that it does not conflict with other features, as above.

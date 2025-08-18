@@ -31,7 +31,7 @@ const config: Config = {
     locales: ["en"],
   },
 
-  plugins: [require.resolve("docusaurus-lunr-search")],
+  plugins: [require.resolve("docusaurus-lunr-search"), require.resolve("docusaurus-plugin-image-zoom")],
   themes: ['@docusaurus/theme-mermaid'],
   markdown: {
     mermaid: true,
@@ -89,6 +89,13 @@ const config: Config = {
       content: '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 8.0.1 is out now! 🎉</a>',
       backgroundColor: '#ff9999',
       isCloseable: true,
+    },
+    zoom: { // the image zoom plugin
+      selector: '.markdown :not(em) > img',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      }
     },
     navbar: {
       title: "INAV",
