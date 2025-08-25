@@ -7,60 +7,75 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import ThemedImage from "@theme/ThemedImage";
+import BGV from "/img/inavbgv.webm";
+import Inavsvg from "/img/inav_home_dark.svg"
 
 import styles from "./index.module.css";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header
-      className={clsx("hero shadow--lw", styles.heroBanner)}
-      style={{
-        backgroundImage: `url("img/g2.svg")`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="container">
-        {/* <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading> */}
-        <ThemedImage
-          alt="INAV"
-          sources={{
-            light: useBaseUrl("img/inav_home_light.svg"),
-            dark: useBaseUrl("img/inav_home_dark.svg"),
-          }}
-        />
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className="container">
-          <div className="row margin-bottom--md">
-            <div className="col col--6 col--offset-3 card padding--md"
-            style={{opacity: 0.8,}}>
-              <div className="text--justify">
-                INAV is a cutting-edge flight controller software whose focus is
-                to bring easy to setup and use, semi-autonomous flight
-                capabilities to a variety of RC vehicles such as: fixed wings,
-                rotary wings, VTOLs, boats, and rovers.
-              </div>
-            </div>
-          </div>
-          <div className="row margin-top--md">
-            <div className="col">
-            <div className={styles.buttons}>
-            <Link
-              className="button button--secondary button--lg"
-              to="/docs/welcome"
-            >
-              Get Started! 🛨
-            </Link>
-          </div>
-            </div>
-          </div>
+    // <p>Hello</p>
+    <div className={styles.wrapper}>
+      <video
+        src={BGV}
+        className={styles.video}
+        autoPlay
+        playsInline
+        loop
+        muted
+      />
+      <div className={styles.mask}></div>
+      <Inavsvg className={styles.content} />
+    </div>
+    // <header
+    //   className={clsx("hero shadow--lw", styles.heroBanner)}
+    //   style={{
+    //     backgroundImage: `url("img/g2.svg")`,
+    //     backgroundRepeat: "no-repeat",
+    //     backgroundSize: "cover",
+    //   }}
+    // >
+    //   <div className="container">
+    //     {/* <Heading as="h1" className="hero__title">
+    //       {siteConfig.title}
+    //     </Heading> */}
+    //     <ThemedImage
+    //       alt="INAV"
+    //       sources={{
+    //         light: useBaseUrl("img/inav_home_light.svg"),
+    //         dark: useBaseUrl("img/inav_home_dark.svg"),
+    //       }}
+    //     />
+    //     <p className="hero__subtitle">{siteConfig.tagline}</p>
+    //     <div className="container">
+    //       <div className="row margin-bottom--md">
+    //         <div className="col col--6 col--offset-3 card padding--md"
+    //         style={{opacity: 0.8,}}>
+    //           <div className="text--justify">
+    //             INAV is a cutting-edge flight controller software whose focus is
+    //             to bring easy to setup and use, semi-autonomous flight
+    //             capabilities to a variety of RC vehicles such as: fixed wings,
+    //             rotary wings, VTOLs, boats, and rovers.
+    //           </div>
+    //         </div>
+    //       </div>
+    //       <div className="row margin-top--md">
+    //         <div className="col">
+    //         <div className={styles.buttons}>
+    //         <Link
+    //           className="button button--secondary button--lg"
+    //           to="/docs/welcome"
+    //         >
+    //           Get Started! 🛨
+    //         </Link>
+    //       </div>
+    //         </div>
+    //       </div>
           
-        </div>
-      </div>
-    </header>
+    //     </div>
+    //   </div>
+    // </header>
   );
 }
 
