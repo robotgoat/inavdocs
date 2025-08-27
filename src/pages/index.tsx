@@ -7,7 +7,7 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import ThemedImage from "@theme/ThemedImage";
-import BGV from "/img/inavbgv.webm";
+import BGV from "/img/inavbgv.mp4";
 import Inavsvg from "/img/inav_home_dark.svg"
 
 import styles from "./index.module.css";
@@ -84,12 +84,12 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Welcome to ${siteConfig.title}`}
-      description="The cutting edge UAV flight controller software suite"
+      description="The cutting edge Open source UAV flight controller software suite"
     >
       <HomepageHeader />
       <main>
         <div className="text--center margin-top--lg margin-left--lg">
-          <Heading as="h1">At a Glance</Heading>
+          {/* <Heading as="h1">At a Glance</Heading> */}
         </div>
         <HomepageFeatures />
       </main>

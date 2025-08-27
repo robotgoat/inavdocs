@@ -31,30 +31,43 @@ const config: Config = {
     locales: ["en"],
   },
 
-  plugins: [require.resolve("docusaurus-lunr-search"), require.resolve("docusaurus-plugin-image-zoom")],
-  themes: ['@docusaurus/theme-mermaid'],
+  plugins: [
+    require.resolve("docusaurus-lunr-search"),
+    require.resolve("docusaurus-plugin-image-zoom"),
+    [
+      "@docusaurus/plugin-content-blog",
+      {
+        id: "release-notes",
+        routeBasePath: "releasenotes",
+        path: "./releasenotes",
+      },
+    ],
+  ],
+
+  themes: ["@docusaurus/theme-mermaid"],
   markdown: {
     mermaid: true,
   },
-  
+
   presets: [
     [
       "classic",
       {
         docs: {
           includeCurrentVersion: true,
-          lastVersion: 'current',
-          versions : {
+          lastVersion: "current",
+          versions: {
             current: {
               label: "8.0.1",
-              banner: 'none'
-            }
+              banner: "none",
+              badge: true,
+              noIndex: false,
+            },
           },
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/robotgoat/inavdocs/tree/main/",
+          editUrl: "https://github.com/robotgoat/inavdocs/tree/main/",
         },
         blog: {
           showReadingTime: true,
@@ -64,8 +77,7 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/robotgoat/inavdocs/tree/main/",
+          editUrl: "https://github.com/robotgoat/inavdocs/tree/main/",
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
@@ -80,22 +92,24 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/inav_social_card.jpg',
+    image: "img/inav_social_card.jpg",
     colorMode: {
       respectPrefersColorScheme: true,
     },
     announcementBar: {
-      id: 'the_news',
-      content: '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 8.0.1 is out now! 🎉</a>',
-      backgroundColor: '#ff9999',
+      id: "the_news",
+      content:
+        '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 8.0.1 is out now! 🎉</a>',
+      backgroundColor: "#ff9999",
       isCloseable: true,
     },
-    zoom: { // the image zoom plugin
-      selector: '.markdown :not(em) > img',
+    zoom: {
+      // the image zoom plugin
+      selector: ".markdown :not(em) > img",
       background: {
-        light: 'rgb(255, 255, 255)',
-        dark: 'rgb(50, 50, 50)',
-      }
+        light: "rgb(255, 255, 255)",
+        dark: "rgb(50, 50, 50)",
+      },
     },
     navbar: {
       title: "INAV",
@@ -106,6 +120,11 @@ const config: Config = {
       },
       items: [
         {
+          to: "/releasenotes",
+          label: "Release Notes",
+          position: "left",
+        },
+        {
           type: "docSidebar",
           sidebarId: "documentationSidebar",
           position: "left",
@@ -114,21 +133,18 @@ const config: Config = {
         {
           to: "/download",
           label: "Download",
-          position: "left"
+          position: "left",
         },
-        { to: "/blog",
-          label: "Blog", 
-          position: "left" 
-        },
+        { to: "/blog", label: "Blog", position: "left" },
         {
           to: "/about",
           label: "About",
-          position: "left"
+          position: "left",
         },
         {
           type: "docsVersionDropdown",
           position: "right",
-          dropdownActiveClassDisabled: true
+          dropdownActiveClassDisabled: true,
         },
         {
           href: "https://github.com/iNavFlight/inav",
@@ -138,8 +154,8 @@ const config: Config = {
       ],
     },
     docs: {
-      versionPersistence: 'localStorage',
-      sidebar : {
+      versionPersistence: "localStorage",
+      sidebar: {
         hideable: true,
         autoCollapseCategories: true,
       },
@@ -153,6 +169,10 @@ const config: Config = {
             {
               label: "Documentation",
               to: "/docs/welcome",
+            },
+            {
+              label: "Release Notes",
+              to: "/releasenotes",
             },
           ],
         },
@@ -187,6 +207,10 @@ const config: Config = {
             {
               label: "GitHub",
               href: "https://github.com/iNavFlight/inav",
+            },
+            {
+              label: "RCGroups",
+              href: "https://www.rcgroups.com/forums/showthread.php?3666667-INAV-for-fixed-wing",
             },
           ],
         },
