@@ -19,4 +19,14 @@ To build and run the docs locally, install npm on your system and follow the Doc
 
 The temporary documentation can be accessed at this URL: https://www.spiffygoose.com/inavdocs/
 
-The search plugin used is docusaurus-lunr-search: https://github.com/praveenn77/docusaurus-lunr-search
+## Versioning Scheme
+
+The website utilizes Docusaurus's versioning feature to keep track of major changes to the firmware.
+The current version is the active stable release in the main `./docs` directory that is intended to be continually updated with minor updates until the next version. 
+Upon the release of the next stable version, the current version will be archived (versioned) into its own directory using `npm run docusaurus docs:version x.y.z`
+Lastly, the next current version's label will updated in `docusaurus.config.ts`.
+
+## Plugins Used
+
+* The search plugin used is docusaurus-lunr-search: https://github.com/praveenn77/docusaurus-lunr-search
+* Image zoom plugin: https://github.com/gabrielcsapo/docusaurus-plugin-image-zoom

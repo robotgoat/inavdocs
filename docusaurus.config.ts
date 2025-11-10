@@ -34,6 +34,7 @@ const config: Config = {
   plugins: [
     require.resolve("docusaurus-lunr-search"),
     require.resolve("docusaurus-plugin-image-zoom"),
+    // Multi instance blog for the release notes
     [
       "@docusaurus/plugin-content-blog",
       {

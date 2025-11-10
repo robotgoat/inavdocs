@@ -5,20 +5,61 @@ import Link from "@docusaurus/Link";
 export default function Downloads() {
   return (
     <Layout title="Downloads" description="Download INAV">
+      <div className="hero shadow--lw">
+        <div className="container">
+          <h1 className="hero__title">Downloads</h1>
+          <p className="hero__subtitle">Get all things INAV</p>
+          <div></div>
+        </div>
+      </div>
       <div className="container">
-        <div className="row margin-top--lg">
-          <div className="col col--6 col--offset-3">
-            <h1 className="text--center">Downloads</h1>
-          </div>
+        <div className="row margin-top--xl">
         </div>
         <div className="row text--center">
-          <div className="col col--4 col--offset-2">
-            <a className="button button--primary button--lg" href="https://github.com/iNavFlight/inav-configurator/releases/latest">
-              Configurator
-            </a>
+          <div className="col">
+            <div className="col-demo">
+              <div className="card-demo">
+                <div className="card">
+                  <div className="card__header">
+                    <h1> INAV Configurator</h1>
+                  </div>
+                  <div className="card__body">
+                    <p>
+                      Configurator is the desktop based tool used to setup and configure INAV on your flight controller.
+                      Download the latest version to use with the latest INAV version. 
+                    </p>
+                  </div>
+                  <div className="card__footer">
+                    <a className="button button--block button--lg button--primary" href="https://github.com/iNavFlight/inav-configurator/releases/latest">Download</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="col col--4">
-            <a className="button button--primary button--lg" href="https://github.com/iNavFlight/OpenTX-Telemetry-Widget/releases/latest">INAV Lua</a>
+          <div className="col">
+            <div className="col-demo">
+              <div className="card-demo">
+                <div className="card">
+                  <div className="card__header">
+                    <h1> INAV EdgeTX Lua Widget</h1>
+                  </div>
+                  <div className="card__body">
+                    <img src="https://raw.githubusercontent.com/iNavFlight/OpenTX-Telemetry-Widget/master/assets/iNavHorus.png"
+                    alt="Lua alt text"
+                    title="INAV Lua widget text" />
+                    <p>
+                      Enhance the INAV experience with the Lua widget for EdgeTX and OpenTX based radios that fully uses telemtry data. 
+                    </p>
+                  </div>
+                  <div className="card__footer">
+                    <div className="button-group button-group--block button--lg">
+                      <a className="button button--primary" href="https://github.com/iNavFlight/OpenTX-Telemetry-Widget/releases/latest">Download</a>
+                      <a className="button button--primary" href="https://luatelemetry.readthedocs.io/en/latest/">Documentation</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
