@@ -17,11 +17,11 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "inavflight", // Usually your GitHub org/user name.
+  organizationName: "iNavFlight", // Usually your GitHub org/user name.
   projectName: "inavdocs", // Usually your repo name.
 
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  // onBrokenMarkdownLinks: "warn", #deprecated comment out for now
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
