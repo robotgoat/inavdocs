@@ -9,9 +9,8 @@ slug: welcome
 
 ## Purpose
 
-This unofficial, community made website is the much needed evolution for the INAV project's documentation. 
-The original documentation was scattered about in the official Github repo and its wiki page. 
-This split documentation made it messy and cumbersome to quickly reference something as one source might be outdated while the other is actively maintained. 
+This unofficial, community made website is the next evolution for the INAV project's documentation. 
+
 The new documentation aims to consolidate everything INAV in a central and easy to use location.
 
 ## How to Use
