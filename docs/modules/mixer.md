@@ -1,4 +1,0 @@
----
-title: Mixer
-slug: mixer
----

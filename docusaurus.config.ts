@@ -52,19 +52,12 @@ const config: Config = {
 
   presets: [
     [
-      "classic",
+      "@docusaurus/preset-classic",
       {
         docs: {
+          // Use default docusaurus versioning behavior
+          // "Next" is for the new docs leading up to the next major version release
           includeCurrentVersion: true,
-          lastVersion: "current",
-          versions: {
-            current: {
-              label: "8.0.1",
-              banner: "none",
-              badge: true,
-              noIndex: false,
-            },
-          },
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -145,7 +138,7 @@ const config: Config = {
         {
           type: "docsVersionDropdown",
           position: "right",
-          dropdownActiveClassDisabled: true,
+          dropdownActiveClassDisabled: false,
         },
         {
           href: "https://github.com/iNavFlight/inav",
@@ -158,7 +151,7 @@ const config: Config = {
       versionPersistence: "localStorage",
       sidebar: {
         hideable: true,
-        autoCollapseCategories: true,
+        autoCollapseCategories: false,
       },
     },
     footer: {

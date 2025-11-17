@@ -12,7 +12,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Hardware',
-    Svg: require('@site/static/img/feature/cpu.svg').default,
+    Svg: require('@site/static/img/assets/cpu.svg').default,
     description: (
       <>
         INAV works on many flight controllers from many different manufacturers with further support of additional peripherals such as pitot tubes, rangefinder/optical flow sensors, and more.
@@ -21,7 +21,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Open Source Software',
-    Svg: require('@site/static/img/feature/code.svg').default,
+    Svg: require('@site/static/img/assets/code.svg').default,
     description: (
       <>
         INAV is free and open source software that is actively developed by many contributers from around the world. Large version releases occur annually and smaller, maintenance releases throughout the year.
@@ -30,7 +30,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Community',
-    Svg: require('@site/static/img/feature/users.svg').default,
+    Svg: require('@site/static/img/assets/users.svg').default,
     description: (
       <>
         With a large, enthusiastic, and active community of 16.4k members in the official Facebook and 8900 in Discord, getting up and going with your INAV build will be a breeze. 

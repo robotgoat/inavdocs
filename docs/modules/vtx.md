@@ -1,4 +1,0 @@
----
-title: VTX
-slug: vtx
----

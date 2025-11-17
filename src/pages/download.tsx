@@ -24,6 +24,9 @@ export default function Downloads() {
                     <h1> INAV Configurator</h1>
                   </div>
                   <div className="card__body">
+                    <img src="img/assets/inav-configurator.jpg"
+                    alt="Blackbox alt text"
+                    title="INAV Blackbox Tools" />
                     <p>
                       Configurator is the desktop based tool used to setup and configure INAV on your flight controller.
                       Download the latest version to use with the latest INAV version. 
@@ -56,6 +59,28 @@ export default function Downloads() {
                       <a className="button button--primary" href="https://github.com/iNavFlight/OpenTX-Telemetry-Widget/releases/latest">Download</a>
                       <a className="button button--primary" href="https://luatelemetry.readthedocs.io/en/latest/">Documentation</a>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="col-demo">
+              <div className="card-demo">
+                <div className="card">
+                  <div className="card__header">
+                    <h1> INAV Blackbox Tools</h1>
+                  </div>
+                  <div className="card__body">
+                    <img src="img/assets/blackbox-screenshot-1.jpg"
+                    alt="Blackbox alt text"
+                    title="INAV Blackbox Tools" />
+                    <p>
+                      These tools allow you to convert flight data logs recorded by INAV's Blackbox feature into CSV files (comma-separated values) for analysis, or into a series of PNG files which you could turn into a video.
+                    </p>
+                  </div>
+                  <div className="card__footer">
+                    <a className="button button--block button--lg button--primary" href="https://github.com/iNavFlight/blackbox-tools/releases/latest">Download</a>
                   </div>
                 </div>
               </div>

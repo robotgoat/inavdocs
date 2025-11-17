@@ -1,4 +1,0 @@
----
-title: VTOL
-slug: vtol
----
