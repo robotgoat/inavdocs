@@ -155,7 +155,7 @@ At this point everything should work as expected.
 
 * Adjust ``set roll_rate`` and ``set pitch_rate`` to the flight characteristics of your plane. For a race wing values like ``set roll_rate = 36`` and ``set pitch_rate = 18`` are a good starting point.
 
-* Set your [RTH mode](../features/Navigation-Mode:-Return-to-Home.md) to your liking
+* Set your [RTH mode](../features/Navigation-Mode-Return-to-Home.md) to your liking
 
 * Increase ``set nav_fw_bank_angle`` for tighter turns.
 

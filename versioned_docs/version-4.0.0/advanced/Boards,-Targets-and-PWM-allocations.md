@@ -17,7 +17,7 @@ The usage is taken directly from the source code, the following interpretation i
 | LED      | LED strip  |
 | PWM, ANY | Some other PWM function |
 
-*List generated 2022-01-22 from the [inav master branch](https://github.com/iNavFlight/inav/) by [`parse_targets.rb`](assets/parse_targets.rb). Some targets may not be available in official or prior releases.* **E&OE.**
+*List generated 2022-01-22 from the [inav master branch](https://github.com/iNavFlight/inav/) by [`parse_targets.rb`](/img/content/parse_targets.rb). Some targets may not be available in official or prior releases.* **E&OE.**
 
 You are strongly advised to check the board documentation as to the suitability of any particular board.
 

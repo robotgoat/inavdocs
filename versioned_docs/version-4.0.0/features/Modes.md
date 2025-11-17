@@ -9,20 +9,20 @@ description: Explaination of all the modes
 
 - [AIR MODE](#air-mode)
 - [ANGLE](#angle)
-- [ARM](#arm)
+- ARM
 - [AUTOLEVEL](#autolevel-fw)
 - [AUTOTUNE](#autotune-fw)
-- [BEEPER](#BEEPER)
+- [BEEPER](#beeper)
 - [BLACKBOX](#blackbox)
 - CAMERA CONTROL #
-- [CAMSTAB](#CAMSTAB)
+- [CAMSTAB](#camstab)
 - [FAILSAFE](#failsafe)
 - [FLAPERON](#flaperon-fw)
 - FPV ANGLE MIX
 - [HEADADJ](#headadj-mc)
 - [HEADFREE](#headfree-mc)
 - [HEADING HOLD](#heading-hold)
-- [HOME RESET](#home-reset)
+- HOME RESET
 - [HORIZON](#horizon)
 - KILLSWITCH
 - [LEDLOW](#ledlow)
@@ -34,11 +34,11 @@ description: Explaination of all the modes
 - [NAV LAUNCH](#nav-launch-fw)
 - [OSD ALT](#osd-alt)
 - [OSD SW](#osd-sw)
-- [PREARM](#prearm)
+- PREARM
 - [SERVO AUTOTRIM](#servo-autotrim-fw)
 - [SOARING](#soaring-fw)
 - [SURFACE](#surface)
-- [TELEMETRY](#telemetry)
+- TELEMETRY
 - [TURN ASSIST](#turn-assist)
 - [TURTLE](#turtle-mc)
 - USER1 & USER2

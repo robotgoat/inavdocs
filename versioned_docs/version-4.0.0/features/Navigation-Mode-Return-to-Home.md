@@ -10,7 +10,7 @@ With default settings RTH will land immediately if you are closer than 5 meters 
 
 Return to Home is activated by the NAV RTH flight mode.
 
-# RTH Altitudes
+## RTH Altitudes
 
 There are two altitudes that can be used with RTH: _nav_rth_altitude_ and _nav_rth_home_altitude_. 
 
@@ -18,13 +18,13 @@ _nav_rth_altitude_ is used in conjunction with the RTH Altitude control modes to
 
 _nav_rth_home_altitude_ sets the altitude that a plane will loiter at when it arrives at home. If above the _nav_rth_home_altitude_, the plane will start loitering, then loiter down to the home altitude. The default, 0, means that the feature is disabled. In which case the plane will loiter at the **Actual RTH Altitude**, or _nav_rth_altitude_ if linear descent is used.
 
-# RTH Altitude control modes
+## RTH Altitude control modes
 
 RTH sequence can control altitude in several different ways, controlled by _nav_rth_alt_mode_ and _nav_rth_altitud_ (the altitude in centimetres) parameters.
 
 Default setting is **NAV_RTH_AT_LEAST_ALT** - climb to preconfigured altitude if below, stay at current altitude if above.
 
-## Maintain current altitude (NAV_RTH_NO_ALT)
+### Maintain current altitude (NAV_RTH_NO_ALT)
 - _nav_rth_alt_mode_ = **CURRENT**
 - _nav_rth_altitude_ is ignored
 
@@ -32,7 +32,7 @@ The **Actual RTH Altitude** is the altitude that the model is currently flying a
 
 ![RTH No Alt](/img/content/NAV_RTH_NO_ALT.jpg)
 
-## Maintain current altitude + predefined safety margin (NAV_RTH_EXTRA_ALT)
+### Maintain current altitude + predefined safety margin (NAV_RTH_EXTRA_ALT)
 - _nav_rth_alt_mode_ = **EXTRA**
 - _nav_rth_altitude_ defines extra altitude margin
 
@@ -40,7 +40,7 @@ The **Actual RTH Altitude** is the altitude that the model is currently flying a
 
 ![RTH Extra alt](/img/content/NAX_RTH_EXTRA_ALT.jpg)
 
-## Predefined altitude (NAV_RTH_CONST_ALT)
+### Predefined altitude (NAV_RTH_CONST_ALT)
 - _nav_rth_alt_mode_ = **FIXED**
 - _nav_rth_altitude_ defines exact RTH altitude above launch point.
 
@@ -48,7 +48,7 @@ If the model is below _nav_rth_altitude_ it will climb to desired altitude prior
 
 ![RTH Const alt](/img/content/NAV_RTH_CONST_ALT.jpg)
 
-## Maximum altitude since launch (NAV_RTH_MAX_ALT)
+### Maximum altitude since launch (NAV_RTH_MAX_ALT)
 - _nav_rth_alt_mode_ = **MAX**
 - _nav_rth_altitude_ is ignored
 
@@ -56,7 +56,7 @@ The **Actual RTH Altitude** is the highest altitude during the flight.
 
 ![RTH Max alt](/img/content/NAV_RTH_MAX_ALT.jpg)
 
-## At least predefined altitude above launch point (NAV_RTH_AT_LEAST_ALT)
+### At least predefined altitude above launch point (NAV_RTH_AT_LEAST_ALT)
 - _nav_rth_alt_mode_ = **AT_LEAST**
 - _nav_rth_altitude_ defines the minimum RTH altitude above launch point. 
 
@@ -64,7 +64,7 @@ If the aircraft is below _nav_rth_altitude_ it will climb to desired altitude pr
 
 ![RTH at least alt](/img/content/NAV_RTH_AT_LEAST_ALT.jpg)
 
-## Predefined altitude linear descent (NAV_RTH_AT_LEAST_ALT_LINEAR_DESCENT)
+### Predefined altitude linear descent (NAV_RTH_AT_LEAST_ALT_LINEAR_DESCENT)
 - _nav_rth_alt_mode_ = **AT_LEAST_LINEAR_DESCENT**
 - _nav_rth_altitude_ defines minimum RTH altitude above launch point. 
 
@@ -72,27 +72,27 @@ If the aircraft is below _nav_rth_altitude_ it will climb to desired altitude pr
 
 ![](https://i.imgur.com/CPgKb4w.png)
 
-# Climb first
+## Climb first
 
 The _nav_rth_climb_first_ option sets how the model will initiate the **RTH**.
 
-## Climb first with Multirotors
+### Climb first with Multirotors
 
 - If _nav_rth_climb_first_ = **OFF**, the multirotor will turn to home, and immediately fly towards it, climbing on the way to the **Actual RTH Altitude**.
 - If _nav_rth_climb_first_ = **ON**, the multirotor hover and increase altitude. When it reaches the **Actual RTH altitude**, it will fly towards home.
 
-## Climb first with Fixed Wing
-### _nav_rth_climb_first_ = **OFF**
+### Climb first with Fixed Wing
+#### _nav_rth_climb_first_ = **OFF**
 The plane will turn towards home, and climb to the **Actual RTH altitude** on the homeward journey.
 
 [![https://imgur.com/qXkxPxh](https://i.imgur.com/qXkxPxhl.png)](https://i.imgur.com/qXkxPxh.png)
 
-### _nav_rth_climb_first_ = **ON**
+#### _nav_rth_climb_first_ = **ON**
 The plane climb to the **Actual RTH altitude** in the direction it is currently flying. Once the **Actual RTH Altitude** is reached, it will turn and fly towards home.
 
 [![https://imgur.com/MYWCu2X](https://i.imgur.com/MYWCu2Xl.png)](https://i.imgur.com/MYWCu2X.png)
 
-### _nav_rth_climb_first_ = **ON_FW_SPIRAL**
+#### _nav_rth_climb_first_ = **ON_FW_SPIRAL**
 _Feature available since iNav 3.0._
 
 The plane climb in a loiter to the **Actual RTH altitude**. Once the **Actual RTH Altitude** is reached, it will turn and fly towards home.
