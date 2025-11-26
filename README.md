@@ -17,14 +17,14 @@ To build and run the docs locally, install npm on your system and follow the Doc
 - Make sure all packages are installed with `npm install`.
 - Run the dev server with `npm run start`.
 
-The temporary documentation can be accessed at this URL: https://www.spiffygoose.com/inavdocs/
+Documentation can be accessed at this URL: https://inavflight.github.io/
 
 ## Versioning Scheme
 
 The website utilizes Docusaurus's versioning feature to keep track of major changes to the firmware.
-The current version is the active stable release in the main `./docs` directory that is intended to be continually updated with minor updates until the next version. 
-Upon the release of the next stable version, the current version will be archived (versioned) into its own directory using `npm run docusaurus docs:version x.y.z`
-Lastly, the next current version's label will updated in `docusaurus.config.ts`.
+The current version is the active stable release in `/versioned_docs/version-x.x.x` directory that has been frozen with no further updates. 
+Upon the release of the next stable version, a new version will be created into its own directory using `npm run docusaurus docs:version x.y.z`
+Lastly, the next current version's label will have to updated manually in `docusaurus.config.ts`.
 
 ## Plugins Used
 
