@@ -33,12 +33,11 @@ When referring to an image in a markdown file, please use absolute paths accordi
 
 ### Linking to Pages
 When linking to local pages, please do not use http urls or relative paths to link to other markdown documents that are part of the docusaurus site.
-For easier maintenance and organization, use absolute paths starting from the root directory eg: `/docs/quickstart/Name_of_markdown.md`.
+For easier maintenance and organization, use relative paths starting from the root directory eg: `../quickstart/Name_of_markdown.md` if not in the `quickstart` directory, which exists one level above.
 Autocomplete on VS Code should find the directories automatically. 
 Linking to headings within the document work as well by using `#` following the filename.
 
 ## Plugins Used
 
-* The search plugin used is docusaurus-lunr-search: https://github.com/praveenn77/docusaurus-lunr-search
-* Alternative search plugin: https://github.com/easyops-cn/docusaurus-search-local
+* Search plugin: https://github.com/easyops-cn/docusaurus-search-local
 * Image zoom plugin: https://github.com/gabrielcsapo/docusaurus-plugin-image-zoom

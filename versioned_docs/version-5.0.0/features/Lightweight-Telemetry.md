@@ -208,7 +208,7 @@ The payload is 6 bytes.
 | (unused) | 1 byte | 
 
 Note that hw status (hardware sensor status) is INAV 1.5 and later. If the value is non-zero, then a sensor has failed. 
-A complementary update has been made to MSP_STATUS (https://github.com/iNavFlight/inav/wiki/INAV-MSP-frames-changelog).
+A complementary update has been made to [MSP_STATUS](../advanced/INAV-MSP-frames-changelog.md).
 Thus, on disarming, the sensor status may be evinced from the MSP_STATUS/sensor field.
 
 The sensor hardware failure indication is backwards compatible with versions prior to 1.5 (and other Multiwii / Cleanflight derivatives).

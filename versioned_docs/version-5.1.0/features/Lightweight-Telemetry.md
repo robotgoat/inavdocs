@@ -22,7 +22,7 @@ The LTM protocol starts with "$T", followed by a function byte, the payload and 
 
 LTM telemetry can be read by [Ghettostation](https://github.com/KipK/Ghettostation),  [LTM Telemetry OLED ](https://github.com/sppnk/LTM-Telemetry-OLED) , [EZGUI](http://ez-gui.com/) , [MwpTools](https://github.com/stronnag/mwptools) and others.
 
-LTM can provide good telemetry down to 2400 (5Hz attitude updates). Due to restrictions in INAV 1.2 and earlier, 9600 was the lowest baud rate supported, which gives 10Hz attitude and 5Hz GPS data. More recently (INAV 1.7.0), LTM is available from 1200 baud and higher; the data transmission frequency is automatically determined from the baud rate, but can be overridden by the user where the baud rate can support the required update frequency. See the  [INAV Telemetry documentation](https://github.com/iNavFlight/inav/blob/master/docs/Telemetry.md#lighttelemetry-ltm) and [below](#inav-cli-support) for CLI settings.
+LTM can provide good telemetry down to 2400 (5Hz attitude updates). Due to restrictions in INAV 1.2 and earlier, 9600 was the lowest baud rate supported, which gives 10Hz attitude and 5Hz GPS data. More recently (INAV 1.7.0), LTM is available from 1200 baud and higher; the data transmission frequency is automatically determined from the baud rate, but can be overridden by the user where the baud rate can support the required update frequency. See the  [INAV Telemetry documentation](./iNav-Telemetry.md) and [below](#inav-cli-support) for CLI settings.
 
 The function consists of a single ASCII character, described below. Data is binary, little endian. The checksum is an XOR of the payload bytes.
 
@@ -208,7 +208,7 @@ The payload is 6 bytes.
 | (unused) | 1 byte | 
 
 Note that hw status (hardware sensor status) is INAV 1.5 and later. If the value is non-zero, then a sensor has failed. 
-A complementary update has been made to MSP_STATUS (https://github.com/iNavFlight/inav/wiki/INAV-MSP-frames-changelog).
+A complementary update has been made to [MSP_STATUS](../advanced/INAV-MSP-frames-changelog.md).
 Thus, on disarming, the sensor status may be evinced from the MSP_STATUS/sensor field.
 
 The sensor hardware failure indication is backwards compatible with versions prior to 1.5 (and other Multiwii / Cleanflight derivatives).

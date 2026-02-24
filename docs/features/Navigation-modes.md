@@ -6,10 +6,10 @@ title: Navigation Modes
 
 This page lists and explains all the different navigational flight modes of iNav:
 
-- [NAV ALTHOLD - Altitude hold](#althold---altitude-hold)
+- [NAV ALTHOLD - Altitude hold](#nav-cruise---course-hold--altitude-hold)
 - [NAV POSHOLD - Horizontal position hold](#nav-poshold---position-hold)
-- [NAV COURSE HOLD - Fixed Wing Heading Hold](#nav-course-hold---fixed-wing-heading-hold)
-- [NAV CRUISE - Fixed Wing Heading + Altitude Hold](#nav-cruise---fixed-wing-heading--altitude-hold)
+- [NAV COURSE HOLD - Fixed Wing Heading Hold](#nav-course-hold---course-hold)
+- [NAV CRUISE - Fixed Wing Heading + Altitude Hold](#nav-cruise---course-hold--altitude-hold)
 - [NAV RTH - Return to home](#rth---return-to-home)
 - [NAV WP - Autonomous waypoint mission](#wp---autonomous-waypoint-mission)
 - [WP PLANNER - On the fly waypoint mission planner](#wp-planner---on-the-fly-waypoint-mission-planner)
@@ -17,24 +17,24 @@ This page lists and explains all the different navigational flight modes of iNav
 
 For safety reasons, INAV’s navigation modes can be activated only if:
 
-- ACC and MAG (multirotor only) are [calibrated](/docs/quickstart/Sensor-calibration.md) properly
+- ACC and MAG (multirotor only) are [calibrated](../quickstart/Sensor-calibration.md) properly
 - a valid 3D GPS fix is available
 - a valid altitude source is available
 - the FC is armed
 
 This applies to enabling the navigation modes in the Configurator as well as at the flying field.
-(For bench tests without(!) propellers you may change “set nav_extra_arming_safety = ON” to “OFF” in CLI.)
+(For bench tests without(!) propellers you may change “set nav_extra_arming_safety = ON” to “ALLOW_BYPASS” in CLI. Then use yaw right when arming to bypass the checks.)
 
 - Flightmodes are self contained. For example: with RTH and WP (Waypoints) it's not necessary to enable angle, althold or mag, it enables what it needs. Read more below in POSHOLD section.
 - On fixed wing aircraft, enabling CRUISE, RTH, WP or POSHOLD also enables TURN ASSIST. TURN ASSIST applies elevator and rudder input when the airplane is banked to obtain a coordinated turn.
 
-|             | POSHOLD | WAYPOINT | RTH | ALTHOLD |
-| ----------- | ------- | -------- | --- | ------- |
-| ANGLE       | X       | X        | X   |         |
-| ALTHOLD     | X       | X        | X   |         |
-| TURN ASSIST | X       | X        | X   |         |
-| MAG         |         | X        | X   |         |
-| BARO        |         | X        | X   | X       |
+|             | COURSE HOLD | CRUISE | POSHOLD | WAYPOINT | RTH | ALTHOLD |
+| ----------- | ----------- | ------ | ------- | -------- | --- | ------- |
+| ANGLE       | X           | X      | X       | X        | X   |         |
+| ALTHOLD     |             | X      | X       | X        | X   |         |
+| TURN ASSIST | X           | X      | X       | X        | X   |         |
+| MAG         |             |        |         | X        | X   |         |
+| BARO        |             |        |         | X        | X   | X       |
 
 :::note
 **Prior to version 2.6 on a fixed wing the motor will stop in all Nav modes except Nav RTH and Nav WP if the throttle is reduced below the Min_Check setting. From version 2.6 this behaviour is controlled using the nav_overrides_motor_stop setting which by default keeps the motor running in all Nav modes.**
@@ -42,21 +42,22 @@ This applies to enabling the navigation modes in the Configurator as well as at 
 
 - There is a companion [[wiki page further describing way point missions, tools and telemetry options|iNavFlight Missions]].
 
-Note: All iNAV parameters for distance, velocity, and acceleration are input in cm, cm/s and cm/s^2.
+Note: All INAV parameters for distance, velocity, and acceleration are input in cm, cm/s and cm/s^2.
 
 Let's have a look at each mode of operation in detail.
 
 ## ALTHOLD - Altitude hold
 
 When activated, the aircraft maintains its actual altitude unless changed by manual throttle input.
-Throttle input indicates climb or sink up to a predetermined maximum rate (see CLI variables). Using ALTHOLD with a multicopter, you need a barometer.
+Throttle input indicates climb or sink up to a predetermined maximum rate (see CLI variables). Using ALTHOLD with a multicopter, you need a barometer. **Please see the platform specific notes for ALTHOLD below.**
+
 SONAR: Altitude hold code will use sonar automatically on low altitudes (< 3m) if hardware is available.
 Using ALTHOLD with a plane (fixed wing: fw) with GPS: Since INAV 1.5 it's recommended to keep baro enabled, and for INAV 1.6 the plan is to rely even less on GPS altitude when baro is enabled.
 
-In general you shouldn't mix up ALTHOLD and ACRO/HORIZON: ALTHOLD doesn't account for extreme acro maneuvers.
+**In general you shouldn't use ALTHOLD with ACRO/HORIZON: ALTHOLD doesn't account for extreme acro manoeuvres.**
 
 Activate ALTHOLD by **ALTHOLD** flight mode.
-Altitude, as calculated by iNAV's position estimator, is recorded to BLACKBOX as navPos[2].
+Altitude, as calculated by INAV's position estimator, is recorded to BLACKBOX as navPos[2].
 
 ### a) Using ALTHOLD with a multicopter (mc):
 
@@ -67,16 +68,16 @@ Climb rate in ALTHOLD mode:
 The neutral position of the throttle stick to hold current altitude is defined by
 
 - “set nav_use_midthr_for_althold=ON”: use mid position of throttle stick as neutral. By default the mid position value is typically 1500us as set in the "Receiver" tab.
-- “set nav_use_midthr_for_althold =OFF”: use current stick position (i.e. when activating ALTHOLD) as neutral. [Yet, if "nav_use_midthr_for_althold=OFF”, and you enable ALTHOLD with throttle stick too low (like on the ground) iNAV will take “thr_mid” as a safe default for neutral. “thr_mid” is defined in the “Receiver” tab and should be set to hover throttle.]
+- “set nav_use_midthr_for_althold =OFF”: use current stick position (i.e. when activating ALTHOLD) as neutral. [Yet, if "nav_use_midthr_for_althold=OFF”, and you enable ALTHOLD with throttle stick too low (like on the ground) INAV will take “thr_mid” as a safe default for neutral. “thr_mid” is defined in the “Receiver” tab and should be set to hover throttle.]
 
-In the moment you engage ALTHOLD, iNAV always sends “nav_mc_hover_thr” to the motors as the starting value of the altitude control loop. You should configure this to your copter's hover setting, if your copter doesn't hover close to the default value of 1500us. Otherwise your copter will begin ALTHOLD with a jump or drop.
+In the moment you engage ALTHOLD, INAV always sends “nav_mc_hover_thr” to the motors as the starting value of the altitude control loop. You should configure this to your copter's hover setting, if your copter doesn't hover close to the default value of 1500us. Otherwise your copter will begin ALTHOLD with a jump or drop.
 
 Example: Let's assume "nav_mc_hover_thr” is already set correctly to your copter's hover throttle and “set nav_use_midthr_for_althold =OFF”. Let's say you have your throttle stick at 30%, and you enter ALTHOLD, your copter will maintain hover at this 30%. If throttle is increased up to 40% it will start to climb. (Even if your copter needs 60% throttle to actually climb up in normal flight without ALTHOLD.)
 
 It's important to note that when the battery is full, "nav_mc_hover_thr” could be a lower value than when the battery is weaker. With a weaker battery more throttle will be needed to maintain a hover. A practical way to establish an approximate valid value is to use the INAV OSD screen to test values real-time when in the field. Once an approximate "nav_mc_hover_thr” has been established, then adjust the PIDs as described in the "PIDs for altitude hold" section below.
 
 "set alt_hold_deadband = 50": You have to change throttle command (e.g. move throttle stick) by at least this amount to make the copter climb or descend and change target altitude for ALTHOLD.
-If ALTHOLD is activated at zero throttle iNAV will account for deadband and move the neutral "zero climb rate" position a little bit up to make sure you are able to descend.
+If ALTHOLD is activated at zero throttle INAV will account for deadband and move the neutral "zero climb rate" position a little bit up to make sure you are able to descend.
 
 PIDs for altitude hold:
 _**The following values can be accessed using INAV OSD when configured for FPV from the "ALT MAG" screen within the "PIDS" section. Alternatively, the comparable variable, in parenthesis (), can be entered in the CLI of INAV Configurator.**_
@@ -115,7 +116,7 @@ What is the trick with "VEL I (nav_mc_vel_z_i)"?
 
 To deal with oscillations you can try lowering your "ALT P (nav_mc_alt_p)", "VEL P (nav_mc_vel_p)", "ALT I (nav_auto_climb_rate)", and "nav_manual_climb_rate".
 
-Climb rate is calculated from the readings of the accelerometer, barometer and – if available – from GPS (“set inav_use_gps_velned = ON”). How strongly the averages of these noisy signals are taken into account in the estimation of altitude change by iNAV is controlled by
+Climb rate is calculated from the readings of the accelerometer, barometer and – if available – from GPS (“set inav_use_gps_velned = ON”). How strongly the averages of these noisy signals are taken into account in the estimation of altitude change by INAV is controlled by
 
 - set inav_w_z_baro_p = 0.350
 - set inav_w_z_gps_p = 0.200
@@ -125,13 +126,13 @@ Climb rate is calculated from the readings of the accelerometer, barometer and �
 
 // : explain remaining relevant settings
 
-### b) Using ALTHOLD with an airplane (fixed wing, fw):
+### b) Using ALTHOLD with an airplane (fixed wing, FW):
 
-With Fixed Wing models, iNAV is not intended to use ALTHOLD controller in anything but ANGLE or CRUISE modes.
-iNAV controls pitch angle and throttle. It assumes that altitude is held (roughly) when pitch angle is zero. If plane has to climb, iNAV will also increase throttle. If plane has to dive, iNAV will reduce throttle and glide. The strength of this mixing is controlled by “nav_fw_pitch2thr”.
+With Fixed Wing models, INAV is not intended to use ALTHOLD controller in anything but ANGLE mode.
+INAV controls pitch angle and throttle. It assumes that altitude is held (roughly) when pitch angle is zero. If plane has to climb, INAV will also increase throttle. If plane has to dive, INAV will reduce throttle and glide. The strength of this mixing is controlled by “nav_fw_pitch2thr”.
 Set board alignment in such a way that your plane is flying level both in "MANUAL" and in "ANGLE", when you don't touch the sticks.
 
-iNAV’s parameters for fixed wing:
+INAV’s parameters for fixed wing:
 
 - set nav_fw_cruise_thr = 1400 # cruise throttle
 - set nav_fw_min_thr = 1200 # minimum throttle
@@ -144,8 +145,28 @@ iNAV’s parameters for fixed wing:
 
 ## NAV POSHOLD - Position hold
 
-For multirotor it will hold 3D position, throttle is automatic (AH).
-You can use your roll and pitch stick to move around. The position hold will be resumed when you center the roll/pitch stick again. You can also enable HEADING HOLD at the same time to lock the heading.
+MULTIROTOR
+
+For multirotors it will hold 3D position, throttle is automatic (AH).
+You can use your roll and pitch stick to move around. The POSHOLD will be resumed when you center the roll/pitch stick again. HEADING HOLD is now included automatically to achieve 3D stability and it is therefore unwise to add it yourself as well. It is adjustable in the CLI via the parameter 'heading_hold_rate_limit'. The default at the time of writing is heading_hold_rate_limit = 90.
+
+POSHOLD permits smooth controlled flight and can be modified via the ADVANCED TUNING TAB under the heading Multirotor Navigation Settings
+
+The User Control Mode can be either ATTI or CRUISE:
+
+- ATTI The Pitch/Roll stick behaves in a similar way to ANGLE
+- CRUISE The Pitch/Roll stick behaves in a similar way to HORIZON (Recommended for smooth video work)
+
+A number of other parameters can also be set:
+
+- Default navigation speed
+- Max. navigation speed
+- Max. CRUISE speed
+- Multirotor max. banking angle
+- Use mid. throttle for ALTHOLD
+- Hover throttle
+
+FIXED WING
 
 For fixed wing it will loiter in circles which radius is defined by the `nav_fw_loiter_radius` variable. The throttle is automatic. The altitude is controlled with the pitch stick (AH).
 
@@ -156,11 +177,23 @@ Hints for safe operation:
 - Activate without props installed to check for reasonable operation.
 - When misconfigured, this mode can result in dramatic failure to hold position. Attitude (yaw & motion) inputs can/will result in rapid and unexpected motion.
 
-## NAV COURSE HOLD - Fixed Wing Heading Hold
+## NAV COURSE HOLD - Course Hold
 
-When enabled the machine will try to maintain the current heading and compensate for any external disturbances (2D CRUISE). User can adjust the flight direction directly with ROLL stick or with the YAW stick (`nav_fw_cruise_yaw_rate` set the yawing rate at full stick deflection). The latter will offer a smoother way to adjust the flight direction. If the mode is enabled in conjunction with NAV ALTHOLD also the current altitude will be maintained (CRUISE). Altitude can be adjusted, as usual, via the pitch stick. ANGLE mode is forced to be active so the plane will auto level.
+Course hold is only available for multirotor from INAV 7.0.
 
-## NAV CRUISE - Fixed Wing Heading + Altitude Hold
+When enabled the craft will try to maintain the current course and compensate for any external disturbances (2D CRUISE). Control behaviour is different for fixed wing and multirotor as follows:
+
+**Fixed wing**  
+The flight direction is controlled directly with ROLL stick as usual or with the YAW stick which provides a smoother way to adjust the flight direction.
+
+**Multirotor**  
+The heading is adjusted using the YAW stick or the ROLL stick (ROLL stick behaves exactly the same as the YAW stick). Cruise speed is increased by raising the pitch stick with the speed set in proportion to stick deflection up to a maximum limit of `nav_manual_speed`. This speed is maintained after the stick returns to centre. If the multirotor is already moving when Course Hold is selected the current speed will be maintained up to the `nav_manual_speed` limit. Speed is decreased by lowering the pitch stick with the rate of reduction proportional to stick position such that at maximum deflection it should take around 2s to slow to a stop. Position is held when the speed drops below 0.5m/s.
+
+`nav_cruise_yaw_rate` sets the yaw rate at full stick deflection (only applicable for YAW stick control on fixed wing).
+
+If the mode is enabled in conjunction with NAV ALTHOLD the current altitude will also be maintained (CRUISE). Altitude can be adjusted, as usual, via the pitch stick for fixed wing or the throttle stick for multirotor. ANGLE mode is active so the craft will auto level and heading hold is active on a multirotor.
+
+## NAV CRUISE - Course Hold + Altitude Hold
 
 Equivalent to the combination of NAV COURSE HOLD and NAV ALTHOLD described above.
 
@@ -170,7 +203,7 @@ RTH will attempt to bring copter/plane to launch position. Launch position is de
 
 With default settings RTH will land immediately if you are closer than 5 meters from launch position. If further away it will make sure to have at least 10 meters of altitude, then start going home at 3m/s, and land. It will disarm itself if so configured, otherwise you will have to manually disarm once on the ground.
 
-There are many different modes for Altitude, see the [RTH mode page](/docs/features/Navigation-Mode-Return-to-Home.md) for details.
+There are many different modes for Altitude, see the [RTH mode page](../features/Navigation-Mode-Return-to-Home.md) for details.
 
 Activated by **RTH** flight mode.
 
@@ -178,11 +211,24 @@ Activated by **RTH** flight mode.
 
 Autonomous waypoint missions allow the craft to fly a predefined sequence of mission waypoints. The mission waypoints include information about the type of waypoint, latitude, longitude, height and speed between the waypoints as well as other settings that control the behaviour during a mission. GUIs such as INAV Configurator Mission Control, [MWP Tools](https://github.com/stronnag/mwptools), EZ-GUI, Mission Planner for INAV, Mobile Flight and can be used to set the waypoints and upload the mission as well as store missions locally for reuse. Uploaded missions are saved in FC volatile memory until a reboot or a new uploaded mission overwrites the old one. Missions can also be saved to EEPROM non volatile memory which retains the mission after power off/reboot.
 
-When waypoint mode is activated (using a switch as other modes), the quad/plane will start to fly the waypoint mission following the waypoints in numerical order. Waypoint missions can be interrupted during a mission by switching NAV WP off (Manual mode on a fixed wing or RTH will also interrupt a WP mission). Up to INAV 4.0 WP missions always start from the first WP. From INAV 4.0 it is possible to resume an interrupted mission from an intermediate WP using the [nav_wp_mission_restart](../advanced/iNav-CLI-variables.md) setting.
+When waypoint mode is activated (using a switch as other modes), the quad/plane will start to fly the waypoint mission following the waypoints in numerical order. Waypoint missions can be interrupted during a mission by switching NAV WP off (Manual mode on a fixed wing or RTH will also interrupt a WP mission). Up to INAV 4.0 WP missions always start from the first WP. From INAV 4.0 it is possible to resume an interrupted mission from an intermediate WP using the [nav_wp_mission_restart](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_wp_mission_restart) setting.
 
 Up to 30 waypoints can be set on F1 boards. On F3 boards and better 60 waypoints are available. This is increased to 120 waypoints from INAV 4.0.
 
 There is an additional [[wiki page further describing way point missions, tools and telemetry options|iNavFlight Missions]].
+
+The [MSP navigation message protocol documentation](../advanced/MSP-Navigation-Messages.md) describes optional parameters affecting WP behaviour.
+
+### Fixed Wing Waypoint Tracking Accuracy and Turn Smoothing
+
+Waypoint tracking accuracy forces the craft to quickly head toward and track along the waypoint course line as closely as possible. 2 settings control the alignment behaviour. [nav_fw_wp_tracking_accuracy](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_wp_tracking_accuracy) adjusts the stability of the alignment. Higher values dampen the response reducing possible overshoot and oscillation. [nav_fw_wp_tracking_max_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_wp_tracking_max_angle)
+sets the maximum alignment convergence angle to the waypoint course line (see below). This is the maximum angle allowed during alignment and in reality will only be acheived when some distance away from the course line with the angle reducing as the craft gets closer to alignment. Lower values result in smoother alignment with the course line but a greater distance along the course line will be required until this is achieved.
+
+Turn Smoothing helps to smooth turns during WP missions by switching to a loiter turn at waypoints with the turn initiated slightly before the waypoint is actually reached. This helps to avoid the overshoot often seen on tighter turns. The [nav_fw_wp_turn_smoothing](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_wp_turn_smoothing) setting provides 2 options as shown below.
+
+(Available from INAV 6.0)
+
+![](https://user-images.githubusercontent.com/56191411/216628721-034b4864-212d-47c7-89dd-c0f4c012cb0f.png)
 
 ### Multi-Missions
 
@@ -190,9 +236,15 @@ Multi-missions allows up to 9 missions to be stored in the FC at the same time. 
 
 Multi-missions can be planned in Configurator Mission Control or MWP Tools and saved to/loaded from the FC as normal. It is also possible to load them into the FC [using the CLI.](https://github.com/iNavFlight/inav/blob/master/docs/Navigation.md#cli-command-wp-to-manage-waypoints)
 
-The OSD `MISSION INFO` field will display the total number of missions loaded on power up. The required mission can be selected either by using the CMS MISSIONS menu or by using the roll stick to change the mission number in the `MISSION INFO` field. `MISSION INFO` will display the mission waypoint count if the current mission number is loaded or 'LOAD' if it isn't. To load a mission use the Mission load stick command.
+The OSD `MISSION INFO` field will display the total number of missions loaded on power up. The required mission can be selected either by using the CMS MISSIONS menu or by using the roll stick to change the mission number in the `MISSION INFO` field. `MISSION INFO` will display the mission waypoint count if the current mission number is loaded or 'LOAD' if it isn't. To load a mission use the Mission load stick command. It is also possible to change missions in flight using adjustment function `Multi mission Index Adjustment` or by selecting `MISSION CHANGE` mode. The mission index is changed in `MISSION CHANGE` mode using the WP mode switch to cycle through the available missions. The newly selected mission becomes active when either the adjustment function or `MISSION CHANGE` mode is deselected.
 
-Selecting mission numbers 1 to 9 will load missions saved in EEPROM. It is also possible to select Mission number 0 which appears in the `MISSION INFO` field as "WP CNT". This shows the current active WP count loaded in FC volatile memory and changes depending on the Arm state. When disarmed with a mission loaded it shows the total number of WPs for all missions stored in EEPROM. After arming and until another mission is loaded on disarm it displays the number of WPs in the loaded mission. "WP CNT" will also display the waypoint count for missions loaded to the FC from a source other than EEPROM, e.g. via telemetry. Note: when 1 or less missions are loaded in the FC EEPROM mission numbers can only be selected using the CMS MISSIONS menu.
+Selecting mission numbers 1 to 9 will load missions saved in EEPROM. Mission selection behaviour changed slightly with INAV 6.0 as follows:
+
+**Pre INAV 6.0**  
+It is possible to select Mission number 0 which appears in the `MISSION INFO` field as "WP CNT". This shows the current active WP count loaded in FC volatile memory and changes depending on the Arm state. When disarmed with a mission loaded it shows the total number of WPs for all missions stored in EEPROM. After arming and until another mission is loaded on disarm it displays the number of WPs in the loaded mission. "WP CNT" will also display the waypoint count for missions loaded to the FC from a source other than EEPROM, e.g. via telemetry. When less than 2 missions are loaded in the FC EEPROM mission numbers can only be selected using the CMS MISSIONS menu.
+
+**From INAV 6.0**  
+Only mission numbers 1 - 9 can be selected and "WP CNT" only appears if a mission has been loaded from a source other than EEPROM. Also waypoint count now only shows the number of WPs in the selected mission.
 
 The only limitation with multi missions relates to single WP RTH missions. There seems little purpose in such a mission but if used it must be saved as mission number 1 (if saved at any other position it will truncate loading of other missions beyond that number).
 
@@ -213,11 +265,9 @@ It should be noted that unlike other Nav modes WP PLANNER will work when disarme
 This mode is just an permission for GCS to change position hold coordinates and the altitude.
 So it's not a flight mode itself, and needs to be combined with other flight modes.
 
-In order to let the GCS have full control over the aircraft the following modes must be activated: `NAV POSHOLD` `NAV ALTHOLD` `MAG` TOGETHER with `GCS_NAV`.
+In order to let the GCS have full control over the aircraft, e.g. 'follow me', the following modes must be activated: `NAV POSHOLD` with `GCS_NAV`. In order to update the home position, no other mode is required.
 
-This can be combined in whichever way you want to permit, e.g manual yawing or altitude control.
-
-Keep in mind that if `NAV POSHOLD` is not combined with this mode you must combine `ANGLE` as the other modes are best combined with `ANGLE` mode.
+For more [detail](../advanced/INAV-remote-management-control-and-telemetry.md).
 
 ## GPS loss during navigation
 

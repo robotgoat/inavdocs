@@ -26,7 +26,7 @@ Buying from the following links will help in supporting more hardware, debugging
 
 If you are building a **plane**:
 
-https://github.com/iNavFlight/inav/wiki/Fixed-Wing-Guide
+[Fixed Wing Guide](./Fixed-Wing-Guide.md)
 
 ## Recommended hardware
 

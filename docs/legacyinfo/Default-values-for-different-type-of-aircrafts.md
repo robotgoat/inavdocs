@@ -13,6 +13,7 @@ This is not a replacement for tuning your PIDs, this is only a starting point fr
 Worth reading regards to deciding to use asynchronous mode. https://quadmeup.com/inav-how-to-setup-asynchronous-gyro/
 
 ### History: **PLEASE WRITE HERE IF YOU CHANGE ANYTHING AND WHY.**
+
 ```
 05.01.3017 oleøst: Changed some settings in 250 class.
 21.11.2016 oleoat: Removed disabling of baro because fixed in INAV 1.4
@@ -29,7 +30,7 @@ Worth reading regards to deciding to use asynchronous mode. https://quadmeup.com
 2016-11-21 stronnag Added Tri 600 settings for F3/ INAV 1.4
 ```
 
-# Change to default INAV settings 
+# Change to default INAV settings
 
 Changes **you** think that should be done to INAV globally:
 
@@ -62,7 +63,6 @@ _Other Values:_
 
 **250 Size:**
 
-
 _PIDs:_
 
 ```
@@ -79,7 +79,6 @@ set p_level = 20
 set i_level = 15
 set d_level = 75
 ```
-
 
 _Navigation PIDs:_
 
@@ -101,6 +100,7 @@ set gyro_sync_denom = 8
 ```
 
 **450 Size:**
+
 ```
 Weight: ~1200g (with battery)
 Props: 10x4.5
@@ -108,6 +108,7 @@ Battery: 3s 5200mAh
 ```
 
 _PIDs:_
+
 ```
 set p_pitch = 90
 set i_pitch = 34
@@ -122,6 +123,7 @@ set p_level = 22
 set i_level = 15
 set d_level = 75
 ```
+
 _Navigation PIDs:_
 
 ```
@@ -155,13 +157,13 @@ set gyro_lpf = 42HZ
 
 Home design 600mm tricopter. Same amateur pilot who only ever flies in horizon /LOS.
 
-````
+```
 3S, 4200mAh (Graphene), 10x5 HQ Thin Electic props, 1000kv. c. 900grams all up.
-INAV 1.4 for the rockin' async_gyro. 
+INAV 1.4 for the rockin' async_gyro.
 Gets about 18 minutes gentle / nav modes, maybe 16 mins for aggressive manual flying.
 
 F3 (SPEVO). Enjoys the relatively high PIDs.
-````
+```
 
 _PIDs:_
 
@@ -228,7 +230,6 @@ set tpa_rate = 20
 set tpa_breakpoint = 1650
 ```
 
-
 **600 Size:**
 
 _PIDs:_
@@ -248,7 +249,6 @@ _Other Values:_
 ```
 
 ```
-
 
 # Fixedwing
 

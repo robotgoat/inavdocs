@@ -47,15 +47,6 @@ const config: Config = {
       },
     ],
     require.resolve("docusaurus-plugin-image-zoom"),
-    // Multi instance blog for the release notes
-    [
-      "@docusaurus/plugin-content-blog",
-      {
-        id: "release-notes",
-        routeBasePath: "releasenotes",
-        path: "./releasenotes",
-      },
-    ],
   ],
 
   themes: ["@docusaurus/theme-mermaid"],
@@ -108,7 +99,7 @@ const config: Config = {
     announcementBar: {
       id: "the_news",
       content:
-        '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 9.0 is out now! 🎉</a>',
+        '<a href="https://github.com/iNavFlight/inav/releases">🎉 INAV 9.0.1 is out now! 🎉</a>',
       backgroundColor: "#ff9999",
       isCloseable: true,
     },
@@ -128,11 +119,6 @@ const config: Config = {
         src: "img/logo.svg",
       },
       items: [
-        {
-          to: "/releasenotes",
-          label: "Release Notes",
-          position: "left",
-        },
         {
           type: "docSidebar",
           sidebarId: "documentationSidebar",
@@ -178,10 +164,6 @@ const config: Config = {
             {
               label: "Documentation",
               to: "/docs/welcome",
-            },
-            {
-              label: "Release Notes",
-              to: "/releasenotes",
             },
           ],
         },

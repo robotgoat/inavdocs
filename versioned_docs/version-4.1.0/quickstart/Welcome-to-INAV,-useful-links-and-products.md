@@ -2,7 +2,7 @@
 title: Useful Links and Products
 ---
 
-![](https://telegra.ph/file/412011e1cf4219dbd18f1.png)
+![](/img/inav_logo2.png)
 
 **Hello everyone and welcome to INAV!**
 
@@ -24,9 +24,7 @@ You are very welcome to ask for suggestions and tips in the chat!
 
 Buying from the following links will help in supporting more hardware, debugging and fixing bugs and expanding the functionalities of the flight controller. From every purchase you make, without any additional cost for you, a small commission will be given to INAV developers!
 
-If you are building a **plane**:
-
-https://github.com/iNavFlight/inav/wiki/Fixed-Wing-Guide
+If you are building a [**plane**](../quickstart/Fixed-Wing-Guide.md)
 
 ## Recommended hardware
 

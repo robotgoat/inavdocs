@@ -1,7 +1,6 @@
 ---
-title: Official Release 5.0
-slug: 5.0
-authors: INAV
+title: Release Notes
+sidebar_position: 2
 ---
 
 ![INAV Banner](/img/inav_banner.png)

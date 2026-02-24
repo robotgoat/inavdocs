@@ -92,7 +92,7 @@ The new value isn't saved to EEPROM, you have to save it manually using either t
 
 ### AUTOTUNE (FW)
 
-For detailed description go to https://github.com/iNavFlight/inav/wiki/Tune-INAV-PIFF-controller-for-fixedwing
+For detailed description go to [Tune INAV PIFF For Fixed Wing](../advanced/Tune-INAV-PIFF-controller-for-fixedwing.md)
 
 AUTOTUNE will attempt to tune roll and pitch P, I and FF gains on a fixed-wing airplane.
 
@@ -127,7 +127,7 @@ Enables the servo gimbal
 ### FAILSAFE
 
 Lets you activate flight controller failsafe with an aux channel.
-Read [Failsafe page](https://github.com/iNavFlight/inav/wiki/Failsafe) for more info.
+Read [Failsafe page](./Failsafe.md) for more info.
 
 ### FLAPERON (FW)
 

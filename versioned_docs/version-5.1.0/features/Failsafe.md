@@ -46,7 +46,7 @@ For fixed wing set `failsafe_throttle_low_delay = 0` or else it will disarm the 
 
 The behavior of `RTH` can also be configured.
 
- - [iNav Flight modes / Navigation Modes](/docs/features/Navigation-Mode-Return-to-Home.md)
+ - [iNav Flight modes / Navigation Modes](./Navigation-Mode-Return-to-Home.md)
 
 Loss of GPS during Failsafe RTH will result in an emergency landing so make sure the following are set to avoid surprises:
 - `nav_emerg_landing_speed` - default is 5 m/s. Reduce for a fixed wing.

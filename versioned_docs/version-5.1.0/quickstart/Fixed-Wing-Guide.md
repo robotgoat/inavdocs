@@ -26,7 +26,7 @@ Some of the most popular flight controllers for fixed wing are:
 
 * Flash the latest version of iNav using the [iNav Configurator](https://github.com/iNavFlight/inav-configurator/releases)
 
-* Do an entire [sensor calibration](/docs/quickstart/Sensor-calibration.md). Level should be the angle of the plane itself when flying straight. **Do not skip this step**.
+* Do an entire [sensor calibration](./Sensor-calibration.md). Level should be the angle of the plane itself when flying straight. **Do not skip this step**.
 
 * Select a preset from the iNav presets tab that fits your aircraft the best, then press "Save & Reboot"
 
@@ -34,7 +34,7 @@ Some of the most popular flight controllers for fixed wing are:
 
 The image below shows the standard wiring for both a flying wing and for a normal fixed wing model with ailerons, elevator & rudder. You connect each servo to the corresponding PWM output on your flight controller.
 
-**Note:** If you are using iNav with a Mini Talon you'll need a [Custom Mix](/docs/advanced/Custom-mixes-for-exotic-setups.md) so that the servos move correctly or if using a Skyhunter (Nano, Micro, Mini & full sized) then there is also a custom mix available [here](/docs/advanced/Custom-mixes-for-exotic-setups.md#skyhunter-nano-no-rudder---172-onwards).
+**Note:** If you are using iNav with a Mini Talon you'll need a [Custom Mix](../advanced/Custom-mixes-for-exotic-setups.md) so that the servos move correctly or if using a Skyhunter (Nano, Micro, Mini & full sized) then there is also a custom mix available [here](../advanced/Custom-mixes-for-exotic-setups.md#skyhunter-nano-no-rudder---172-onwards).
 
 ![Mixes airplane](/img/content/mixes_airplane.png)
 
@@ -128,7 +128,7 @@ At this point everything should work as expected.
 
 * Setup the right failsafe action. For most users it is advised to use ``set failsafe_procedure = RTH``.
 
-* Take a few minutes to read through how the different [Flight Modes](/docs/features/Modes.md) affect the model in the air.
+* Take a few minutes to read through how the different [Flight Modes](../features/Modes.md) affect the model in the air.
 
 * Have `manual` mode configured so if it happens anything with gyro / accelerometer in the air you can use manual control. This includes if your flight controller resets during flight because of example an brownout.  
 
@@ -136,13 +136,13 @@ At this point everything should work as expected.
 
 ### Step 6: Optional, but Recommended:
 
-* [Tune your PIFF controller](/docs/advanced/Tune-INAV-PIFF-controller-for-fixedwing.md) ( iNav versions 1.6 & later )
+* [Tune your PIFF controller](../advanced/Tune-INAV-PIFF-controller-for-fixedwing.md) ( iNav versions 1.6 & later )
 
 * To make altitude hold smoother you can adjust ``set nav_fw_pos_z_p`` , ``set nav_fw_pos_z_i`` and ``set nav_fw_pos_z_d``. Good values to start are 30/10/10.
 
 * Use Airmode mode to get full stabilization and servo throw with no throttle applied.
 
-* [Setting up failsafe with return to home.](/docs/features/Failsafe.md)
+* [Setting up failsafe with return to home.](../features/Failsafe.md)
 
 * If your compass is not 100% properly setup just disable it instead. **A calibrated compass can cause orientation drift during flight that may not show up in the configurator** (especially built-in ones on your FC). Really consider disabling it unless you need it. INAV uses GPS heading normally, Only on ground before GPS speed has been high enough or if error between GPS heading and compass heading exceed 60deg will it use compass heading
 
@@ -154,7 +154,7 @@ At this point everything should work as expected.
 
 * Adjust ``set roll_rate`` and ``set pitch_rate`` to the flight characteristics of your plane. For a race wing values like ``set roll_rate = 36`` and ``set pitch_rate = 18`` are a good starting point.
 
-* Set your [RTH mode](/docs/features/Navigation-Mode-Return-to-Home.md) to your liking
+* Set your [RTH mode](../features/Navigation-Mode-Return-to-Home.md) to your liking
 
 * Increase ``set nav_fw_bank_angle`` for tighter turns.
 
@@ -168,15 +168,15 @@ At this point everything should work as expected.
     * Enable `Angle` / `Horizon` mode and verify the control surfaces moves correctly when moving aircraft by hand and by sticks on TX
 
 * Arm and launch your aircraft using prefered mode, example `manual` for the maiden flight launch.
-    * If airplane is not flying leveled when in self leveling mode like `Horizon` you need to trim your [board aligment](/docs/quickstart/Sensor-calibration.md#board-orientation-and-level-calibration)
+    * If airplane is not flying leveled when in self leveling mode like `Horizon` you need to trim your [board aligment](./Sensor-calibration.md#board-orientation-and-level-calibration)
     * If airplane flies leveled, do an [Servo Autotrim](/docs/features/Modes.md#servo-autotrim-fw)
-    * Tune your PIFF values, either manually or with [AUTOTUNE](/docs/features/Modes.md#autotune-fw) 
+    * Tune your PIFF values, either manually or with [AUTOTUNE](../features/Modes.md#autotune-fw) 
 
 * For GPS features
     * Test `NAV ALTHOLD` and see that it holds altitude.
     * Test `NAV ALTHOLD` and `NAV POSHOLD` combined
     * Test `RTH` flight mode
-    * Test [failsafe](/docs/features/Failsafe.md)
+    * Test [failsafe](../features/Failsafe.md)
 
 
 ### Optional / Guides related to Fixed Wing:
@@ -191,4 +191,4 @@ At this point everything should work as expected.
 
 * Add an capacitor on the +5v powering servos to avoid issues. ( Especially with digital servos ) [Link explanation](http://www.vstabi.info/en/node/1422) [Example to buy](http://www.multiwiicopter.com/products/c1-anti-brownout-cap-for-rc-drone-servos)
 
-* [Why do I have limited servo throw-in-my airplane](/docs/quickstart/Why-do-I-have-limited-servo-throw-in-my-airplane.md)
+* [Why do I have limited servo throw-in-my airplane](./Why-do-I-have-limited-servo-throw-in-my-airplane.md)

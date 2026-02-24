@@ -1,7 +1,6 @@
 ---
-title: Official Release 4.1.0
-slug: 4.1.0
-authors: INAV
+title: Release Notes
+sidebar_position: 2
 ---
 
 ![INAV Banner](/img/inav_banner.png)
@@ -14,7 +13,7 @@ Please carefully read all of this document for the best possible experience and 
 
 Your contribution from the past month has been very welcome! Thanks!
 
-Tested and suggested hardware can be found [here](https://github.com/iNavFlight/inav/wiki/Welcome-to-INAV,-useful-links-and-products)
+Tested and suggested hardware can be found [here](./quickstart/Welcome-to-INAV,-useful-links-and-products.md)
 
 ## Important notes
 
@@ -31,7 +30,7 @@ Tested and suggested hardware can be found [here](https://github.com/iNavFlight/
 
 ### Upgrading from older versions
 
-Please follow the instructions on [this](https://github.com/iNavFlight/inav/wiki/Upgrading-from-an-older-version-of-INAV-to-the-current-version) page.
+Please follow the instructions on [this](./quickstart/Upgrading-from-an-older-version-of-INAV-to-the-current-version.md) page.
 
 ## Important changes
 

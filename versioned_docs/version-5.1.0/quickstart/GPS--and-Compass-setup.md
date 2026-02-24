@@ -113,7 +113,7 @@ Only when you're content that the compass reads correctly for all throttle setti
  * Select your newly connected magnetometer by using `mag_hardware` CLI command. Example `set mag_hardware = auto` if you only have one magnetometer connected.
  * Most built in magnetometers are on the underside and rotated 180 degrees, use example `set align_mag = CW180FLIP`. If compass is not working properly in all directions then either think and figure out the direction of your mag, or go through them all until it works as expected.
  * F3 based board and newer uses default automatic magnetic declination, if your on F1 board or want to change magnetic declination manually you have to set correct declination of your spesific location, which can be found here: www.magnetic-declination.com. If your magnetic declination readings are e.g. +3° 34' , the value entered in the INAV configurator is 3.34 (3,34 in some locales). In the CLI, the same effect would be `set mag_declination = 334`. For west declination, use a minus value, e.g. for 1° 32' W, `set mag_declination = -132`. In all cases (both CLI and GUI), the least significant digits are **minutes**, not decimal degrees.
- * Calibrate your compass according to [compass calibration](/docs/quickstart/Sensor-calibration.md#compass-calibration)
+ * Calibrate your compass according to [compass calibration](./Sensor-calibration.md#compass-calibration)
 
 
 Note to change magnetic declination manually on F3 or later board you have to turn off automatic function. `set inav_auto_mag_decl = OFF`.
@@ -172,7 +172,7 @@ If it is the first time you have connected the GPS unit, then it can take severa
 Default DJI GPS puck pointing forward is set with CW180FLIP, but can be changed with CW0FLIP, CW90FLIP, CW180FLIP or CW270FLIP
 
  * Inav since 1.5 version and newer uses default automatic magnetic declination, if your on old verion or want to change magnetic declination manually you have to set correct declination of your spesific location, which can be found here: www.magnetic-declination.com. If your magnetic declination readings are e.g. +3° 34' , the value entered in the INAV configurator is 3.34 (3,34 in some locales). In the CLI, the same effect would be `set mag_declination = 334`. For west declination, use a minus value, e.g. for 1° 32' W, `set mag_declination = -132`. In all cases (both CLI and GUI), the least significant digits are **minutes**, not decimal degrees.
- * Calibrate your compass according to [compass calibration](/docs/quickstart/Sensor-calibration.md#compass-calibration)
+ * Calibrate your compass according to [compass calibration](./Sensor-calibration.md#compass-calibration)
 
 Note to change magnetic declination manually on F3 or newer board you have to turn off automatic function. `set inav_auto_mag_decl = OFF`.
 

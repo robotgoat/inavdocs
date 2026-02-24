@@ -11,8 +11,8 @@ sidebar_position: 3
 
 - Download latest configurator from [here](https://github.com/iNavFlight/inav-configurator/releases)
 - Flash newest iNav with full chip erase option selected
-- Do the advanced 6-point [sensor calibration](/docs/quickstart/Sensor-calibration.md)
-- Select your Mixer. Most common ones are already available as presets. For exotic setups, see [Custom mixes for exotic setups](/docs/advanced/Custom-mixes-for-exotic-setups.md); if you don't do this, you will not see any motors in the motors tab.
+- Do the advanced 6-point [sensor calibration](Sensor-calibration.md)
+- Select your Mixer. Most common ones are already available as presets. For exotic setups, see [Custom mixes for exotic setups](../advanced/Custom-mixes-for-exotic-setups.md); if you don't do this, you will not see any motors in the motors tab.
 - Be sure the model moves on the configurator as it is moving on the bench. If not, adjust board alignment from the Configuration tab
 - If you have a magnetometer, you may need to attach a battery for magnetometer calibration. Rotate the quadcopter 360 degrees on all 3 axes.
 
@@ -26,7 +26,7 @@ Set trim on your TX to zero. Use subtrim to adjust your TX midpoints to be preci
 Many presets are available on the specific configurator tab and they mostly represent a good starting point.
 Be sure to load the correct present and double check the applied configuration.
 
-[Default values for different type of aircrafts](/docs/quickstart/Default-values-for-different-type-of-aircrafts.md)
+[Default values for different type of aircrafts](Default-values-for-different-type-of-aircrafts.md)
 
 ## 4. Trim copter to level flight
 
@@ -41,7 +41,7 @@ You can use RX stick combination to trim the quadcopter: [Controls](https://gith
 
 ## 6. Setup and verify failsafe on TX and iNav
 
-[Guide for setting up failsafe](/docs/features/Failsafe.md)
+[Guide for setting up failsafe](../features/Failsafe.md)
 
 ## 7. Determine and set hover throttle
 
@@ -50,4 +50,4 @@ If your copter jumps/rises when you activate altitude hold, reduce your nav_mc_h
 
 ## 8. Get to know the CLI values.
 
-iNav offers a lot of customization through CLI variables. It is strongly recommended to read through [iNav CLI variables](/docs/advanced/iNav-CLI-variables.md) and [available CLI variables](https://github.com/iNavFlight/inav/blob/master/docs/Cli.md)
+iNav offers a lot of customization through CLI variables. It is strongly recommended to read through [iNav CLI variables](../advanced/iNav-CLI-variables.md) and [available CLI variables](https://github.com/iNavFlight/inav/blob/master/docs/Cli.md)

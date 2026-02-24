@@ -12,7 +12,7 @@ title: Make a new Virtualbox to make your own INAV
 1. Download a fresh copy of INAV by running this in terminal: `git clone https://github.com/inavflight/inav`
 1. Enter INAV folder, clean up previous builds, and build your target: `cd inav; make clean; make TARGET=TARGET_YOU_WANT_TO_MAKE`
 
-And heres a [link](https://github.com/iNavFlight/inav/wiki/Features-safe-to-add-and-remove-to-fit-your-needs.#other-features-that-can-safely-be-removed-or-added) that gives some hints how to tailor INAV for your needs.
+And heres a [link](./Features-safe-to-add-and-remove-to-fit-your-needs..md#other-features-that-can-safely-be-removed-or-added) that gives some hints how to tailor INAV for your needs.
 
 It is also now possible to build on OS X using the [cross compiler tools for ARM]
 1. If you haven't already, install XCode command line tools and [homebrew](https://brew.sh)
