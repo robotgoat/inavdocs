@@ -1,7 +1,7 @@
 // docmd.config.js
 export default defineConfig({
   // --- Core Metadata ---
-  title: 'My Documentation',
+  title: 'INAV Documentation',
   url: '', // e.g. https://mysite.com (Critical for SEO/Sitemap)
 
   // --- Branding ---
