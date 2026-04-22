@@ -2,16 +2,16 @@
 export default defineConfig({
   // --- Core Metadata ---
   title: 'INAV Documentation',
-  url: '', // e.g. https://mysite.com (Critical for SEO/Sitemap)
+  url: 'https://inavflight.github.io/',
 
   // --- Branding ---
   logo: {
-    light: 'assets/images/docmd-logo-dark.png',
-    dark: 'assets/images/docmd-logo-light.png',
+    light: 'assets/images/brand/inav_home_light.svg',
+    dark: 'assets/images/brand/inav_home_dark.svg',
     alt: 'Logo',
     href: '/',
   },
-  favicon: 'assets/favicon.ico',
+  favicon: 'assets/images/brand/favicon.ico',
 
   // --- Source & Output ---
   src: 'docs',
@@ -23,12 +23,24 @@ export default defineConfig({
     header: {
       enabled: true,
     },
+    menubar: {
+      enabled: true,
+      position: 'top',
+      left : [
+        { type: 'title', text: "INAV", url: '/', icon: "home" },
+        { text: "Documentation", url: "/welcome" },
+        { text: "Downloads", url: "/downloads" },
+      ],
+      right: [
+        { text: "GitHub", url: "https://github.com/inavflight/inav", icon: "github" },
+      ]
+    },
     sidebar: {
       collapsible: true,
       defaultCollapsed: false,
     },
     optionsMenu: {
-      position: 'sidebar-top', // 'menubar', 'header', 'sidebar-top', 'sidebar-bottom'
+      position: 'menubar', // 'menubar', 'header', 'sidebar-top', 'sidebar-bottom'
       components: {
         search: true,      
         themeSwitch: true, 
@@ -37,7 +49,7 @@ export default defineConfig({
     },
     footer: {
       style: 'minimal', // 'minimal' or 'complete'
-      content: '© ' + new Date().getFullYear() + ' My Project.',
+      content: '© ' + new Date().getFullYear() + ' Team INAV Flight',
       branding: true    // Config for "Built with docmd" badge
     }
   },
@@ -58,28 +70,26 @@ export default defineConfig({
   
   customJs: [],           
 
-  // --- Versioning (Optional) ---
-  /*
+  // Versioning
+
   versions: {
     position: 'sidebar-top', // 'sidebar-top', 'sidebar-bottom'
-    current: 'v2',
+    current: 'v9',
     all: [
-      { id: 'v2',       // Unique identifier for this version (used in URLs) and matching current version
+      { id: 'v9',       // Unique identifier for this version (used in URLs) and matching current version
        dir: 'docs',     // Source directory for latest version
-       label: 'v2.0 (Latest)'
+       label: '9.0.1'
       },
-      { id: 'v1',
-       dir: 'docs-v1',  // Source directory for older version
-       label: 'v1.0'
+      { id: 'v4',
+       dir: 'docs-v4',  // Source directory for older version
+       label: '4.0'
       }
     ]
   },
-  */
 
   // --- Navigation (Sidebar) ---
   navigation: [
-    { title: 'Introduction', path: '/', icon: 'home' },
-    { title: 'About', path: '/about', icon: 'home' },
+    { title: 'Welcome', path: '/welcome', icon: 'plane' },
   ],
 
   // --- Plugins ---
@@ -91,7 +101,7 @@ export default defineConfig({
     },
     sitemap: { defaultChangefreq: 'weekly' },
     analytics: { 
-      googleV4: { measurementId: 'G-X9WTDL262N' } // Change the example GA ID with your own
+      googleV4: { measurementId: '' } // Change the example GA ID with your own
     }
   },
   

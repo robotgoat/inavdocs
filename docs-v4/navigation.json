@@ -1,0 +1,6 @@
+[
+  { "title": "Welcome", "path": "/welcome" },
+  { "title": "Quickstart", "path": "/quickstart", "children": [
+    { "title": "Getting Started", "path": "/quickstart" }
+  ]}
+]
