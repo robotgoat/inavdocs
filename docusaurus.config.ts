@@ -131,6 +131,11 @@ const config: Config = {
           label: "Download",
           position: "left",
         },
+        {
+          to: "/developers",
+          label: "Tools",
+          position: "left",
+        },
         // { to: "/blog", label: "Blog", position: "left" },
         {
           to: "/about",
