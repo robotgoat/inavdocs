@@ -83,7 +83,6 @@ const Contributors: React.FC = () => {
 
   return (
     <div style={{ margin: '12px 0' }}>
-      <h3>Top 100 Recent Contributors</h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px' }}>
         {contributors.map((contributor) => (
           <div key={contributor.login} style={{ border: '1px solid #ccc', padding: '10px', textAlign: 'center' }}>
