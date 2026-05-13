@@ -2,3 +2,45 @@
 title: Overview
 sidebar_posoition: 1
 ---
+
+This section aims to provide a bird's eye view of INAV when applied to fixed wings.
+The topics covered in this section are:
+
+- INAV state diagram
+- Fixed wing basics
+
+## INAV State Diagram
+
+Presented below is a state diagram showing a high level overview of the INAV control loop.
+This should hopefully paint a picture of the control flow from the RC control link to expected outputs.
+
+```mermaid
+stateDiagram-v2
+
+RCTX: RC Transmitter
+RCRX: RC Receiver
+FC: INAV FC
+
+PIDFF: PIDFF Controller (Roll, pitch, yaw)
+INAVMix: INAV Mixer
+NAV: Nav Mode PID Controller
+Output: Servo and/or throttle output AE(T)R
+
+Sensors: Nav Sensors GPS, Compass, Pitot, etc
+
+RCTX --> RCRX : TX channel output
+RCRX --> FC : Received TX channel output
+state FC {
+    [*] --> PIDFF
+    NAV --> PIDFF: If Enabled
+    PIDFF --> INAVMix
+    INAVMix --> [*]
+}
+FC --> Output
+
+Sensors --> FC
+FC --> RCRX: Telemetry
+RCRX --> RCTX: Telemetry
+```
+
+## Core Concepts

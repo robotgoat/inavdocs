@@ -1,10 +1,85 @@
 ---
-title: Hardware Setup
-sidebar_position: 3
+title: Hardware Overview
+sidebar_position: 1
 ---
 
+## Get Acquainted With The Hardware
+
 There are now many flight controllers on the market tailored for fixed wing.
-This section provides a high level overview of the typical components and suggestions for wiring them up.
+This section provides a high level overview of the typical components and suggestions for wiring both fixed wing and multicopter FCs.
+
+## Components
+
+The flight controller is the central processing computer that runs INAV and interfaces with other sensors to make navigation enhanced flight possible.
+This section outlines the components needed depending on the kind of build.
+
+
+### Bare Necessities
+
+- Flight controller
+- Radio control link receiver
+
+INAV can function without any extra sensors and be used as a simple flight stablization system. 
+This can be useful for certain visual line of sight flying (VLOS).
+
+### Navigation Essentials
+
+In addition to everything in [Bare Necessities](./01-hardware-overview.mdx#bare-necessities):
+
+- GNSS/GPS
+
+A GPS unit, with or without a compass/magnetometer, is all that's needed to gain full functionality of INAV's navigation features. 
+This will allow for things like return to home (RTH), altitude hold, position, hold, waypoint missions, and more.
+
+### FPV (First Person View) Build
+
+In addition to everything in [Navigation Essentials](./01-hardware-overview.mdx#navigation-essentials):
+
+- Video transmitter (VTX)
+- Camera compatible with VTX system
+
+There are now a multitude of video systems for FPV available. 
+These range from the inexpesive, old, but still widely used analog video systems to digital systems such as DJI, Caddx Walksnail, Caddx Ascent, Betafpv P1, and OpenIPC. 
+
+:::info
+It is possible to fly FPV without a GPS, but is not recommended.
+There will be no OSD aids or safety features like return to home without a GPS.
+:::
+
+### Sensor Enhanced
+
+In addition to everything in [FPV Build](./01-hardware-overview.mdx#fpv-first-person-view-build):
+
+- Airspeed sensor (pitot)
+- Rangefinder
+- Buzzer
+- Addressable LED strip
+- Telemetry Radio
+- Second ELRS receiver for Companion Flight
+- Companion computer
+
+## Connection Inputs and Outputs
+
+The flight controller communicates with peripheral components mentioned above using standardized protocols: 
+
+- **UART**: Universal Asynchronous Receiver/ Transmitter
+- **I2C**: Inter-Integrated Circuit
+- **SPI**: Serial Peripheral Interface
+- **CAN**: Controller Area Network
+
+**UARTs** are the most common way to add sensors to a FC.
+It is a one-to-one connection where only one device can talk to one UART resource on the FC.
+They are denoted as TX and RX in the flight controller manuals and wiring diagrams and must be crossed from device to FC. 
+Peripherals like ELRS receivers, Crossfire receivers, and GPS units communicate with the FC over a UART. 
+
+**I2C** is a two wire serial bus that has one master device (FC) and multiple slave devices (external magnetometer).
+Pads marked with SCL and SDA on the FC indicate a I2C connection.
+
+**SPI** is a multi wire, single master (FC) to multiple slave devices where each slave device has a dedicated wire. 
+SPI devices are usually on the FC to interface with on board devices like barometers, multiple IMUs, and SD card access. 
+
+**CAN** is similar to the CANBUS found in modern cars. 
+While INAV does not support any DroneCAN based sensors yet, they are available on other flight controller software like Ardupilot.
 
 ## Fixed Wings
 
@@ -69,7 +144,7 @@ As an illustrated example, the wiring guide for the AtomRC F405 Navi is shown be
 
 #### Power Wires 
 Powers wires from the battery and to the ESC(s), should be a thicker gauage wire. 
-Depending on the size of the aircraft, a good starting point for average aircraft is 16awg to 14awg.
+Depending on the size of the aircraft, a good starting point for average, parkflier sized aircraft is 16awg to 14awg.
 
 It's also a good idea to mount a capacitor on the battery pad. 
 The capacitor is provided in FC packaging along with the wiring accessories for all the peripherals. 
@@ -93,3 +168,4 @@ This includes having a (usually) 8 pin JST 1.0 cable that connects the FC to the
 An example of how a typical MC FC is wired is shown below:
 
 ![Sequire H743](/img/gettingstarted/sequreH743_wires.jpg)
+

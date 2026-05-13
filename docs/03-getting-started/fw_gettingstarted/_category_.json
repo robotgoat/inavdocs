@@ -1,6 +1,6 @@
 {
   "label": "Fixed Wing Configuration",
-  "position": 4,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "The essentials for getting a fixed wing aircraft ready for flight"
