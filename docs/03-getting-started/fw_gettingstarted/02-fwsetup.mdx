@@ -1,6 +1,68 @@
 ---
-title: Airplane Setup
+title: Wiring
 sidebar_position: 2
 ---
 
-This section explains how to wire servos and motors to the FC and how to configure INAV through INAV Configurator to get a working airplane ready for its maiden flight.
+This page explains where to connect servos and motors to the FC and how to configure INAV through INAV Configurator to get a working airplane ready for its maiden flight.
+
+
+## Hooking Everything Up
+
+As an example for this section, we will use the Matek F405 Wing V2, whose picture is shown below.
+
+![](/img/gettingstarted/matekf405wingv2_annotated.jpg)
+<figcaption><i>Credit: Matek</i></figcaption>
+
+Motor and servo wires are generally connected to dedicated pins on the FC. 
+In the Matek FC pictured above, the pins for motors and servos is boxed in red.
+These are labeled as S1 - S9 on this FC and are referred to as PWM headers.
+Other FCs may have more or fewer pins.
+
+### Timer Groups
+
+An important concept with STM32 based MCUs that is present in almost all modern FCs on the market is that of **timers**. 
+Timers are associated with a physical hardware pin on the MCU where a set of pins belong to a certain timer depending on the configuration. 
+INAV utilizes these pins in timer groups to allow for flexibility in driving a combination of motors that are DSHOT drivin and servos that are PWM driven. 
+The mixer tab in INAV Configurator where this setting is configured is shown below with an explanation of each boxed section under the picture.
+
+![INAV Configurator Mixer Tab](/img/gettingstarted/mixer_tab.png)
+
+1. **Timer Outputs** - shows the available timers and their functions.
+By default, all timers are set as `AUTO`.
+To manually set the fuction, click the dropdown.
+The available functions are: MOTOR, SERVO, and LED.
+
+1. **Output Mapping** - is a table that shows which timers in Box 1 are mapped to which motor and/or servos.
+
+1. **Motor Mixer** - is where motor outputs are added and configured.
+To add a motor, press *Add new mixer rule* and a new motor index will automatically populate the table. 
+
+
+1. **Servo Mixer** - is wher servo outputs are mapped to their respective pins. 
+Just like a motor, press *Add new mixer rule* and a new servo index will automatically populate the table. 
+
+:::tip
+When the **Timer Outputs** are set in **AUTO** mode, the default, predefined timers and their functions will be used. 
+This can be limiting for more complex setups.
+
+Thus it's good practice to first decide which pins/timer groups on the FC you wish to use for motors or servos and define them in the **Timer Outputs** (Box 1) shown above.
+Then save and reboot to make those changes active. 
+Then populate the motor and servo mixes by adding them in Box 3 and Box 4.
+
+**Example:** The Mixer page from the Matek F405 V2 pictured above by default only has motors mapped to Timer 4.
+This will prevent adding additional motors in a multi engine airplane build.
+Therefore, it will be necessary to explicitly define the other timers/pins with the MOTOR function instead of AUTO.
+:::
+
+### Motor Wire(s)
+
+:::danger
+For ESCs with an integrated BEC, do not connect the red wire bringing power from the BEC to the FC.
+This will potentially ruin the FC!
+:::
+
+
+
+### Servo Wires
+
+## INAV Configuration
