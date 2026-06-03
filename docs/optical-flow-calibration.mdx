@@ -1,0 +1,23 @@
+---
+title: Optical Flow Sensor Calibration
+description: Calibrate a rangefinder or optical flow sensor
+sidebar_position: 99
+---
+
+An optical flow sensor installed (for GPS-free position hold or enhanced navigation) can be calibrated in INAV Configurator.
+
+**Calibration Steps:**
+
+1. Connect your aircraft to INAV Configurator
+1. Go to the **Calibration** tab
+1. Place aircraft on a flat, stable surface
+1. Click "Calibrate Optic Flow"
+1. Keep aircraft completely stationary for ~30 seconds during auto-calibration
+1. Verify calibration succeeded by checking that CLI parameters are not at default values
+
+**Verification (CLI):**
+After calibration, verify these settings have changed from defaults:
+- `opflow_scale` should be adjusted from the default 10.5
+- Hardware-specific calibration values should be stored
+
+If calibration fails or optic flow isn't working correctly, see the [Optic Flow and Rangefinder Setup Guide]() for detailed configuration and troubleshooting.
