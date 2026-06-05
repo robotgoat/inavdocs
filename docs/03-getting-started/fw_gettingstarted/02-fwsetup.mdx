@@ -182,3 +182,16 @@ It is safe to ignore the zeroth servo that appears in the servo section.
 :::tip
 It is also possible to reverse servo direction in the Mixer tab by changing the weight to a negative value.
 :::
+
+### PWM ESC Calibration
+
+ESCs that do not run BLHeli-S, AM32, Bluejay, or BLHeli32 need to be calibrated before first use.
+Calibration can be performed in a few easy steps:
+
+1. Connect FC to INAV and navigate to the Outputs tab.
+Power the FC on only through USB at first!
+1. Enable motor and servo output, reboot, and enable the Motor Test Mode in the Motors section.
+1. Raise the master motor control slider to the max.
+1. Plug in battery to power the ESC.
+The ESC will make its usual beeps after a couple seconds.
+1. Lower the master throttle slider to finish the calibration process.
