@@ -1,14 +1,24 @@
 ---
-title: Fixed Wing Setup
+title: Fixed Wing Setup Guide
 sidebar_position: 2
 ---
 
 This page explains where to connect servos and motors to the FC and how to configure INAV through INAV Configurator to get a working airplane ready for its maiden flight.
 
+:::note
+Since this is a quickstart guide, advanced configuration for FPV setups is not covered.
+This is meant to provide a barebones setup to get an aircraft ready for a line of sight flight.
+:::
+
 The main parts of this page are:
 
 1. [Wiring](./02-fwsetup.mdx#hooking-everything-up)
 1. [Software Configuration](./02-fwsetup.mdx#inav-configuration)
+
+## Prerequsites
+
+1. Have [INAV Configurator](../03-install-inav.mdx) installed and working.
+1. [Flash the FC](../03-install-inav.mdx) with its firmware through INAV Configurator
 
 ## Hooking Everything Up
 
@@ -139,10 +149,10 @@ Lastly, save and reboot to apply your settings.
 
 Before continuing any further, now is a good time to configure the receiver to ensure INAV is able to read the commands given from your radio.
 
-Assuming that a CRSF based serial receiver was used during the FC wiring steps and that the wiring diagram was followed for the respective FC used, assign the UART that the receiver is connected to as RX in the Ports tab in INAV Configurator.
+1. Assuming that a CRSF based serial receiver was used during the FC wiring steps and that the wiring diagram was followed for the respective FC used, assign the UART that the receiver is connected to as RX in the Ports tab in INAV Configurator.
 Save and reboot.
 
-Then head to the Reciever tab and select receiver type as *Serial*.
+1. Then head to the Reciever tab and select receiver type as *Serial*.
 
 After rebooting, the Receiver tab will show the working channels that it is receiving from the radio.
 
@@ -156,9 +166,11 @@ For the purpose of setup, enable the following modes on a switch of your choice:
 
 :::note
 At this stage the control surfaces can be mechanically centered.
-Please ensure the airplane has props removed and is in Manual mode when powered on.
+Please ensure the airplane has its props removed and is in **Manual mode**.
 :::
 
+With the airplane powered on by a battery, mechanically center the control surface linkages.
+While in the modes tab, confirm that the correct mode is highlighted by changing the mode switch to their respective positions.
 
 
 ### Outputs
