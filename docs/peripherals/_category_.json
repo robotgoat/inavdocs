@@ -1,8 +1,0 @@
-{
-  "label": "Peripheral Devices",
-  "position": 99,
-  "link": {
-    "type": "generated-index",
-    "description": "Information about adding sensors and additional devices."
-  }
-}
