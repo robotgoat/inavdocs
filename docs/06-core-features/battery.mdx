@@ -32,7 +32,7 @@ On the first battery connection is always advisable to use a current limiter dev
 
 See the [Sparky board chapter](Board%20-%20Sparky.md).
 
-## Voltage measurement
+## Voltage Measurement
 
 Enable the `VBAT` feature to enable the measurement of the battery voltage and the use of the voltage based OSD battery gauge, voltage based and energy based battery alarms.
 
@@ -54,7 +54,7 @@ It can be set to either `RAW` for using raw battery voltage or `SAG_COMP` for us
 
 You can see an illustration of the sag compensation algorithm in action in the following graph:
 
-{/* ![Voltage graph](assets/images/sag_compensated_battery_voltage_plot.png) */}
+![Voltage graph](/img/features-core/sag_compensated_battery_voltage_plot.png)
 
 ### Voltage based OSD gauge and alarms
 
@@ -132,7 +132,7 @@ The virtual sensor uses the throttle position to calculate an estimated current 
 | `current_meter_scale`      | The throttle scaling factor [centiamps, i.e. 1/100th A]  |
 | `current_meter_offset`     | The current at zero throttle (while disarmed) [centiamps, i.e. 1/100th A] |
 
-There are two simple methods to tune these parameters:  one uses a battery charger and another depends on actual current measurements.
+There are two simple methods to tune these parameters: one uses a battery charger and another depends on actual current measurements.
 
 #### Tuning Using Actual Current Measurements
 If you know your craft's current draw while disarmed (Imin) and at maximum throttle while armed (Imax), calculate the scaling factors as follows:
@@ -140,7 +140,9 @@ If you know your craft's current draw while disarmed (Imin) and at maximum throt
 current_meter_scale = (Imax - Imin) * 100000 / (Tmax + (Tmax * Tmax / 50))
 current_meter_offset = Imin * 100
 ```
-Note: Tmax is maximum throttle offset (i.e. for `max_throttle` = 1850, Tmax = 1850 - 1000 = 850)
+:::note
+Tmax is maximum throttle offset (i.e. for `max_throttle` = 1850, Tmax = 1850 - 1000 = 850)
+:::
 
 For example, assuming a maximum current of 34.2A, a minimum current of 2.8A, and a Tmax `max_throttle` = 1850:
 ```
@@ -150,14 +152,13 @@ current_meter_scale = (Imax - Imin) * 100000 / (Tmax + (Tmax * Tmax / 50))
 current_meter_offset = Imin * 100 = 280
 ```
 #### Tuning Using Battery Charger Measurement
-If you cannot measure current draw directly, you can approximate it indirectly using your battery charger.  
-However, note it may be difficult to adjust `current_meter_offset` using this method unless you can
-measure the actual current draw with the craft disarmed.
+If you cannot measure current draw directly, you can approximate it indirectly using your battery charger.
+However, note it may be difficult to adjust `current_meter_offset` using this method unless you can measure the actual current draw with the craft disarmed.
 
-Note:
+:::note
 + This method depends on the accuracy of your battery charger; results may vary.
-+ If you add or replace equipment that changes the in-flight current draw (e.g. video transmitter,
-  camera, gimbal, motors, prop pitch/sizes, ESCs, etc.), you should recalibrate.
++ If you add or replace equipment that changes the in-flight current draw (e.g. video transmitter, camera, gimbal, motors, prop pitch/sizes, ESCs, etc.), you should recalibrate.
+:::
 
 The general method is:
 
@@ -186,7 +187,8 @@ current_meter_scale = (reported_draw_mAh / charging_data_mAh) * old_current_mete
 
 ## Power and Current Limiting
 
-INAV includes an advanced power and current limiting system to protect your battery and ESCs from excessive discharge rates. This feature automatically reduces throttle output when current or power draw exceeds configured limits.
+INAV includes an advanced power and current limiting system to protect your battery and ESCs from excessive discharge rates.
+This feature automatically reduces throttle output when current or power draw exceeds configured limits.
 
 ### Why Use Power Limiting?
 
@@ -208,7 +210,8 @@ This burst mode allows brief high-power maneuvers (like punch-outs or quick clim
 
 ### Configuration
 
-Power limiting requires a current sensor (`CURRENT_METER` feature). Power-based limiting additionally requires voltage measurement (`VBAT` feature).
+Power limiting requires a current sensor (`CURRENT_METER` feature).
+Power-based limiting additionally requires voltage measurement (`VBAT` feature).
 
 #### Basic Settings (per battery profile)
 
@@ -223,7 +226,9 @@ Power limiting requires a current sensor (`CURRENT_METER` feature). Power-based 
 | `limit_burst_power_time` | Duration burst power is allowed | ds | 0-600 (0-60s) |
 | `limit_burst_power_falldown_time` | Ramp-down duration for power | ds | 0-600 (0-60s) |
 
-**Note**: Set any limit to `0` to disable that specific limiter.
+:::note
+Set any limit to `0` to disable that specific limiter.
+:::
 
 #### Advanced Tuning Settings
 
@@ -335,13 +340,19 @@ Enable these in the OSD tab to monitor limiting during flight.
 
 ## Battery capacity monitoring
 
-For the capacity monitoring to work you need a current sensor (`CURRENT_METER` feature). For monitoring energy in milliWatt hour you also need voltage measurement (`VBAT` feature). For best results the current and voltage readings have to be calibrated.
+For the capacity monitoring to work you need a current sensor (`CURRENT_METER` feature). For monitoring energy in milliWatt hour you also need voltage measurement (`VBAT` feature).
+For best results the current and voltage readings have to be calibrated.
 
 It is possible to display the remaining battery capacity in the OSD and also use the battery capacity thresholds (`battery_capacity_warning` and `battery_capacity_critical`) for battery alarms.
 
-For the remaining battery capacity to be displayed users need to set the `battery_capacity` setting (>0) and the battery to be full when plugged in. If the `battery_capacity` setting is set to 0 the remaining battery capacity item in the OSD will display `NA` and the battery gauge will use an estimation based on the battery voltage otherwise it will display the remaining battery capacity down to the `battery_capacity_critical` setting (battery considered empty) and the battery gauge will be based on the remaining capacity. For the capacity thresholds to be used for alarms the `battery_capacity_warning` and `battery_capacity_critical` settings also needs to be set (>0) and the plugged in battery to be full when plugged in. The battery capacity settings unit can be set using the `battery_capacity_unit`. MilliAmpere hour and milliWatt hour units are supported. The value are absolute meaning that `battery_capacity_warning` is the battery capacity left when the battery is entering the `warning` state and `battery_capacity_critical` is the battery capacity left when the battery is considered empty and entering the `critical` state.
+For the remaining battery capacity to be displayed users need to set the `battery_capacity` setting (>0) and the battery to be full when plugged in.
+If the `battery_capacity` setting is set to 0 the remaining battery capacity item in the OSD will display `NA` and the battery gauge will use an estimation based on the battery voltage otherwise it will display the remaining battery capacity down to the `battery_capacity_critical` setting (battery considered empty) and the battery gauge will be based on the remaining capacity.
+For the capacity thresholds to be used for alarms the `battery_capacity_warning` and `battery_capacity_critical` settings also needs to be set (>0) and the plugged in battery to be full when plugged in.
+The battery capacity settings unit can be set using the `battery_capacity_unit`. MilliAmpere hour and milliWatt hour units are supported.
+The value are absolute meaning that `battery_capacity_warning` is the battery capacity left when the battery is entering the `warning` state and `battery_capacity_critical` is the battery capacity left when the battery is considered empty and entering the `critical` state.
 
-For the battery to be considered full the mean cell voltage of the battery needs to be above `vbat_max_cell_voltage - 140mV` (by default 4.1V). So a 3S battery will be considered full above 12.3V and a 4S battery above 16.24V. If the battery plugged in is not considered full the remaining battery capacity OSD item will show `NF` (Not Full).
+For the battery to be considered full the mean cell voltage of the battery needs to be above `vbat_max_cell_voltage - 140mV` (by default 4.1V). So a 3S battery will be considered full above 12.3V and a 4S battery above 16.24V. 
+If the battery plugged in is not considered full the remaining battery capacity OSD item will show `NF` (Not Full).
 
 For the remaining battery capacity and battery gauge to be the most precise (linear relative to throttle from full to empty) when using battery capacity monitoring users should use the milliWatt hour unit for the battery capacity settings.
 
@@ -359,7 +370,9 @@ Note that in this example even though your warning capacity (`battery_capacity_w
 
 ## Battery profiles
 
-Up to 3 battery profiles are supported. You can select the battery profile from the GUI, OSD menu, [stick commands](Controls.md) and CLI command `battery_profile n`. Battery profiles store the following settings (see above for an explanation of each setting): 
+Up to 3 battery profiles are supported.
+You can select the battery profile from the GUI, OSD menu, [stick commands](Controls.md) and CLI command `battery_profile n`.
+Battery profiles store the following settings (see above for an explanation of each setting): 
 - `bat_cells`
 - `vbat_cell_detect_voltage`
 - `vbat_max_cell_voltage`
@@ -380,13 +393,15 @@ Up to 3 battery profiles are supported. You can select the battery profile from 
 - `failsafe_throttle`
 - `nav_mc_hover_thr`
 
-To enable the automatic battery profile switching based on battery voltage enable the `BAT_PROF_AUTOSWITCH` feature. For a profile to be automatically selected the number of cells of the battery needs to be specified (>0).
+To enable the automatic battery profile switching based on battery voltage enable the `BAT_PROF_AUTOSWITCH` feature.
+For a profile to be automatically selected the number of cells of the battery needs to be specified (>0).
 
 ### Battery profiles configuration examples
 
 #### Simple example
 
-In this example we want to use two different type of batteries for the same aircraft and switch manually between them. The first battery is a Li-Po (4.20V/cell) and the second battery is a Li-Ion (4.10V/cell).
+In this example we want to use two different type of batteries for the same aircraft and switch manually between them.
+The first battery is a Li-Po (4.20V/cell) and the second battery is a Li-Ion (4.10V/cell).
 
 ```
 battery_profile 1
@@ -407,7 +422,11 @@ set vbat_min_cell_voltage = 250
 
 #### Simple example with automatic profile switching
 
-In this example we want to use two different batteries for the same aircraft and automatically switch between them when the battery is plugged in. The first battery is a Li-Po 2200mAh 3S and the second battery is a LiPo 1500mAh 4S. Since the INAV defaults for the cell detection voltage and max voltage are adequate for standard LiPo batteries they will not be modified. The warning and minimum voltage are not modified either in this example but you can set them to the value you like. Since we are using battery capacities only the warning voltage (kept at default in this example) will be used and only for triggering the battery voltage indicator blinking in the OSD.
+In this example we want to use two different batteries for the same aircraft and automatically switch between them when the battery is plugged in.
+The first battery is a Li-Po 2200mAh 3S and the second battery is a LiPo 1500mAh 4S. 
+Since the INAV defaults for the cell detection voltage and max voltage are adequate for standard LiPo batteries they will not be modified.
+The warning and minimum voltage are not modified either in this example but you can set them to the value you like.
+Since we are using battery capacities only the warning voltage (kept at default in this example) will be used and only for triggering the battery voltage indicator blinking in the OSD.
 
 ```
 feature BAT_PROF_AUTOSWITCH
@@ -432,7 +451,8 @@ set battery_capacity_critical = 150
 #### Advanced automatic switching example
 
 Profile 1 is for a 3S 2200mAh Li-Po pack (max 4.20V/cell), profile 2 for a 3S 4000mAh Li-Ion pack (max 4.10V/cell) and profile 3 for a 4S 1500mAh Li-Po pack (max 4.20V/cell).
-With this configuration if the battery plugged in is less than 12.36V (3 x 4.12) the profile 2 will be automatically selected else if the battery voltage is less than 12.66V (3 x 4.22) the profile 1 will be automatically selected else if the battery voltage is less 17.20V (4 x 4.3) the profile 3 will be automatically selected. If a matching profile can't be found the last selected profile is used.
+With this configuration if the battery plugged in is less than 12.36V (3 x 4.12) the profile 2 will be automatically selected else if the battery voltage is less than 12.66V (3 x 4.22) the profile 1 will be automatically selected else if the battery voltage is less 17.20V (4 x 4.3) the profile 3 will be automatically selected.
+If a matching profile can't be found the last selected profile is used.
 
 ```
 feature BAT_PROF_AUTOSWITCH
@@ -476,7 +496,8 @@ set battery_capacity_critical = 150
 
 #### Change control profile based on battery profile
 
-You can change the control profile, automatically, based on the battery profile. This allows for fine tuning of each power choice.
+You can change the control profile, automatically, based on the battery profile.
+This allows for fine tuning of each power choice.
 
 ```
 feature BAT_PROF_AUTOSWITCH
@@ -495,7 +516,11 @@ set controlrate_profile = 2
 
 ## Remaining flight time and flight distance estimation
 
-The estimated remaining flight time and flight distance estimations can be displayed on the OSD (for fixed wing only for the moment). They are calculated from the GPS distance from home, remaining battery capacity and average power draw. They are taking into account the requested altitude change and heading to home change after altitude change following the switch to RTH. They are also taking into account the estimated wind if `osd_estimations_wind_compensation` is set to `ON`. When the timer and distance indicator reach 0 they will blink and you need to go home in a straight line manually or by engaging RTH. You should be left with at least `rth_energy_margin`% of battery left when arriving home if the cruise speed and power are set correctly (see bellow).
+The estimated remaining flight time and flight distance estimations can be displayed on the OSD (for fixed wing only for the moment).
+They are calculated from the GPS distance from home, remaining battery capacity and average power draw.
+They are taking into account the requested altitude change and heading to home change after altitude change following the switch to RTH.
+They are also taking into account the estimated wind if `osd_estimations_wind_compensation` is set to `ON`. When the timer and distance indicator reach 0 they will blink and you need to go home in a straight line manually or by engaging RTH.
+You should be left with at least `rth_energy_margin`% of battery left when arriving home if the cruise speed and power are set correctly (see below).
 
 To use this feature the following conditions need to be met:
 - The `VBAT`, `CURRENT_METER` and `GPS` features need to be enabled
@@ -507,11 +532,14 @@ To use this feature the following conditions need to be met:
 
 It is advised to set `nav_fw_cruise_speed` a bit lower than the real speed and `cruise_power` 10% higher than the power at cruise throttle to ensure variations in throttle during cruise won't cause the aircraft to draw more energy than estimated.
 
-If `---` is displayed during flight instead of the remaining flight time/distance it means at least one of the above conditions aren't met. If the OSD element is blinking and the digits are replaced by the horizontal wind symbol it means that the estimated horizontal wind is too strong to be able to return home at `nav_fw_cruise_speed`.
+If `---` is displayed during flight instead of the remaining flight time/distance it means at least one of the above conditions aren't met.
+If the OSD element is blinking and the digits are replaced by the horizontal wind symbol it means that the estimated horizontal wind is too strong to be able to return home at `nav_fw_cruise_speed`.
 
 ## Automatic throttle compensation based on battery voltage
 
-This features aims to compensate the throttle to get constant thrust with the same throttle request despite the battery voltage going down during flight. It can be used by enabling the `THR_VBAT_COMP` feature. This feature needs the sag compensated voltage which needs a current sensor (real or virtual) to be calculated.
+This features aims to compensate the throttle to get constant thrust with the same throttle request despite the battery voltage going down during flight.
+It can be used by enabling the `THR_VBAT_COMP` feature.
+This feature needs the sag compensated voltage which needs a current sensor (real or virtual) to be calculated.
 
 It is working like this: `used_throttle = requested_throttle * (1 + (battery_full_voltage / sag_compensated_voltage - 1) * thr_comp_weight)`.
 
