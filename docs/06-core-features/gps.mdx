@@ -117,10 +117,9 @@ If you choose to use a higher baud rate, be sure to twist the `TX/RX/5v/G` leads
 
 - Activate GPS in the configuration tab, set it to Ublox.
  
-
 Some FC boards may not provide 4.5V power on USB supply.
 In order to power the GPS it is necessary to connect the battery or use another power source (a 4.5V source may be powered by USB).
-The onboard 3.3V will be powered by USB, but may not provide adequate voltage, as the GPS regulator typically requires 3.6V minimum.
+The onboard 3.3V will be powered by USB, but may not provide adequate voltage as the GPS regulator typically requires 3.6V minimum.
 
 Once you have connected the GPS to your flight control board:
 
@@ -142,19 +141,17 @@ You can confirm the GPS unit is working by going to the GPS tab in the INAV Conf
 INAV 7.0 and later supports a higher GNSS update rate for Ublox receivers (`gps_ublox_nav_hz`).
 With M9 and now M10 supporting up to 25Hz.
 If you wish to increase navigation precision and you have a low noise build and high quality GNSS receiver, you may wish to alter this setting.
-But ONLY do so according to the tables below.
+ONLY do so according to the tables below.
 Note how the maximum update rate can only be achieved with lower concurrent constellations.
 
-The M9 can _theoretically_ run up to 25 Hz with all four constellations enabled.
+The M9 can *theoretically* run up to 25 Hz with all four constellations enabled.
 The M10 is more limited as shown here:
 
-
-<img width="865" height="147" alt="304644162-a541d4bb-3dca-4813-a3ce-60a067ae67a1" src="https://github.com/user-attachments/assets/6e848154-824d-4410-818b-c3ee3125e595" />   
+![GPS Update Rate](/img/features-core/gps-update-rate.png) 
 
 Ideally it is best to run `gps_ublox_nav_hz` at the highest rate your GNSS module will allow.
 This provides more precision at higher flight speeds.
-**However** doing so can cause data to be lost randomly by the module during processing.
-Which can reduce precision, making the benefit of running more concurrent constellations on some modules not as worthwhile.
+**However**, doing so can cause data to be lost randomly by the module during processing, which can reduce precision, making the benefit of running more concurrent constellations on some modules not as worthwhile.
 The chart below shows the devices with realistic update rates for more typical hardware.
 Not the theoretically possible values that only work on the best high end devices.
 
@@ -168,10 +165,11 @@ Not the theoretically possible values that only work on the best high end device
 If it is the first time you have connected the GNSS unit, then it can take several long minutes for a satellite fix to be obtained.
 This is the time required to download the Almanac and Ephemeris data.
 This is perfectly normal.
-But if it takes longer than 13 minutes, you likely have GNSS RF band interference coming from a hardware source in your model.
+If it takes longer than 13 minutes, you likely have GNSS RF band interference coming from a hardware source in your model.
 
-**Note:** For the GPS unit to work & pick up satellites it needs an unobstructed view to the sky (so if using indoors, and the module has a small antenna, don't expect any satellites to be picked up!)
-
+:::note
+For the GPS unit to work & pick up satellites it needs an unobstructed view to the sky (so if using indoors, and the module has a small antenna, don't expect any satellites to be picked up!)
+:::
 
 ## SBAS
 
@@ -190,13 +188,15 @@ The default is AUTO.
 | NONE     | NONE         |
 
 If you use a regional specific setting you may achieve a faster GPS lock than using AUTO.
-But keep in mind to change it if you change your location for holidays etc.
+Keep in mind to change it if you change your location for holidays etc.
 
 This setting only works when `gps_auto_config= ON`
 
 ## AssistNow Online/Offline
 
-**Free service is depreciated as of June 2025**
+:::info
+**Free service has been depreciated as of June 2025**
+:::
 
 INAV 8.0 adds support for AssitNow Online and AssistNow Offline GPS assistance services, which is a proprietary A-GNSS service that can reduce Time To First Fix (TTFF) but requires access to the internet to fetch data.
 AssistNow Online data is valid for a few hours, while AssistNow Offline data can be valid for weeks.
@@ -206,11 +206,12 @@ In order to use the service, you have to create a thingstream account and regist
 The process is described here: https://developer.thingstream.io/guides/location-services/assistnow-getting-started-guide
 
 Once you have your AssitNow service token, you need to configure INAV Configurator to use it, by clicking on the gear cog on the top right of the Configurator window.
-![image](https://github.com/iNavFlight/inav/assets/23555060/1b0baf83-2306-4e19-a321-110ba480a9aa)
+
+![INAV Configurator Assist Now](/img/features-core/ublox-assist-now.png)
 
 Once INAV Configurator has your token, you can use the buttons on the bottom of the GPS tab to upload AssistNow data to your GPS unit.
 
-![image](https://github.com/iNavFlight/inav/assets/23555060/2bd2a160-5756-4f4e-8550-04962b19acaf)
+![INAV Configurator Assist Now](/img/features-core/ublox-assist-now_2.png)
 
 AssistNow Online data requires an active internet connection, while AssistNow Offline will cache the data for 3 days, and will not need internet connection, unless the data is expired.
 
@@ -237,9 +238,11 @@ If so, you have low frequency interference or an unreliable physical connection 
 If so, in CLI check that inav_max_eph_epv is set to 1000, not 1.000.
 You can run:
 
+```
 set inav_max_eph_epv = 1000
 
 save
+```
 
 ### Other issues
 
@@ -247,8 +250,8 @@ save
 - No GPS lock: often due to electric noise from flight controller or other equipment such as 1.2ghz video TX.
 Try getting the GPS as far away as possible from electric noise emitting parts as the FC, ESCs or power cables.
 Placing the GPS on a mast is also a common way, you can further try shielding with aluminum or copper foil.
-Don´t place the GPS inside the frame.
-- "Toilet bowling": in the beginning the copter holds its position and then starts to make bigger and bigger circles, you probably have your magnetometer not calibrated correctly or it’s interfered from the magnetic field of your power lines or the beeper.
+Don't place the GPS inside the frame.
+- "Toilet bowling": in the beginning the copter holds its position and then starts to make bigger and bigger circles, you probably have your magnetometer not calibrated correctly or it's interfered from the magnetic field of your power lines or the beeper.
 If you are using your FC onboard mag, try to place the the FC as far away as possible from the magnetic interference causing parts e.g. mounting it on/under the top plate on small racers.
 - 3.3V GPS units, such as the GPS from 3DR should not be powered by the flight controller's 3.3V pin along with a Spektrum (or other DSM) receiver.
 The current draw can cause the Spektrum receiver to brownout.
