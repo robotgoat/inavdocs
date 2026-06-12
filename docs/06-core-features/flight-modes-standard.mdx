@@ -1,11 +1,12 @@
 ---
-title: Flight Modes
+title: Flight Modes - Standard
 description: The standard flight modes in INAV
+sidebar_position: 1
 ---
 
 Flight Modes in INAV can be categorized into two groups:
 * **Navigation-Modes** which involve GNSS and other positional sensors.
-Refer to the [Navigation Flight Modes](./flight-modes-nav.mdx) page for more information.
+Refer to the [Navigation Flight Modes](./flight-modes-navigation.mdx) page for more information.
 * **Non Navigation Modes** perform actions that may only rely on the accelerometer and gyro, or no sensor at all.
 See the mode descriptions below.
 
@@ -176,7 +177,7 @@ When DISARMING occurs, it disables some of the above functions and saves certain
 
 This mode is a flight mode modifier that maintains the altitude of the aircraft the moment you activated with a *non-navigation* mode such as ANGLE.
 :::info
-All navigation modes already have ALTHOLD enabled by default. For more information see [here](./flight-modes-nav.mdx).
+All navigation modes already have ALTHOLD enabled by default. For more information see [here](./flight-modes-navigation.mdx).
 :::
 
 ## AUTO LEVEL TRIM (FW)
@@ -395,7 +396,7 @@ Please note that Failsafe is still active in this mode and can override the cont
 Used with POSHOLD mode, this mode provides faster manual braking when the pitch stick is released. 
 For this mode to work, it requires `nav_user_control_mode = CRUISE` to be enabled.
 **Use with caution**. This mode can cause temporary runaway with some settings and under some conditions.
-[more details](./flight-modes-nav.mdx##mc-braking-mode---poshold-modifier)
+[more details](./flight-modes-navigation.mdx##mc-braking-mode---poshold-modifier)
 
 ## MIXER PROFILE 2
 
@@ -591,7 +592,7 @@ This should not be taken as a set order. Always read the hardware definition in 
 
 ## WP Planner
 
-This is a Navigation-Mode that allows you to plot a waypoint mission as you fly. See more [details](./flight-modes-nav.mdx#wp-planner---on-the-fly-waypoint-mission-planner)
+This is a Navigation-Mode that allows you to plot a waypoint mission as you fly. See more [details](./flight-modes-navigation.mdx#wp-planner---on-the-fly-waypoint-mission-planner)
 
 ## AUXILIARY CONFIGURATION
 

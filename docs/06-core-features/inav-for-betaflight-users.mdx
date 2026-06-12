@@ -54,7 +54,7 @@ The most common ones do.
 - For fully autonomous flight, in modes like `Loiter/Poshold`, `Cruise`, `WP Missions` and `RTH`. The Flight Controller board should have an onboard barometer sensor. INAV's altitude navigation precision will suffer without one.
 - You should also cover the barometer sensor with a small piece of open-cell foam, to lessen the effects of wind and propeller tip-wash from altering the sensor reading.
 - Prior to the INAV 7.1 release. The GNSS module required an integrated magnetometer sensor for navigation and still does for the best precision.
-  However, GNSS modules without a mag sensor will work from 7.1 on-wards for copter navigation. [See requirements](https://github.com/iNavFlight/inav/wiki/GPS-and-Compass-setup#multi-rotor-without-a-compass)
+  However, GNSS modules without a mag sensor will work from 7.1 on-wards for copter navigation. [See requirements](./compass.mdx#multicopter-navigation-without-a-compass)
 - The GNSS module should be mounted with good separation from other devices that produce RF and EM interference. Ideally there should be a minimum distance of 5cm for best navigation performance.
 - A GNSS module with a magnetometer should **not** be mounted in-line with the bell of the motors. That location produces the highest level of magnetic flux. The module should always be mounted above or below the motor bell. Or at a distance greater than 12cm if it can't be avoided.
 - Many `ready to fly` quadcopters come with a GNSS module mounting location at the rear of the airframe. It is often mounted at rearward facing 45° angle.  
@@ -66,7 +66,7 @@ The most common ones do.
 - INAV supports loop frequencies up to 4kHz without i2C devices. Although, for reliable navigation performance its should be limited to a maximum of 2kHz.  
   Using 1Khz with later INAV builds, both fixedwing and multicopter can provide surprising good performance. With this becoming a safer default in future releases. This too will eventually become the case for Betaflight, if they start to pursue INAV in its path, while using current processor hardware.
 - DShot telemetry and beeper is supported, but not Bi-directional. Only single-wire telemetry.
-- Some tips for stabilization PID tuning can be found [here](https://github.com/iNavFlight/inav/wiki/Multirotor-guide#2-tune-your-copters-pitchrollyawlevel-pids-and-other-values). This will provide better gains to begin tuning from if using a more powerful build.
+- Some tips for stabilization PID tuning can be found [here](../05-getting-started/06-mr-gettingstarted.mdx#3-tune-your-copters-pitchrollyawlevel-pids-and-other-values). This will provide better gains to begin tuning from if using a more powerful build.
 
 ### Most important settings you should take a look at before your first flight :
 
@@ -81,5 +81,5 @@ The most common ones do.
 - `set nav_wp_safe_distance = 400` # The mission will not load if the first waypoint is further than this distance (in meters).
 - `set nav_auto_speed = 2000` # Maximum copter ground speed in automated modes (in centimeters per second)
 - `set nav_rth_allow_landing = ALWAYS` # Allows the copter to land by itself after RTH, FS or a WP mission if set.
-- `set nav_rth_altitude = 5000` # Altitude that aircraft will try to reach when performing [RTH](https://github.com/iNavFlight/inav/wiki/Navigation-Mode:-Return-to-Home).
+- `set nav_rth_altitude = 5000` # Altitude that aircraft will try to reach when performing [RTH](./rth.mdx)).
 - `set blackbox_rate_denom = 32` # Is the logging rate. Lower logging denominators are best used as a safer option, without knowing what fields the user has selected.
