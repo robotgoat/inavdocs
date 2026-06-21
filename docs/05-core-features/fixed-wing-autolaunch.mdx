@@ -1,0 +1,325 @@
+---
+title: Fixed Wing Autolaunch
+description: Enable autolaunch on fixed wings for easy takeoffs
+---
+
+Fixed Wing Autolaunch, aka launch mode, allows the pilot to have assistance in launching their airplane.
+This can be particularly useful if you're a new pilot, have a difficult model to launch, or have a large model.
+
+## Enabling Autolaunch
+
+By default, autolaunch will not work.
+You need to tell INAV that you want to use it. There are two ways to do this.
+You can use a switched mode, or you can have it permanently enabled.
+Whichever you choose is a personal preference.
+The switch gives you more control.
+Having it permanently enabled means it will work all the time, but if you don't want to use it, you must remember to move the pitch or roll stick to deactivated it.
+
+### Using Autolaunch With a Switch
+
+![Fixed Wing NAV LAUNCH mode in INAV](/img/features-core/fw-autolaunch-switch.png)
+
+To use a switch, you will need to set a switch to a channel on your transmitter.
+Then in the **Modes** page in INAV Configurator, set **NAV LAUNCH** mode to be active when the switch is in the chosen position.
+If you don't see the **NAV LAUNCH** mode, you may have the permanent method enabled.
+
+### Having Autolaunch Permanently Enabled
+
+![Permanently enable launch mode in INAV](/img/features-core/fw-autolaunch-perm-enable.png)
+
+To have Autolaunch permanently enabled. You need to activate the **Permanently enabled Launch Mode for Fixed Wing** feature on the **Configuration** page.
+If this is enabled, the **NAV LAUNCH** mode will not be found on the **Modes** page.
+
+## Configuring Launch Mode
+
+The basic settings for Autolaunch can be found on the **Advanced Tuning** page in INAV Configurator.
+These settings should be all that you need to change to get launch mode working well for your model.
+
+![Autolaunch settings on the Advanced Tuning page](/img/features-core/fw-autolaunch-config-settings.png)
+
+:::info
+The Autolaunch settings on the **Advanced Tuning** page are ordered in the way they happen during the launch.
+So they start with **Idle Throttle** (the first part of launch mode to activate, if set) to the **End Transition Time** (the end of the launch).
+This graphical explanation shows the Autolaunch sequence, related parameters and events is provided.
+
+![AutoLaunch](/img/features-core/fw-autolaunch-sequence.jpg)
+:::
+
+We will look at these setting briefly.
+
+### Autolaunch Video
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/rj_RSrXqib8?si=N_eftWaZIrB-0nz7"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+### Idle Throttle
+
+The **Idle Throttle** setting allows you to let the motor spin at the desired throttle level _before_ you throw the airplane.
+This can be useful if:
+
+- you have a large or heavy aircraft that will benefit from some additional push
+- your plane suffers from torque roll
+- you would like a visual indicator that the aircraft is ready to launch
+
+Idle throttle is an extremely useful setting for launch assistance.
+You can have idle throttle set low, to show you that your aircraft is ready to launch, or you can set it higher to assist with the launch itself.
+There are often times that people have been seen jerking their airplane before launch, sometimes called a "shake and bake", which is completely unnecessary with INAV.
+Even Joshua Bardwell has been guilty of this on one of his instructional videos.
+You're gonna learn something today.
+With a correctly set up launch detection and idle throttle, you **never** _need_ to shake and bake.
+In fact, we advise against it.
+Using auto launch correctly will be more consistent and safer.
+
+The amount of **Idle Throttle** you need depends on your goal.
+If you only want a visual indicator, a low value like 1100uS (10%) will work for you.
+However, if you want to have some launch assistance or to combat torque roll, you will need to estimate and adjust this value until it works well for your aircraft.
+A good starting point may be half the launch throttle, which we will cover later.
+If you don't want to use **Idle Throttle**, set the value to 1000uS (0%).
+
+[`nav_fw_launch_idle_thr`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_idle_thr) will set the throttle level for the motor when idle throttle is enabled.
+If you just want this as a low, visual aid for launch mode.
+You can set this to somewhere between 1050 and 1200.
+It should be high enough that the motor spins, but only just.
+If you want assistance in launching your aircraft, the idle throttle should be set high enough to assist with the push, but not so high that it is uncontrollable in your hands.
+This will very much be dependant on your aircraft, motor, prop, even how you hold it, so you will need to experiment or use the tool at the bottom of this page for an estimate.
+The default setting is `1000`; which is idle throttle is disabled.
+
+If you don't change anything else, the motor will start spinning at idle throttle as soon as you raise the throttle in the [launch sequence](./fixed-wing-autolaunch.mdx#configuring-launch-mode).
+However, we don't necessarily want this.
+Maybe you have a large model that needs two hands that you need to pick it up after you have finished on your transmitter.
+There are definitely scenarios where you will want to delay the idle throttle from starting.
+There are a couple of way of doing this.
+One may suit your situation better.
+
+:::note
+If you see a red box around the **Idle Throttle**. It is because you have specified an **Idle Throttle Delay** but do not have an **Idle Throttle** set.
+
+![fw autolaunch idle throttle](/img/features-core/fw-autolaunch-idle-throttle-note.png)
+:::
+
+### Idle Throttle Delay
+
+**Idle Throttle Delay** adds a delay between raising the throttle and the \*Idle Throttle** starting.
+This is extremely useful if you need to do something like put your transmitter down and pick up your airplane. Or just to get yourself prepared.
+If you do not want to use an **Idle Throttle Delay\*\*, set this to 0.
+
+[`nav_fw_launch_idle_motor_delay`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_idle_motor_delay) allows you to add a time delay between raising the throttle and the motor starting at idle.
+The default is `0`, which means the setting is disabled.
+Above 0, will set the timeout in milliseconds.
+I know, why milliseconds!?
+All you need to do is multiply the number of seconds you want the delay to be by 1000 (move the decimal 3 places to the left) to get the value in seconds.
+For example, a 5 second delay would be 5000 ms.
+
+### Max Throw Angle
+
+The **Max Throw Angle** setting is the maximum angle that the aircraft can be at to allow the launch to be detected.
+The default of 45 degrees should be plenty for most launches.
+Please don't be tempted to set this to a stupid angle like 180 degrees.
+Even a double-handed overhead launch should only need a maximum of 60 degrees.
+Any higher than this and the aircraft will likely just stall.
+There are very few exceptions, where vertical launches are desired, such as high powered FunJet, which will have a high power to weight ratio.
+
+### Motor Delay
+
+**Motor Delay** is the time between the launch being detected and the motor starting to spin up to **Launch Throttle**.
+This setting is pretty important for safety.
+If you have a tractor plane, this setting can be low safely.
+
+:::warning
+If the motor speeds up too quickly and you have a pusher plane, you risk a prop strike to your hand.
+Therefore, please be carful when adjusting this.
+:::
+
+### Minimum Launch Time
+
+The **Minimum Launch Time** setting dictates a time period where the sticks on your transmitter will not respond.
+This is particularly useful if you have to pick up your transmitter or it's hanging on a neck strap.
+Setting this to 2 seconds can stop the launch being aborted unintentionally, because you have bumped a stick on your transmitter.
+Increasing `nav_fw_launch_land_abort_deadband` can also reduce the chances of unintentionally aborting launch mode.
+
+### Motor Spinup Time
+
+This setting usually doesn't need to be changed, but it can be useful for reducing torque roll or taking stress off of folding props.
+The **Motor Spinup Time** is the time taken to go from the starting throttle (0% or **Idle Throttle**) to **Launch Throttle**.
+Lowering this setting is not recommended, but if you have a folding or large prop you could increase it.
+You could also try increasing this to help avoid torque roll.
+
+### Launch Throttle
+
+**Launch Throttle** is the main throttle level for the launch.
+This should be set based on the powertrain and weight of your aircraft.
+In <a href="https://youtu.be/rj_RSrXqib8" target="_blank">this video</a>, you can see a physical method for calculating the _Launch Throttle_.
+There is also [a tool for estimating the launch throttle](https://www.mrd-rc.com/tutorials-tools-and-testing/useful-tools/inav-auto-launch-throttle-estimator/).
+
+### Climb Angle
+
+Is the base attitude of the model for the climb.
+The **Climb Angle** should be set for the model.
+Some require a flatter launch to get speed up, whereas others could have a steeper climb.
+Your flying environment may also contribute to the **Climb Angle**.
+
+:::warning
+**Fixed Wing Level Trim** will be added to the **Climb Angle**.
+So a **Climb Angle** of 20 degrees and a **Fixed Wing Level Trim** of 5 degrees, would result in a commanded pitch of 25 degrees.
+:::
+
+### Manual Throttle Launch
+
+From INAV 6.0.0 it is possible to use NAV Launch with manual throttle control.
+This is really intended as a more controllable alternative to the shake to start motor and throw method of launching.
+Shaking the airplane to start the motor has never been recommended as a launch technique.
+When enabled using setting [`nav_fw_launch_manual_throttle`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_manual_throttle) the throttle is controlled manually throughout the launch using the throttle stick.
+There is no motor idle or detection used to start the motor, motor control is entirely manual and active via the throttle stick once armed.
+INAV only controls roll, yaw, and pitch attitude during the launch climb out.
+
+:::note
+If this option is used with no GPS fix available it is recommended to throw the plane as soon as the throttle is raised in order to avoid possible degraded control issues and premature end of the launch timeout (moving the throttle stick back to idle will reset the affected launch parameters if required).
+:::
+
+### Launch Timeout
+
+The **Launch Timeout** is the maximum time you provide for the climb phase to occur.
+The timer will commence once the plane is thrown and launch is detected, then once timeout has been exceeded the launch will progress to the end transition.
+
+### Maximum Altitude
+
+This is the **Maximum Altitude** that the airplane will climb to.. Once this altitude is reached. The launch will progress to the end transition.
+
+:::note
+**Launch Timeout** and **Maximum Altitude** operate together.
+Whichever condition is met first, will lead to the End transition.
+:::
+
+### End Transition Time
+
+Is the time that the final launch phase will take.
+The **End Transition Time** makes for a smooth transition from the launch angle and throttle to level flight and the current or cruise throttle.
+
+## Using Autolaunch
+
+There are many versions of how to use autolaunch floating about the internet.
+Here is the official procedure for using autolaunch.
+
+### Pilot actions for starting autolaunch
+
+1. As preparation for launch, make sure that you are not in a navigation mode, or a modifier (such as alt hold) that activates auto throttle.
+1. If you don't have autolaunch permanently enabled, enable NAV LAUNCH with the switch on your transmitter.
+1. Arm the airplane.
+1. Select the mode that you would like to exit launch in to.
+   A good choice for this is loiter, as you can watch the aircraft through the launch and keep it in view when it completes.
+1. Raise the throttle to the approximate level that you want after launch has completed.
+
+At this point, the process is different depending on your settings.
+
+:::note
+Currently, you cannot exit launch in to a waypoint mission.
+:::
+
+**No idle throttle set**
+
+6. At this point, the airplane should be ready to throw. You can check in the OSD for the system message `** READY TO LAUNCH **`. Throw the airplane and it will enter the launch procedure. **You should not shake the aircraft to falsely start the launch.**
+
+**Idle throttle set with no Idle Throttle Delay**
+
+6. At this point, the motor will start with the Idle Throttle. `** READY TO LAUNCH**` will be shown on the OSD. Throw the airplane and it will enter the launch procedure.
+
+**Idle Throttle set with an Idle Throttle Delay**
+
+6. For the length of the Idle Throttle Delay. Nothing will happen. On the OSD it will show `** WAITING FOR IDLE **`. Then, the motor will start with the Idle Throttle and show `** READY TO LAUNCH **` on the OSD. Throw the airplane and it will enter the launch procedure.
+
+:::tip
+Above, I have mentioned text being shown in the OSD to explain the launch status.
+To see these, you must have the **System Messages** OSD element on your OSD layout.
+We highly recommend having **System Messages** on every OSD layout as it will show useful information and warnings during your flight.
+:::
+
+### The Launch Procedure
+
+7. After throwing the airplane. INAV will watch for triggers to determine it has been launched. The two main triggers are the `nav_fw_launch_accel` and `nav_fw_launch_detect_time`.
+   Once these have been breached, launch progresses to the next stage.
+   A second trigger is the GPS.
+   If INAV detects the craft moving away from the arming point.
+   It will progress to the next stage of launch.
+8. The throttle will increase from its current level to **Launch Throttle** over the course of **Motor Spinup Time**.
+   Also, the pitch of the airplane will be commanded to target **Climb Angle** plus \*Fixed Wing Level Trim\*\*.
+9. The airplane will climb with these settings until either the **Launch Timeout\* or **Maximum Altitude\*\* have been surpassed.
+10. Launch will transition in to the flight mode and throttle level selected on your transmitter, over the course of **End Transition Time**.
+
+## Glider and Slope Soarer Setup
+
+For obtaining launch assistance for hand-thrown gliders, it's a bit tricky.
+One possible solution is to setup the throttle as in input for switching modes.
+At lowest throttle setting, disarm and enter passthrough.
+Just above minimal throttle, turn on Nav Launch, then just above that, Arm and activate Angle - all simultaneously "on" for launch.
+
+This will allow the FC to reset the launch sequence and be ready for toss with Angle activated after launch.
+
+Setup launch parameters appropriately:
+
+`set nav_fw_launch_climb_angle = XX` 45?
+
+['nav_fw_launch_climb_angle'](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_climb_angle) is the climb angle for launch sequence (degrees), is also restrained by global [`max_angle_inclination_pit`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#max_angle_inclination_pit).
+
+`set nav_fw_launch_thr = 1700`
+
+The [`nav_fw_launch_idle_thr`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_thr) parameter can be problematic for a glider. Not obvious, since Airplanes change PID values for throttle based on [`set tpa_rate = XXX`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#tpa_rate) and [`set tpa_breakpoint = XXXX`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#tpa_breakpoint) (adjust accordingly). Also, not well documented but PIDs are boosted at low throttles by 1.5X!! Can cause unexplained behaviour at launch. For some gliders - having PID gains reduced for toss is beneficial (DLG launch may be fastest speed the glider travels).
+
+`set nav_fw_launch_velocity = XXX` 300?
+
+['nav_fw_launch_velocity'](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_velocity) is the forward velocity threshold for swing-launch detection [cm/s].
+
+One option is to add Horizon mode at very top end of throttle, to enable acro flying with ability to drop back to angle mode for emergency recovery.
+
+## Tools
+
+Traditionally, to get the launch throttle, you would need to power your airplane and raise the throttle to get the hover point.
+This is not the safest of practices, especially with large models.
+However, [this tool](https://www.mrd-rc.com/tutorials-tools-and-testing/useful-tools/inav-auto-launch-throttle-estimator/) can be used to **estimate** the launch and idle throttle for the model.
+Please note that it is an estimate, so test and be ready to take over the launch.
+It should give a reasonable starting point allowing you to raise or lower the throttle levels to suit.
+
+## Advanced Settings
+
+The advanced settings are only accessible through the CLI.
+For the most part, they are not needed, but some pilots may find them useful.
+
+### Wiggle to Wake Idle Throttle
+
+_From INAV 8.0_
+
+Wiggle to Wake allows you to wiggle the yaw of the plane to start the idle throttle.
+This does not start the launch procedure or launch throttle, only the idle throttle.
+This gives more control over when the idle throttle starts, as you don't need to use a timer, though the timer can still also be used.
+If so, idle will start either when the timer expires or the wiggle is detected.
+
+There is one setting in the CLI: `nav_fw_launch_wiggle_to_wake_idle`. 0 = disabled. 1 and 2 signify 1 or 2 yaw wiggles to activate.
+
+- 1 wiggle has a higher detection point (quicker movement), for airplanes without a tail.
+- 2 wiggles has a lower detection point (slightly slower movement), but requires the repeated action.
+  This is intended for larger models and airplanes with tails.
+
+For this to work, an idle throttle value greater than 1000uS must be set and `nav_fw_launch_wiggle_to_wake_idle` must not be 0.
+If there is no idle throttle delay, the wiggle will activate the idle throttle.
+If an idle delay is also set up, whichever occurs first activates the idle throttle.
+
+[`nav_fw_launch_wiggle_to_wake_idle`](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_launch_wiggle_to_wake_idle) allows you to trigger the idle throttle by deliberately invoking a yaw _wiggle_ on the aircraft.
+This can be used instead of, or as well as, `nav_fw_launch_idle_motor_delay`. The default setting is `0`, which means the feature is disabled.
+Setting the parameter to `1` or `2` signifies 1 or 2 yaw wiggles to activate the idle throttle.
+
+- 1 wiggle has a higher detection point, for smaller airplanes, which are easier to wiggle quickly.
+- 2 wiggles has a lower detection point, but requires the repeated action. This is intended for larger models, where you can't yaw wiggle as quickly.
+
+The _wiggle_ needs to be a quick, deliberate action. This is so that there are no accidental starts of motors.
+
+:::tip
+The wiggle needs to be a quick movement.
+This is deliberate, as slow movements could cause accidental triggers when walking about.
+:::
