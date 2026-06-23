@@ -15,7 +15,7 @@ Minimum and maximum cell voltages can be set, and these voltages are used to aut
 
 Per-cell monitoring is not supported, as we only use one ADC to read the battery voltage.
 
-## Supported targets
+## Supported Targets
 
 All targets support battery voltage monitoring unless stated.
 
@@ -38,7 +38,7 @@ Enable the `VBAT` feature to enable the measurement of the battery voltage and t
 `vbat_scale` - Adjust this setting to match actual measured battery voltage to reported value.
 Increasing this value increases the measured voltage.
 
-### Voltage measurement source
+### Voltage Measurement Source
 
 Two voltage sources are available: raw voltage and sag compensated voltage.
 The raw voltage is the voltage directly measured at the battery while the sag compensated voltage is calculated by an algorithm aiming to provide a stable voltage source for gauges, telemetry and alarms.
@@ -53,7 +53,7 @@ You can see an illustration of the sag compensation algorithm in action in the f
 
 ![Voltage graph](/img/features-core/sag_compensated_battery_voltage_plot.png)
 
-### Voltage based OSD gauge and alarms
+### Voltage Based OSD Gauge and Alarms
 
 Up to 3 battery profiles are supported.
 You can select the battery profile from the GUI, OSD menu, [stick commands](./stick-controls.mdx) and CLI command `battery_profile n`.
@@ -335,7 +335,7 @@ Enable these in the OSD tab to monitor limiting during flight.
 - The system uses instantaneous current/power readings for responsive limiting
 - Set limits to `0` to disable a specific limiter while keeping others active
 
-## Battery capacity monitoring
+## Battery Capacity Monitoring
 
 For the capacity monitoring to work you need a current sensor (`CURRENT_METER` feature). For monitoring energy in milliWatt hour you also need voltage measurement (`VBAT` feature).
 For best results the current and voltage readings have to be calibrated.
@@ -353,7 +353,7 @@ If the battery plugged in is not considered full the remaining battery capacity 
 
 For the remaining battery capacity and battery gauge to be the most precise (linear relative to throttle from full to empty) when using battery capacity monitoring users should use the milliWatt hour unit for the battery capacity settings.
 
-### Example configuration
+### Example Configuration
 
 ```
 set battery_capacity_unit = MAH         // battery capacity values are specified in milliAmpere hour
@@ -365,7 +365,7 @@ set battery_capacity_critical = 440     // the battery critical alarm will sound
 Note that in this example even though your warning capacity (`battery_capacity_warning`) is set to 30% (660mAh), since 440mAh (`battery_capacity_critical`) is considered empty (0% left), the OSD capacity related items will only start to blink when the remaining battery percentage shown on the OSD is below 12%: (`battery_capacity_warning`-`battery_capacity_critical`)*100/(`battery_capacity`-`battery_capacity_critical`)=(660-440)*100/(2200-440)=12.5
 
 
-## Battery profiles
+## Battery Profiles
 
 Up to 3 battery profiles are supported.
 You can select the battery profile from the GUI, OSD menu, [stick commands](./stick-controls.mdx) and CLI command `battery_profile n`.
@@ -393,7 +393,7 @@ Battery profiles store the following settings (see above for an explanation of e
 To enable the automatic battery profile switching based on battery voltage enable the `BAT_PROF_AUTOSWITCH` feature.
 For a profile to be automatically selected the number of cells of the battery needs to be specified (>0).
 
-### Battery profiles configuration examples
+### Battery Profiles Configuration Examples
 
 #### Simple example
 

@@ -48,7 +48,7 @@ Scroll down to the [AUXILIARY CONFIGURATION](./flight-modes-standard.mdx#auxilia
 - [MIXER TRANSITION](./flight-modes-standard.mdx#mixer-transition)
 - [MSP RC OVERRIDE](./flight-modes-standard.mdx#msp-rc-override)
 - [MULTI FUNCTION](./flight-modes-standard.mdx#multi-function) 
-- [NAV LAUNCH](https://github.com/iNavFlight/inav/wiki/Auto-Launch-(NAV_LAUNCH)) **FW**
+- [NAV LAUNCH](./fixed-wing-autolaunch.mdx) **FW**
 - [OSD ALT](./flight-modes-standard.mdx#osd-alt)
 - [OSD SW](./flight-modes-standard.mdx#osd-sw)
 - [PREARM](./flight-modes-standard.mdx#prearm)
@@ -196,7 +196,7 @@ You can see how level the craft is flying with the numerical variometer element 
 +/- 0.3° is an acceptable tolerance.
 Once flying level, you can disable AUTO LEVEL.
 From INAV 6.0, a system message is shown when AUTO LEVEL is active.
-The trimming speed and accuracy can also be adjusted via [fw_level_pitch_gain](#fw_level_pitch_gain). 
+The trimming speed and accuracy can also be adjusted via [fw_level_pitch_gain](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#fw_level_pitch_gain). 
 
 If new value isn't saved to EEPROM automatically on disarm, you have to save it manually using either the configurator or a [stick combo](./stick-controls.mdx).
 However, if you have a feature enabled which saves on disarm, such as Continuous Servo Trim or [Stats](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#stats). The new `fw_level_pitch_trim` will be saved on disarm.
@@ -396,7 +396,7 @@ Please note that Failsafe is still active in this mode and can override the cont
 Used with POSHOLD mode, this mode provides faster manual braking when the pitch stick is released. 
 For this mode to work, it requires `nav_user_control_mode = CRUISE` to be enabled.
 **Use with caution**. This mode can cause temporary runaway with some settings and under some conditions.
-[more details](./flight-modes-navigation.mdx##mc-braking-mode---poshold-modifier)
+[more details](./flight-modes-navigation.mdx#mc-braking-mode---poshold-modifier)
 
 ## MIXER PROFILE 2
 
