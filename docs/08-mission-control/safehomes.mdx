@@ -5,7 +5,7 @@ description: Safehomes and how to use them
 
 ## Introduction
 
-The "Home" position is used for the landing point when landing is enabled or in an emergency situation.
+The default "Home" position is used for the landing point when landing is enabled or in an emergency situation.
 It is by default determined by the GPS location where the aircraft is armed.
 
 For airplanes, information about the auto landing procedure can be found in the [Fixed Wing Autoland](../06-advanced-features/fixed-wing-autoland.mdx) page.
@@ -15,12 +15,15 @@ For airplanes, information about the auto landing procedure can be found in the 
 One potential risk when landing is that there might be buildings, trees and other obstacles in the way as the airplance circles lower toward the ground at the arming point.
 Most people don't go the middle of the field when arming their airplanes.
 
+To solve this issue, the idea of Safehomes is available in INAV.
+Safehomes are alternative points that function as the new home point that INAV will use as the point for setting up for RTH and/or autoland.
+
 ## Safehome
 
 Safehomes are a list of GPS coordinates that identify safe landing points.
-You can define up to 8 safehomes for different locations you fly at.
+You can define **up to 8 safehomes** for different locations you fly at.
 When the flight controller is armed, it checks the list of safehomes.
-The nearest safehome that is enabled and within `safehome_max_distance` (default 200m) of the current position is identified.
+The nearest safehome that is enabled and within `safehome_max_distance` (default 200m) of the current arming position is identified.
 The arming home location remains as home.
 
 When RTH is activated, whether by radio failsafe, or using the RTH radio control mode, the safehome identified during arming will replace the home location.
@@ -32,14 +35,41 @@ If the safehome is in use, you can use the OSD menu to disable safehome usage pr
 
 ## Create Safehomes
 
-Safehomes can be created in the Mission Control Tab of INAV Configurator.
-In the upper left hand section of the map, click the house button to open the safehomes window for creating and editing safehome points.
+Safehomes can be created in the [Mission Control Tab](../04-inav-configurator/mission-control-tab.mdx) of INAV Configurator.
+
+1. In the upper left hand section of the map, click the house button to open the safehomes window for creating and editing safehome points.
+This will open the Safehomes box in the left hand column.
+![safehome 0](/img/mission-control/safehome-create-00.png)
+1. Click the **+** icon to create a safehome point.
+A green POI with the house icon will appear in the center of the map signifying the creation of a safehome point.
+    - You can click and move the point to your desired place on the map for fine tuning or alternatively input the GPS coordinates in the **Safe Home Manager**.
+1. Edit the Safehome to your liking.
+The following options are available:
+![safehome 1](/img/mission-control/safehome-create-01.png)
+    - Latitude: the latitude value
+    - Longitude: the longitude value
+    - Sea level reference: a switch to use MSL altitude instead of AGL 
+    - Land alt: the altitude at which the flare procedure will be used during autoland.
+    For more information, please see [Autoland](../06-advanced-features/fixed-wing-autoland.mdx)
+    - Elevaton: a non-configurable value that shows the MSL elevation of the safehome POI
+    - Approach direction: change the direction the airplane turns during the base leg and the final approach.
+    Left will make the airplane turn left (counterclockwise) and right will make it turn clockwise.
+    - **Heading 1 and 2 (deg)**: is essentially a runway heading that tells the airplane how to approach the safehome point for autoland.
+    By default, both values are 0, which defaults to an arbitrary landing pattern based off the autoland procedure.
+    Change the heading to a value that's not 0 to define a direction the aircraft should land.
+    This essentially creates a runway heading with two approaches, the second being 180 deg of the defined heading that is used as an alternative approach to fly into a headwind.
+    Toggling the `Exlc.` switch will remove the opposite landing heading and force the airplane to land only at that specified heading.
+1. Click the second icon with the arrow pointing towards the chip to save the safehome to the eeprom.
 
 ## Configure Safehomes
 
 The quickest and easiest way to configure safehome behavior is through the RTH settings in the Advanced Tuning Tab.
+Safehomes can also be configured and edited via CLI.
+Both procedures are described in this section.
 
 ### INAV Configurator
+
+Please see the above section on configuring safehomes through INAV Configurator.
 
 ### CLI
 

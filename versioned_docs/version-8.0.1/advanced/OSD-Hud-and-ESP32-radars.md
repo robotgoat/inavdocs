@@ -2,7 +2,7 @@
 title: OSD Hud and ESP32 Radars
 ---
 
-# The Hud
+## The Hud
 
 The Hud is a feature that displays various points of interest (POI) on the OSD, in "3D", by showing a marker where the location is on the screen. For now it's capable to display :
 
@@ -10,20 +10,30 @@ The Hud is a feature that displays various points of interest (POI) on the OSD, 
 - Nearby aircrafts as sent by an ESP32 LoRa modem
 - Next waypoints during a mission.
 
-# Video Resources
+## Later updates
+
+  - INAV 6.0 - Seen an update in the way the Craft radar information is display on the OSD. [Craft radar layout](#craft-radar-layout)
+  - INAV 8.0 - Provides the ability to display the Craft radar information in a fix location on the OSD. Without using the HUD, which is still an option.
+  - [FormationFlight](#formation-flight) project.
+
+## Video Resources
 
 * [This is a video demonstrating the hud for both home point and ESP32 radar tracking](https://youtu.be/zzKkcd5_cY4?t=27).
 * [This is a video demonstrating the display of the waypoints live during an autonomous mission](https://www.youtube.com/watch?v=CqKNGY4pogU).
 
-# Configuration
+## Configuration
 
-The hud must be set from the CMS menu of the OSD or from the CLI in the Configurator.
+The HUD can be setup in the Configurator OSD tab, CLI or the CMS menu of the OSD.
 
-**Important! The Hud is a sub-set of the crosshair, it's designed this way because the crosshair is the origin/reference for anything hud-related. So make sure you have the crosshair enabled and displayed in the OSD tab of the Configurator. It is not recommended to have any of the legacy map or 2D-view items displayed in your OSD, as this could cause overlaps on the screen.**
+**Important!** The HUD is a sub-set of the crosshair, it's designed this way because the crosshair is the origin/reference for anything hud-related.
 
-In order for the hud to display in "3D" where the POI is, it needs to know few things about your FPV camera :
+- So make sure you enable the Crosshair in the configurator OSD tab, if you wish to display any HUD related information, including the Craft Radar.
+- You are NOT required to select the Crosshair if you use the `INAV radar fixed` element. It's selected in the OSD tab under **Maps & Radar**. It can be beneficial when using the Craft Radar on multicopter platforms.
 
-In the CMS/OSD menu, go to OSD > Hud >...
+It is not recommended to have any of the legacy map or 2D-view items displayed in your OSD, as this could cause overlaps on the screen.
+In order for the HUD to display in "3D" where the POI is, it needs to know few things about your FPV camera :
+
+In the CMS/OSD menu, go to OSD > HUD >... 
 
 ### Crosshair style
 To choose between 7 different types of crosshairs.
@@ -121,7 +131,7 @@ set osd_hud_radar_range_max = 4000
 set osd_hud_wp_disp = 2
 ```
 
-#  Accuracy and limitations
+##  Accuracy and limitations
 
 There's a long chain of inaccuracies conspiring to make the tracking not perfectly accurate :
 

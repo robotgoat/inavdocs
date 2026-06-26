@@ -30,6 +30,11 @@ Documentation can be accessed at this URL: https://inavflight.github.io/
 
 ## For Contributors
 
+Any improvements and edits to the documentation are welcome.
+For all additions and contributions, please use `mdx` formatting:
+- Each sentence belongs on its own line
+- Place images in their respective folder in the `/static/img/` directory
+
 ### Versioning Scheme
 
 The website utilizes Docusaurus's versioning feature to keep track of major changes to the firmware.

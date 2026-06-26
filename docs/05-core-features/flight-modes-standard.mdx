@@ -122,7 +122,7 @@ However, if Airmode is enabled with ACRO mode and you have Airmode activated via
 The strength Airmode will apply to holding a specific flight attitude is determined by how much I-term applied to that axis.
 There is little to no benefit to having Airmode enabled with other flight modes that are ANGLE based because they use the LEVEL controller.
 
-For Fixedwing Airmode to become active for flight, it requires `airmode_throttle_threshold` to be met, wWhich uses different settings for [airmode_type](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#airmode_type) than for multicopter.
+For Fixedwing Airmode to become active for flight, it requires `airmode_throttle_threshold` to be met, which uses different settings for [airmode_type](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#airmode_type) than for multicopter.
 They are - `STICK_CENTER` and `STICK_CENTER_ONCE`.
 `STICK_CENTER_ONCE` is activated by the same method - using `airmode_throttle_threshold`, but instead of disabling Airmode when the throttle is lowered below the `throttle_threshold`, it will keep Airmode active until disarmed. 
 This is more beneficial for fixedwing platforms like powered gliders so they maintain Airmode stabilization at zero throttle.
@@ -391,7 +391,7 @@ To switch to a nav mode such as POSHOLD from MANUAL, MANUAL needs to be turned o
 What FC does in MANUAL mode is: Motor mixing, Servo Mixing, Expo settings, Throws limiting (see the `manual_*_rate` settings).
 Please note that Failsafe is still active in this mode and can override the controls.
 
-### MC BRAKING (MC)
+## MC BRAKING (MC)
 
 Used with POSHOLD mode, this mode provides faster manual braking when the pitch stick is released. 
 For this mode to work, it requires `nav_user_control_mode = CRUISE` to be enabled.
@@ -566,11 +566,11 @@ In RATE mode it allows one to makes a perfect yaw-stick only turn without changi
 
 In ANGLE mode it also makes yaw turns smoother and completely pirouette-less. This is because TURN ASSIST introduces feed-forward control in pitch/roll and maintains attitude naturally and without delay.
 
-From INAV 1.7 turn assist will work one planes, copy paste from pull request:
-
-This extends TURN_ASSIST flight mode on airplanes - when doing a turn on an airplane it will calculate required yaw and pitch rate to keep airplane pointed at horizon.
-
 TAS (from airspeed sensor) will be used for calculation if available - otherwise code will use cruise airspeed defined by fw_reference_airspeed.
+
+The CLI parameters relevant to this are:
+- [fw_turn_assist_pitch_gain](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#fw_turn_assist_pitch_gain)
+- [fw_turn_assist_yaw_gain](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#fw_turn_assist_yaw_gain)
 
 ## TURTLE (MC)
 

@@ -4,15 +4,17 @@ description: INAV's semiautonmous navigation modes and other modes
 sidebar_position: 2
 ---
 
+Navigation modes are those that allow the aircraft to travel in a semi-autonomous to autonomous manner.
 This page lists and explains all the different navigational flight modes of INAV:
 
+- [Global Navigation Settings](./flight-modes-navigation.mdx#global-navigation-settings)
 - [NAV ALTHOLD - Altitude hold](./flight-modes-navigation.mdx#nav-althold)
 - [NAV POSHOLD - 3D Position hold](./flight-modes-navigation.mdx#nav-poshold)
 - [NAV MC BRAKING - Poshold faster braking](./flight-modes-navigation.mdx#mc-braking-mode---poshold-modifier)
 - [NAV COURSE HOLD - Course Hold](./flight-modes-navigation.mdx#nav-course-hold)
 - [NAV CRUISE - Course Hold + Altitude Hold](./flight-modes-navigation.mdx#nav-cruise)
 - [NAV RTH - Return to home](./flight-modes-navigation.mdx#rth---return-to-home)
-- [NAV WP - Autonomous waypoint mission](./flight-modes-navigation.mdx#wp---autonomous-waypoint-mission)
+- [NAV WP - Autonomous waypoint mission](./flight-modes-navigation.mdx#nav-wp---autonomous-waypoint-mission)
 - [WP PLANNER - On the fly waypoint mission planner](./flight-modes-navigation.mdx#wp-planner---on-the-fly-waypoint-mission-planner)
 - [GCS NAV - Ground control station](./flight-modes-navigation.mdx#gcs-nav---ground-control-station)
 
@@ -43,8 +45,9 @@ INAV also checks for an acceptable level of satellite precision defined by a low
 For example: In RTH, POSHOLD, CRUISE and WP modes, it is NOT necessary to enable ANGLE, ALTHOLD or Heading control along with the mode you select.
 The software will enable what is required for that mode to work as it was designed to. 
 - **The same applies to fixed wing aircraft**.
-Enabling RTH, LOITER, CRUISE or WP modes will enable TURN ASSIST.
-TURN ASSISTANCE applies elevator and rudder input when the airplane is banked, to obtain a coordinated turn. [fw_turn_assist_pitch_gain](./flight-modes-standard.mdx#turn-assist) and [fw_turn_assist_yaw_gain](./flight-modes-standard.mdx#turn-assist)
+Enabling RTH, LOITER, CRUISE or WP modes will enable [TURN ASSIST](./flight-modes-standard.mdx#turn-assist).
+TURN ASSISTANCE applies elevator and rudder input when the airplane is banked, to obtain a coordinated turn.
+
 
 In later releases there is some flexibility in what sensors can be used for multicopter and fixedwing navigation.
 As a general rule, the more sensors you have enabled, the more precise navigation will be.
@@ -62,6 +65,53 @@ As a general rule, the more sensors you have enabled, the more precise navigatio
 | BARO - MC/FW `✓`/ MC/FW `O` |             | ✓      | ✓      | ✓        | ✓   | 
 | GNSS                        | ✓           | ✓      | ✓      | ✓        | ✓   |         
 
+## Global Navigation Settings
+
+INAV has a few main, global navigation settings that define how the aircraft will behave during navigation assisted modes.
+These settings are what's seen in the [Advanced Tuning Tab](../04-inav-configurator/advanced-tuning-tab.mdx).
+There is some overlap between multicopter and fixed wing settings.
+Each of these settings are described in the proceeding sections.
+Please see the navigation mode to see which modes use which settings.
+Generally speaking, they are all related to one another.
+
+### Navigation Settings - Fixed Wings
+
+![fixed wing nav settings](/img/features-core/nav-settings-fw.png)
+
+Parameter Name | CLI Name | Description
+--- | --- | ---
+Min. throttle | [nav_fw_min_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_min_thr) = 1200 | Minimum throttle for flying in GPS assisted modes
+Cruise throttle | [nav_fw_cruise_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_cruise_thr) = 1450 | The cruise throttle in GPS assisted modes, this includes RTH. Should be set high enough to avoid stalling. This values gives INAV a base for throttle when flying straight, and it will increase or decrease throttle based on pitch of airplane and the parameters below. In addition it will increase throttle if GPS speed gets below 7m/s ( hardcoded )
+Max throttle | [nav_fw_max_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_max_thr) = 1750 | The max PWM throttle signal that will be applied.
+Allow manual throttle increase | [nav_fw_allow_manual_thr_increase](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_allow_manual_thr_increase) | Enable the possibility to manually increase the throttle in auto throttle controlled modes for fixed wing
+Min Throttle Down Pitch | [fw_min_throttle_down_pitch](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#fw_min_throttle_down_pitch) | Automatic pitch down angle when throttle is at 0 in angle mode. Progressively applied between cruise throttle and zero throttle (decidegrees)
+Pitch to throttle ratio | [nav_fw_pitch2thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_pitch2thr) = 10 | Amount of throttle applied related to pitch attitude in GPS assisted modes. Throttle = nav_fw_cruise_throttle - (nav_fw_pitch2thr * pitch_angle). (notice that pitch_angle is in degrees and is negative when climbing and positive when diving, and throttle value is constrained between nav_fw_min_thr and nav_fw_max_thr)
+Throttle smoothing | [nav_fw_pitch2thr_smoothing](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_pitch2thr_smoothing) | How smoothly the autopilot makes pitch to throttle correction inside a deadband defined by `nav_fw_pitch2thr_threshold`.
+Instantaneous throttle adjustment threshold | [nav_fw_pitch2thr_threshold](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_pitch2thr_threshold) | Threshold from average pitch where momentary pitch_to_throttle correction kicks in. [decidegrees]
+Max navigation bank angle | [nav_fw_bank_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_bank_angle) = 45 | The maximum bank the autopilot will command.
+Max alt hold climb rate | [nav_fw_manual_climb_rate](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_manual_climb_rate) | Maximum climb/descent rate firmware is allowed when processing pilot input for ALTHOLD control mode [cm/s]
+Max. navigation climb angle | [nav_fw_climb_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_climb_angle) = 25 | Max positive pitch angle when climbing in GPS assisted modes, is also restrained by global [max_angle_inclination_pit](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#max_angle_inclination_pit)
+Max. navigation dive angle | [nav_fw_dive_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_dive_angle) = 18 | Max negative pitch angle when diving in GPS assisted modes, is also restrained by global [max_angle_inclination_pit](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#max_angle_inclination_pit)
+Cruise Yaw Rate | [nav_cruise_yaw_rate](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_cruise_yaw_rate) | Max YAW rate when NAV COURSE HOLD/CRUISE mode is enabled. Set to 0 to disable on fixed wing (Note: On multirotor setting to 0 will disable Course Hold/Cruise mode completely) [dps]
+Loiter radius | [nav_fw_loiter_radius](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_loiter_radius) = 5000 | The radius of the orbit that will be used in Poshold. Values are in cm.
+Loiter direction | [fw_loiter_direction](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#fw_loiter_direction) | The direction the airplane will turn for the loiter orbit. It can turn either left or right.
+Control smoothness | [nav_fw_control_smoothness](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_control_smoothness) = 0 | How smoothly the autopilot controls the airplane to correct the navigation error. The max value is 9 and the min is 0. The default is 0.
+Soaring mode stop | [nav_fw_soaring_motor_stop](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_soaring_motor_stop) | When enabled, stops the motor when [Soaring mode](./flight-modes-standard.mdx#soaring-fw) is enabled.
+Soaring Mode Pitch Deadband | [nav_fw_soaring_pitch_deadband](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_soaring_pitch_deadband) | Pitch Angle deadband when soaring mode is enabled (deg). Angle mode is inactive within the deadband allowing pitch to free float whilst soaring.
+Altitude Control Response Factor | [nav_fw_alt_control_response](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_alt_control_response) | Adjusts the deceleration response of fixed wing altitude control as the target altitude is approached. Decrease value to help avoid overshooting the target altitude. Default is 40.
+Max altitude for Navigation | [nav_max_altitude](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_max_altitude) | Max allowed altitude (above Home Point) that applies to all NAV modes (including Altitude Hold). 0 means limit is disabled.
+Navigation Motor Stop Override | [nav_overrides_motor_stop](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_overrides_motor_stop) | When set to ALL_NAV (default) the navigation system will take over the control of the motor completely and never allow the motor to stop even when the throttle is low. When set to OFF the navigation system will not take over the control of the motor if the throttle is low (motor will stop). When set to OFF_ALWAYS the navigation system will not take over the control of the motor if the throttle was low even when failsafe is triggered. When set to AUTO_ONLY the navigation system will only take over the control of the throttle in autonomous navigation modes (NAV WP and NAV RTH).  This setting only has an effect on NAV modes which take control of the throttle when combined with MOTOR_STOP and is likely to cause a stall if fw_min_throttle_down_pitch isn't set correctly or the pitch estimation is wrong for fixed wing models when not set to ALL_NAV.
+
+
+**More related setup and tuning information can be found here:** [Fixedwing navigation PID tuning](../07-pid-tuning/navigation-pid-tuning-fw.mdx)
+
+### Navigation Settings - Multicopters
+
+![nav settings mc](/img/features-core/nav-settings-mc.png)
+
+Parameter Name | CLI Name | Description
+--- | --- | ---
+User Control Mode | [nav_user_control_mode](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_user_control_mode) = ATTI | Defines how Pitch/Roll input from RC receiver affects flight in POSHOLD mode: ATTI - pitch/roll controls attitude like in ANGLE mode; CRUISE - pitch/roll controls velocity in forward and right direction. For more information, please see [POSHOLD MC Braking](./flight-modes-navigation.mdx#mc-braking-mode---poshold-modifier)
 
 ## NAV ALTHOLD
 
@@ -80,7 +130,7 @@ Surface mode is not available on fixed wings - they always use barometric/GPS al
 See [Optic Flow and Rangefinder Setup](./optical-flow-rangefinder.mdx) for configuration details.
 
 :::warning
-It is not advisable to use ALTHOLD combined with ACRO or HORIZON modes on either a multicopter or fixedwing plateform.
+It is not advisable to use ALTHOLD combined with ACRO or HORIZON modes on either a multicopter or fixedwing platform.
 :::
 
 ALTHOLD doesn't account for bank angles greater than 90° or inverted maneuvers.
@@ -145,22 +195,9 @@ INAV presently does not support Slung Payload Oscillation Suppression.
 
 ### Using ALTHOLD with a FixedWing (FW):
 
-INAV controls pitch angle and throttle. It assumes that altitude is held (roughly) when pitch angle is zero. If the airplane has to climb, INAV will also increase throttle. If plane has to dive, INAV will reduce throttle and glide. The strength of this function is controlled by `nav_fw_pitch2thr`.
+INAV controls pitch angle and throttle. It assumes that altitude is held (roughly) when pitch angle is zero. If the airplane has to climb, INAV will also increase throttle. If plane has to dive, INAV will reduce throttle and glide. The strength of this function is controlled by the Pitch to throttle ratio setting - `nav_fw_pitch2thr` in CLI.
 Trim the aircraft via the **Auto Level Trim** mode [fw_level_pitch_trim](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#fw_level_pitch_trim) in such a way that your airplane is flying level both in "MANUAL" and in "ANGLE", when not touching the sticks.
 
-Related setting parameters for fixed wings: These setting are also found in the Configurators _Advanced Tuning tab_ 
-
-- [nav_fw_min_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_min_thr) = 1200  
-- [nav_fw_cruise_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_cruise_thr) = 1450
-- [nav_fw_max_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_max_thr) = 1750 
-- [nav_fw_bank_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_bank_angle) = 45
-- [nav_fw_climb_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_climb_angle) = 25
-- [nav_fw_dive_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_dive_angle) = 18
-- [nav_fw_pitch2thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_pitch2thr) = 11  
-- [nav_fw_loiter_radius](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_fw_loiter_radius) = 5000
-
-
-**More related setup and tuning information can be found here:** [Fixedwing navigation PID tuning](../07-pid-tuning/navigation-pid-tuning-fw.mdx)
 
 ### OSD altitude adjustment alert:
 For visual awareness, the OSD altitude element has a symbol that will appear to the left side of the altitude value. This symbol can be used to inform the pilot of when they're making a change via the throttle stick to adjust the copters altitude.
@@ -211,7 +248,8 @@ Position hold for fixed wings is also known as loiter mode.
 :::
 
 In this mode, a fixed wing aircraft will loiter in a circle, holding altitude, with the throttle automatically controlled.
-The circles radius is defined by the setting `nav_fw_loiter_radius`.
+The circles radius is defined by the setting Loiter Radius in the Advanced Tuning Tab. 
+The CLI is `nav_fw_loiter_radius`.
 The **altitude** can be adjusted via the **pitch stick** if required.
 Loiter direction can be selected by `fw_loiter_direction`.
 It can be altered in flight by the Yaw stick or by the LOITER CHANGE mode, via a switch.
@@ -312,14 +350,24 @@ The operation of the landing detector disarming functions can be found [RTH - La
 
 There are many different RTH fly-home altitude modes, see the [RTH mode page](https://github.com/iNavFlight/inav/wiki/Navigation-Mode:-Return-to-Home) for details.
 
+## MISSION CHANGE
 
-## WP - Autonomous Waypoint Mission
+The MISSION CHANGE mode allows you to switch between multiple stored missions in flight. 
+When the mode is active, the required mission index can be selected by cycling through missions using the WP mode switch.
+The selected mission is loaded when mission change mode is switched off.
+The mission index can also be changed through addition of a new Mission Index adjustment function which should be useful for DJI users unable to use the normal OSD mission related fields.
+
+## NAV WP - Autonomous Waypoint Mission
 
 Autonomous waypoint missions allow the craft to fly a predefined sequence of mission waypoints.
 The mission waypoints include information about the type of waypoint, latitude, longitude, height and speed between the waypoints as well as other settings that control the behaviour during a mission.
 GUIs such as INAV Configurator Mission Control, [MWP Tools](https://codeberg.org/stronnag/mwptools), EZ-GUI, Mission Planner for INAV, Mobile Flight and can be used to set the waypoints and upload the mission as well as store missions locally for reuse.
 Uploaded missions are saved in FC volatile memory until a reboot or a new uploaded mission overwrites the old one.
 Missions can also be saved to EEPROM non volatile memory which retains the mission after power off/reboot.
+
+### Waypoint Mode Overview
+
+For more detailed information using waypoint navigation, please see the [Waypoint Missions](../08-mission-control/waypoint-missions.mdx) page for a complete guide on its usage.
 
 When waypoint mode is activated (using a switch as other modes), the quad/plane will start to fly the waypoint mission following the waypoints in numerical order.
 Waypoint missions can be interrupted during a mission by switching NAV WP off (Manual mode on a fixed wing or RTH will also interrupt a WP mission).
@@ -342,7 +390,7 @@ Turn Smoothing helps to smooth turns during WP missions by switching to a loiter
 
 (Available from INAV 6.0)
 
-![Wapoint turn smoothing](/img/features-core/wp-turn-smoothing.png)
+![Wapoint turn smoothing](/img/features-core/nav-wp-turn-smoothing.png)
 
 :::note
 Besides the waypoint _track angle_ and _accuracy_ settings, there are other setting that will influence the turn accuracy of a fixedwing aircraft in a Waypoint mission, RTH Trackback or Loiter.
@@ -428,7 +476,7 @@ Switching the modes off will stop the emergency landing allowing the craft to be
 - ALTHOLD mode should still work normally if a barometer is available.
 
 A fixedwing can continue to run a WP mission or RTH even if the GNSS fix is lost.
-Setup requirements and limitations of operation are found here [GPS Fix estimation - Dead Reckoning](../06-advanced-features/gps-fix-estimation.mdx).
+Setup requirements and limitations of operation are found here [GPS Fix Estimation - Dead Reckoning](../06-advanced-features/gps-fix-estimation.mdx).
 
 ## Emergency Landing
 An emergency landing will be triggered during WP and RTH modes if navigation sensors fail or in the case of RTH if the craft heads off in the wrong direction.
