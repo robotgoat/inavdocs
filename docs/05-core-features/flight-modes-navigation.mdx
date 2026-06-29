@@ -69,7 +69,7 @@ As a general rule, the more sensors you have enabled, the more precise navigatio
 
 INAV has a few main, global navigation settings that define how the aircraft will behave during navigation assisted modes.
 These settings are what's seen in the [Advanced Tuning Tab](../04-inav-configurator/advanced-tuning-tab.mdx).
-There is some overlap between multicopter and fixed wing settings.
+There is some overlap between multicopter and fixed wing settings, but each platform has its own set of navigation parameters.
 Each of these settings are described in the proceeding sections.
 Please see the navigation mode to see which modes use which settings.
 Generally speaking, they are all related to one another.
@@ -112,6 +112,17 @@ Navigation Motor Stop Override | [nav_overrides_motor_stop](https://github.com/i
 Parameter Name | CLI Name | Description
 --- | --- | ---
 User Control Mode | [nav_user_control_mode](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_user_control_mode) = ATTI | Defines how Pitch/Roll input from RC receiver affects flight in POSHOLD mode: ATTI - pitch/roll controls attitude like in ANGLE mode; CRUISE - pitch/roll controls velocity in forward and right direction. For more information, please see [POSHOLD MC Braking](./flight-modes-navigation.mdx#mc-braking-mode---poshold-modifier)
+Default navigation speed | [nav_auto_speed](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_auto_speed) | Default speed in fully autonomous modes (RTH, WP) [cm/s]. Used for WP mode when no specific WP speed set. [Multirotor only]
+Max. navigation speed | [nav_max_auto_speed](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_max_auto_speed) | Maximum speed allowed in fully autonomous modes (RTH, WP) [cm/s] [Multirotor only]
+Max. CRUISE speed | [nav_manual_speed](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_manual_speed) | Maximum speed allowed when processing pilot input for POSHOLD/CRUISE control mode [cm/s] [Multirotor only]
+Max. navigation climb rate | [nav_mc_auto_climb_rate](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_mc_auto_climb_rate) | Maximum climb/descent rate that UAV is allowed to reach during navigation modes. [cm/s]
+Max. Alt-hold climb rate | [nav_mc_manual_climb_rate](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_mc_manual_climb_rate) | Maximum climb/descent rate firmware is allowed when processing pilot input for ALTHOLD control mode [cm/s]
+Multirotor max. banking angle | [nav_mc_bank_angle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_mc_bank_angle) | Maximum banking angle (deg) that multicopter navigation is allowed to set. Machine must be able to satisfy this angle without loosing altitude.
+Stick position for althold hover | [nav_mc_althold_throttle](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_mc_althold_throttle) | If set to STICK the FC remembers the throttle stick position when enabling ALTHOLD and treats it as the neutral midpoint for holding altitude. If set to MID_STICK or HOVER the neutral midpoint is set to the mid stick position or the hover throttle position respectively.
+Hover throttle | [nav_mc_hover_thr](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_mc_hover_thr) | Multicopter hover throttle hint for altitude controller. Should be set to approximate throttle value when drone is hovering.
+Slow down when approaching waypoint | [nav_mc_wp_slowdown](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_mc_wp_slowdown) | When ON, NAV engine will slow down when switching to the next waypoint. This prioritizes turning over forward movement. When OFF, NAV engine will continue to the next waypoint and turn as it goes.
+Max altitude for Navigation | [nav_max_altitude](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_max_altitude) | Max allowed altitude (above Home Point) that applies to all NAV modes (including Altitude Hold). 0 means limit is disabled.
+Navigation Motor Stop Override | [nav_overrides_motor_stop](https://github.com/iNavFlight/inav/blob/master/docs/Settings.md#nav_overrides_motor_stop) | When set to ALL_NAV (default) the navigation system will take over the control of the motor completely and never allow the motor to stop even when the throttle is low. When set to OFF the navigation system will not take over the control of the motor if the throttle is low (motor will stop). When set to OFF_ALWAYS the navigation system will not take over the control of the motor if the throttle was low even when failsafe is triggered. When set to AUTO_ONLY the navigation system will only take over the control of the throttle in autonomous navigation modes (NAV WP and NAV RTH).  This setting only has an effect on NAV modes which take control of the throttle when combined with MOTOR_STOP and is likely to cause a stall if fw_min_throttle_down_pitch isn't set correctly or the pitch estimation is wrong for fixed wing models when not set to ALL_NAV.
 
 ## NAV ALTHOLD
 
