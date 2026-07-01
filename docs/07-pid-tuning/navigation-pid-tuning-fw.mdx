@@ -183,7 +183,8 @@ Once the tuning in those modes is completed. It is important to test its operati
 `fw_p_yaw = 20`
 `fw_ff_yaw = 70`
 
-_Once navigation is tested, and it shows no undesirable results, like over correction or dropping the wing in a turn (under the worst case). The first three setting may be adjusted **incrementally** to provide even tighter performance.  
+_Once navigation is tested, and it shows no undesirable results, like over correction or dropping the wing in a turn (under the worst case).
+The first three setting may be adjusted **incrementally** to provide even tighter performance.
 Navigation testing should **also** be done in windier conditions, to ensure yaw stabilization operates correctly when being pushed by sustained wind gusts._
 
 **Heading and related gains:**
@@ -198,17 +199,21 @@ Navigation testing should **also** be done in windier conditions, to ensure yaw 
 - `nav_cruise_yaw_rate` - Sets the yaw rotation rate in degrees that the airplane can be commanded via stick input, while in _Cruise/CourseHold_ modes.
 - `fw_yaw_iterm_freeze_bank_angle` - When enabled, it can help reduce the effect of the rudder counteracting aileron bank turns, by reducing yaw i-term error accumulation. It is only used for ANGLE, HORIZON or ACRO modes. It is not active in navigation modes, unless TURN ASSIST is disabled.
 
-_In my experience. Enabling the `nav_fw_pos_hdg` controller combined with an airplane that has yaw control. i.e. A Rudder, Differential thrust or Vectored thrust, **when those yaw gains are tuned**. Will provide the most accurate turn/track response in a waypoint mission or RTH Trackback._
+Enabling the `nav_fw_pos_hdg` controller combined with an airplane that has yaw control. i.e. A Rudder, Differential thrust or Vectored thrust, **when those yaw gains are tuned**. Will provide the most accurate turn/track response in a waypoint mission or RTH Trackback.
 
-_The use of a magnetometer can help augment the GNSS heading and wind estimation, to provide faster correction in turns. But it must be [setup](https://github.com/iNavFlight/inav/wiki/GPS-and-Compass-setup#note-) and calibrated correctly. Or it will make performance even worse._
+_The use of a magnetometer can help augment the GNSS heading and wind estimation, to provide faster correction in turns. But it must be [setup](../05-core-features/compass.mdx) and calibrated correctly. Or it will make performance even worse._
 
 ## Tuning Rangefinder
 
 **The Rangefinder (surface) gains should only be tuned after the Z navigation PID's are optimally tuned.**
 
-_When a Lidar/Sonar sensor is selected via its Type or MSP. That sensor will actively feed the altitude estimator, regardless of the sensors operational range._
-_However, over certain types of terrain, the sensor can occasionally read a false altitude spike. This has been known to cause a temporary ghost climbing action. If you experience this, it may be beneficial to disable the sensor in the Configuration tab._  
-_**NOTE:** This issue has been resolved for INAV 9.0._
+:::note
+This issue has been resolved for INAV 9.0:
+When a Lidar/Sonar sensor is selected via its Type or MSP, that sensor will actively feed the altitude estimator, regardless of the sensors operational range.
+However, over certain types of terrain, the sensor can occasionally read a false altitude spike.
+This has been known to cause a temporary ghost climbing action.
+If you experience this, it may be beneficial to disable the sensor in the Configuration tab.
+:::
 
 **Rangefinder** - Lidar or Sonar altitude terrain settings and sensor weights:
 
@@ -219,7 +224,9 @@ _**NOTE:** This issue has been resolved for INAV 9.0._
 - `inav_w_z_surface_v` - Weight applied to the Rangefinders estimated _climb rate_. When a rangefinder is present, within its operational distance above the ground.
 
 :::tip
-When choosing a [Lidar rangefinder](https://github.com/iNavFlight/inav/blob/master/docs/Rangefinder.md) for fixedwing landing assistance. Ensure you do not purchased a cheaper unit with minimal range. e.g. 2meters or less. Such Lidar sensors have great difficulty working at even one quarter of their recommended range in direct sun light. Always select a higher quality unit with a stronger laser diode and lens, to provide more operational range.
+When choosing a [Lidar rangefinder](https://github.com/iNavFlight/inav/blob/master/docs/Rangefinder.md) for fixedwing landing assistance. Ensure you do not purchased a cheaper unit with minimal range. e.g. 2meters or less.
+Such Lidar sensors have great difficulty working at even one quarter of their recommended range in direct sun light.
+Always select a higher quality unit with a stronger laser diode and lens, to provide more operational range.
 :::
 
-**Optical-flow is not available for fixedwing use, due to the speed airplanes travel across the ground. And the inherent range limitation of these sensors.**
+**Optical-flow is not available for fixedwing use due to the speed airplanes travel across the ground and the inherent range limitation of these sensors.**

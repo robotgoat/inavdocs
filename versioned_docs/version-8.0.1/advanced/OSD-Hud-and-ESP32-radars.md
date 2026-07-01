@@ -112,7 +112,7 @@ How many waypoint are displayed, from 0 to 3. Set to 0 (zero) to disable. As sam
 **CLI :**
 `set osd_hud_wp_disp= 2`
 
-# CLI commands
+#### CLI commands
 
 All the settings are available in the CLI, recommended settings are :
 ```
@@ -130,6 +130,14 @@ set osd_hud_radar_range_min = 10
 set osd_hud_radar_range_max = 4000
 set osd_hud_wp_disp = 2
 ```
+### Craft radar layout
+ The radar layout is the same for both Analog and Digital. However digital can be in color and requires a video system that fully supports the INAV font set. Which the DJI 04 did not support unit INAV 8.0.1. Meaning it **did not** have a full compliment of OSD elements, as in the image below. The DJI V1 and V2 were only supported using WTFOS firmware.
+
+![Inav craft radar](https://github.com/user-attachments/assets/9ff09053-2f8b-43fa-a02f-9ff726e60935)
+
+There can be some confusion concerning the use of **(1) The arrow indicating the peer aircraft's heading**.   
+You may know the direction the peer aircraft is located by **(5) The Cardinal pointer** e.g. 2 O'clock. But without knowing its heading, you do not know whether that aircraft is traveling _towards_ you, _away_ from you, or _across_ your aircraft's line of flight.   
+So by using both the _Cardinal pointer_ and the _Heading arrow reference_ of the other aircraft, you can set a course that will help you intersect the other aircraft faster and more accurately.
 
 ##  Accuracy and limitations
 
@@ -164,6 +172,13 @@ Please see this [discussion at RCGroups](https://www.rcgroups.com/forums/showthr
 
 [This is a video demonstrating the hud for both home point and ESP32 radar tracking](https://youtu.be/zzKkcd5_cY4?t=27).
 
+
+## Formation Flight
+
+The [FormationFlight](https://formationflight.org/) project is separate to INAV ESP32 Radar. Both firmware's provide a means of RF communication between multiple aircraft.. But its more versatile, using the same hardware as the ELRS project. And has many advantages over the original Lora ESP32 boards. Being that the hardware is smaller, lighter and cheaper.
+The INAV project supports the use of both types of hardware and software for OSD craft radar display. It depends on your choice.
+
+If you require assistance with setting up FormationFlight. You can ask on its [Discord server](https://discord.com/invite/npaX3VxQjh)
 
 ## What's displayed exactly ?
 
