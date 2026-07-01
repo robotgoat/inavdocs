@@ -10,15 +10,16 @@ import ThemedImage from "@theme/ThemedImage";
 import BGV from "/img/inavbgv.mp4";
 import Inavpng from "/img/inav_home.png";
 
-import Carousel from "../components/Carousel";
+// Carousel component for future use if needed
+// import Carousel from "../components/Carousel";
 
 import styles from "./index.module.css";
 
 // Image array for the carousel component
-const images = [
-  ["/img/inav_home.png", "/img/inav_home_dark.svg", "/img/inav_home_light.svg"],
-  ["/img/assets/airplane.svg", "/img/assets/blackbox-screenshot-1.jpg"],
-];
+// const images = [
+//   ["/img/inav_home.png", "/img/inav_home_dark.svg", "/img/inav_home_light.svg"],
+//   ["/img/assets/airplane.svg", "/img/assets/blackbox-screenshot-1.jpg"],
+// ];
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();

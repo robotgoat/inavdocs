@@ -57,3 +57,7 @@
 
   /* ---ifm-toc-link-color: #37a8db; */
 }
+
+.menu__link {
+  line-height: normal;
+}
